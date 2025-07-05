@@ -1,0 +1,242 @@
+[
+    {
+        "title": "হোম রো - বাম হাত",
+        "words": ["আসা", "সাদা", "দাদা", "ফাদা", "আদ", "আসাদ", "সাফ", "দাস", "ফাস", "আদা"],
+        "phonetic_words": ["asa", "sada", "dada", "fada", "ad", "asad", "saf", "das", "fas", "ada"],
+        "phrases": ["asa asa", "sada sada", "dada ase", "fada dao", "asad sada", "das ase", "ada dao"]
+    },
+    {
+        "title": "হোম রো - ডান হাত",
+        "words": ["কাকা", "মালা", "কমি", "কাকি", "মাসি", "দামি", "মালি", "কলাম", "মাকি", "কিকি", "আকাল", "কালি"],
+        "phonetic_words": ["kaka", "mala", "komi", "kaki", "masi", "dami", "mali", "kolam", "maki", "kiki", "akal", "kali"],
+        "phrases": ["kaka ase", "mala ase", "sada kaka", "dami mala", "masi ase", "kaki bhalo", "kali dao"]
+    },
+    {
+        "title": "হোম রো - আরও কার ও ব্যঞ্জনবর্ণ",
+        "words": ["বোন", "ননদ", "বনে", "কনে", "মনে", "বলো", "সোনালি", "কেন", "নব", "বচন", "মনন", "লবন"],
+        "phonetic_words": ["bOn", "nonod", "bOne", "kOne", "mOne", "bOlo", "sonali", "keno", "nob", "bochon", "monon", "lobon"],
+        "phrases": ["bOn ase", "mOne kOro", "bOlo na", "nob kOne", "bOne chOlo", "keno bOlo", "lobon dao"]
+    },
+    {
+        "title": "টপ রো - বাম হাত",
+        "words": ["তারা", "নদী", "টাকা", "রমা", "তোর", "তারাশঙ্কর", "রাত", "রত্ন", "টর", "তরল", "নাটক", "রতন", "তরণী"],
+        "phonetic_words": ["tara", "nodi", "Taka", "roma", "tOr", "tarashonkor", "rat", "rotno", "Tor", "torol", "naTok", "roton", "toroni"],
+        "phrases": ["Taka ache", "tara ase", "nodi kalo", "rat ase", "tOr nam", "roton ase", "naTok dekhO"]
+    },
+    {
+        "title": "টপ রো - ডান হাত",
+        "words": ["পাপ", "চাচা", "রূপ", "পূজা", "পাপী", "চাপ", "পায়রা", "চুপ", "পুর", "পাড়া", "চুন", "পুতুল", "উপায়"],
+        "phonetic_words": ["pap", "chacha", "rup", "puja", "papi", "chap", "payra", "chup", "pur", "paRa", "chun", "putul", "upay"],
+        "phrases": ["rup bhalo", "chacha ase", "puja kOro", "payra ORe", "chup kOro", "putul nache", "upay bOlo"]
+    },
+    {
+        "title": "বটম রো - বাম হাত",
+        "words": ["জল", "ধরা", "ঝরনা", "ধরালো", "জলদি", "ঝড়", "ধরণ", "জড়া", "ঝলক", "ধাম", "জামা", "ঝাল"],
+        "phonetic_words": ["jol", "dhora", "jhorna", "dhoralo", "jolodi", "jhoR", "dhoron", "joRa", "jholok", "dham", "jama", "jhal"],
+        "phrases": ["jol dao", "dhora dao", "jhorna chole", "jhoR ase", "dhoron bOlo", "jolodi chOlo", "jama porO"]
+    },
+    {
+        "title": "বটম রো - ডান হাত",
+        "words": ["গান", "ভাব", "বড়", "গাড়ি", "ভাবনা", "ভালো", "গড়", "ভাগ", "রাগ", "ভারী", "গাল", "গভীর"],
+        "phonetic_words": ["gan", "bhab", "boRo", "gari", "bhabna", "bhalo", "goR", "bhag", "rag", "bhari", "gal", "gobhir"],
+        "phrases": ["gan gao", "boRO gari", "bhabna nei", "bhalo gan", "rag kOro na", "bhari kaj", "gobhir jol"]
+    },
+    {
+        "title": "বাকি মৌলিক ব্যঞ্জনবর্ণ ও স্বরবর্ণ",
+        "words": ["হাত", "ডাল", "ঠাকুমা", "হাঁস", "ঠান্ডা", "ডিম", "ঈদ", "ঊষা", "হাড়", "ডানা", "ঠোঁট", "হাতা", "ডোর", "দীর্ঘ"],
+        "phonetic_words": ["hat", "Dal", "Thakuma", "ha`s", "Thanda", "Dim", "Id", "USa", "haR", "Dana", "ThO`T", "hata", "DOr", "dirgho"],
+        "phrases": ["hat dao", "Thanda jol", "Dim khao", "Id mobarak", "USa ase", "haR bhanga", "Dana mele"]
+    },
+    {
+        "title": "আরও কার ও বিশেষ অক্ষর",
+        "words": ["ঐক্য", "ঔষধ", "রং", "দুঃখ", "অন্তঃপুর", "ঐরাবত", "ঔষধালয়", "সংকল্প", "দুঃসাহস", "ঐশ্বর্য", "সংশয়", "অংশ"],
+        "phonetic_words": ["OIkyo", "OUshodh", "rong", "dukkho", "ontohpur", "OIrabot", "OUshodhaloy", "shongkolpo", "duhsahos", "OIshorjo", "shongshoy", "ongsho"],
+        "phrases": ["OIkyo bhalo", "rong dao", "dukkho nei", "OIrabot ase", "shongkolpo kOro", "duhsahos dekhao", "shongshoy dur kOro"]
+    },
+    {
+        "title": "যতিচিহ্ন ও বিশেষ অক্ষর",
+        "words": ["আমি ভালো আছি।", "কেমন আছো?", "যাও, খাও।", "হঠাৎ", "গণিত", "৳৫০", "১.২", "সময়:", "সৎ", "ফল্"],
+        "phonetic_words": ["ami bhalo achi|", "kemon achO?", "jao, khao|", "hoThaT", "gonit", "$50", "1.2", "somoy:", "sot", "fol"],
+        "phrases": ["amar nam roma|", "tumi kOthay?", "aj $100 lagbe|", "somoy: 10Ta|", "she khub sot|", "kajTi foloprosu|"]
+    },
+    {
+        "title": "যুক্তাক্ষর - পর্ব ১",
+        "words": ["ব্যক্তি", "উত্তর", "যুদ্ধ", "আনন্দ", "ভক্ত", "রক্ত", "দত্ত", "শুদ্ধ", "ছন্দ", "বন্ধু", "মুক্ত", "উত্তেজনা"],
+        "phonetic_words": ["byakti", "uttor", "juddho", "anondo", "bhokto", "rokto", "dotto", "shuddho", "chhondo", "bondhu", "mukto", "uttejona"],
+        "phrases": ["anondo kOro", "uttor dao", "juddho shesh", "rokto dao", "shuddho bangla", "bondhu ase", "mukto akash"]
+    },
+    {
+        "title": "যুক্তাক্ষর - পর্ব ২",
+        "words": ["স্বাস্থ্য", "স্পষ্ট", "সম্পদ", "শান্ত", "বস্তু", "আস্থা", "স্বপ্ন", "কম্পন", "অন্তত", "সস্তা", "বিস্তার", "সম্পর্ক"],
+        "phonetic_words": ["sastho", "spoSTo", "sompod", "shanto", "bostu", "astha", "sopno", "kompon", "ontoto", "sosta", "bistar", "somporko"],
+        "phrases": ["sastho bhalo", "spoSTo bOlo", "shanto thakO", "sopno dekhO", "ontoto eshO", "sosta jinish", "somporko baRao"]
+    },
+    {
+        "title": "যুক্তাক্ষর - পর্ব ৩",
+        "words": ["বঙ্গ", "পঞ্চাশ", "গঞ্জন", "সঞ্জয়", "মঙ্গল", "শৃঙ্খলা", "বঞ্চনা", "অঞ্জলি", "সঙ্গ", "রঞ্জন", "কুঞ্জ"],
+        "phonetic_words": ["bongo", "ponchash", "gonjon", "sonjoy", "mongol", "shrikhola", "bonchona", "onjoli", "songo", "ronjon", "kunjo"],
+        "phrases": ["bongo desh", "ponchash Taka", "sonjoy ase", "mongol kamona", "shrikhola rakhO", "onjoli dao"]
+    },
+    {
+        "title": "যুক্তাক্ষর - পর্ব ৪",
+        "words": ["বাক্য", "কার্য", "মূল্য", "শব্দ", "আব্দুল", "ঐক্য", "ধৈর্য", "কল্যাণ", "জব্দ", "কাব্য", "আবশ্যক"],
+        "phonetic_words": ["bakko", "karjo", "mullo", "shobdo", "abdull", "OIkyo", "dhoirjo", "kollyan", "jobdo", "kabbo", "abashshok"],
+        "phrases": ["bakko bOlo", "karjo kOro", "shobdo shOna", "mullo dao", "dhoirjo dhorO", "kollyan hOk"]
+    },
+    {
+        "title": "যুক্তাক্ষর - পর্ব ৫",
+        "words": ["নিশ্চয়", "বৃষ্টি", "স্রোত", "পশ্চিম", "সৃষ্টি", "শুশ্রূষা", "অস্পষ্ট", "অস্ত্র", "বিশ্ব", "প্রশ্ন", "সশ্রদ্ধ"],
+        "phonetic_words": ["nishshoy", "briSTi", "srot", "poshchim", "sriSTi", "shushrUSa", "ospoSTo", "ostro", "bishwo", "proshno", "soshroddho"],
+        "phrases": ["nishshoy asbe", "briSTi ase", "srot chole", "poshchim dike", "sriSTi kOro", "ostro dhorO"]
+    },
+    {
+        "title": "উন্নত যুক্তাক্ষর ও বিশেষ შემთხვევা",
+        "words": ["শিক্ষা", "জ্ঞান", "ব্রহ্ম", "তৃষ্ণা", "লক্ষ্য", "ক্ষমা", "বিজ্ঞান", "ব্রাহ্মণ", "উষ্ণ", "কক্ষ", "দক্ষ"],
+        "phonetic_words": ["shikkha", "gyan", "bromho", "triShna", "lokkho", "khoma", "biggan", "bramhon", "uShno", "kokkho", "dokkho"],
+        "phrases": ["shikkha nao", "gyan baRao", "triShna ache", "lokkho sthir", "khoma kOro", "biggan poRO"]
+    },
+    {
+        "title": "সংখ্যা (১-৫)",
+        "words": ["এক", "দুই", "তিন", "চার", "পাঁচ", "একা", "দুইটা", "তিনটা", "চারটা", "পাঁচটা", "একশ"],
+        "phonetic_words": ["ek", "dui", "tin", "char", "pa`ch", "eka", "duiTa", "tinTa", "charTa", "pa`chTa", "ekosh"],
+        "phrases": ["1Ta am", "2Ta kolom", "3Ta boi", "4Ta ful", "5Ta fol", "ek dui tin", "char pa`ch choy"]
+    },
+    {
+        "title": "সংখ্যা (৬-০)",
+        "words": ["ছয়", "সাত", "আট", "নয়", "দশ", "শূন্য", "সাতাশ", "আশি", "নব্বই", "শত", "ছয়শ"],
+        "phonetic_words": ["choy", "sat", "aT", "noy", "dosh", "shunno", "satash", "ashi", "nobboi", "shoto", "choyosh"],
+        "phrases": ["6Ta apel", "7Ta pakhi", "8Ta mach", "9Ta tara", "10Ta Taka", "shunno theke shuru", "sat aT noy"]
+    },
+    {
+        "title": "অপেক্ষাকৃত কম ব্যবহৃত বর্ণ",
+        "words": ["ঋষি", "আষাঢ়", "পড়া", "দৃঢ়", "ঋতু", "গূঢ়", "পাড়", "ঋণ", "বৃষ"],
+        "phonetic_words": ["rriShi", "aShaR", "poRa", "driRo", "rritu", "gURo", "paR", "rriN", "briSh"],
+        "phrases": ["rriShi ase", "poRa bhalo", "driRo shongkolpo", "rritu poriborton", "rriN shodh"]
+    },
+    {
+        "title": "আরও কার-চিহ্ন ও তারতম্য",
+        "words": ["কৃষি", "মৌমাছি", "ভৌগোলিক", "বৈকাল", "নৃতত্ত্ব", "ঐচ্ছিক", "কৌশল", "নৈতিক", "বৈজ্ঞানিক", "পৌষ", "দৈনিক"],
+        "phonetic_words": ["krishi", "mOUmachi", "bhOugolik", "boikal", "nritotto", "OIchhik", "kOUshol", "noitik", "boigyanik", "pOUS", "doinik"],
+        "phrases": ["krishi kaj", "mOUmachi URe", "boikal bela", "noitik shikkha", "boigyanik goboshona", "doinik khobor"]
+    },
+    {
+        "title": "ব-ফলা যুক্ত যুক্তাক্ষর",
+        "words": ["স্বাগত", "সত্বর", "দ্বন্দ্ব", "ধ্বংস", "আহ্বান", "স্বর", "তত্ত্ব", "বিদ্বান", "ধ্বনি", "বিশ্ব", "স্বচ্ছ"],
+        "phonetic_words": ["swa`goto", "sottor", "dondwo", "dhongsho", "ahban", "swor", "totto", "bidwan", "dhoni", "bishwo", "shochho"],
+        "phrases": ["swagoto janai", "dondwo nei", "dhongsho kOro na", "swor shunO", "totto poRO", "bidwan lOk"]
+    },
+    {
+        "title": "ম-ফলা যুক্ত যুক্তাক্ষর",
+        "words": ["স্মৃতি", "জন্ম", "রশ্মি", "ব্রহ্মপুত্র", "আত্মা", "সম্ভব", "স্তম্ভ", "সম্মান", "উন্মুক্ত", "ভস্ম", "আত্মীয়"],
+        "phonetic_words": ["smriti", "jonmo", "roshmi", "bromhoputro", "attma", "shombhob", "stomvo", "shomman", "unmukto", "bhosmo", "attiyo"],
+        "phrases": ["smriti bhalo", "jonmo din", "roshmi ase", "shombhob noy", "shomman dao", "unmukto akash", "attiyo swojon"]
+    },
+    {
+        "title": "য-ফলা যুক্ত যুক্তাক্ষর",
+        "words": ["ভাগ্য", "ধন্য", "বিদ্যুৎ", "আবশ্যিক", "সভ্য", "ধৈর্য", "খাদ্য", "বাধ্য", "স্বাস্থ্য", "যোগ্য", "অধ্যয়ন"],
+        "phonetic_words": ["bhaggo", "dhonno", "biddut", "abashshik", "shobvO", "dhoirjo", "khaddo", "baddho", "sastho", "joggo", "oddhoyon"],
+        "phrases": ["bhaggo bhalo", "dhonno tumi", "biddut nei", "shobvO shomaj", "khaddo dao", "baddho thakO", "oddhoyon kOro"]
+    },
+    {
+        "title": "র-ফলা ও রেফ যুক্ত যুক্তাক্ষর",
+        "words": ["ছাত্র", "প্রশ্ন", "ক্রম", "ধর্ম", "কর্ম", "বক্র", "বক্তৃতা", "পত্র", "শ্রম", "গ্রহ", "অর্ক", "আর্তনাদ", "ক্ষুদ্র"],
+        "phonetic_words": ["chattro", "proshno", "krom", "dhormo", "kormo", "bokro", "boktrita", "potro", "shrom", "groho", "orrko", "arrtonad", "khudro"],
+        "phrases": ["chattro poRe", "proshno kOro", "dhormo palon kOro", "bokro poth", "potro likhO", "shrom dao", "orrko ase"]
+    },
+    {
+        "title": "ল-ফলা যুক্ত যুক্তাক্ষর",
+        "words": ["ক্লান্ত", "গ্লাস", "প্ল্যান", "শ্লোক", "ক্লিনিক", "গ্লানি", "প্লাবন", "অশ্লীল", "ক্লান্তি", "গ্লোব", "শ্লেষ"],
+        "phonetic_words": ["klanto", "glas", "plyan", "shlok", "klinik", "glani", "plabon", "oshlil", "klanti", "glob", "shlesh"],
+        "phrases": ["klanto lagche", "glas dao", "plyan kOro", "shlok bOlo", "klanti nei", "glob dekhO"]
+    },
+    {
+        "title": "ণ, ঙ, ঞ, ঙ্ক যুক্ত যুক্তাক্ষর",
+        "words": ["কণ্ঠ", "পাণ্ডব", "শঙ্খ", "বাঞ্ছিত", "কুণ্ডলী", "শঙ্কা", "অঙ্ক", "দণ্ড", "লঙ্ঘন", "মঞ্চ", "কণ্ঠস্বর"],
+        "phonetic_words": ["konTho", "panDob", "shonkho", "banChito", "kunDoli", "shonka", "onko", "donDo", "longhon", "moncho", "konThoshwor"],
+        "phrases": ["konTho bhalo", "shonkho bajao", "banChito fol", "onko kOro", "donDo dao", "monche eshO"]
+    },
+    {
+        "title": "ত, থ, দ, ধ যুক্ত যুক্তাক্ষর",
+        "words": ["উত্থান", "উদ্দেশ্য", "উদ্ভট", "তত্ত্ব", "পদ্ধতি", "মুগ্ধ", "দগ্ধ", "বন্ধ", "অন্ধ", "সত্ত্বা", "ক্রুদ্ধ", "লুব্ধ"],
+        "phonetic_words": ["utthan", "uddeshsho", "udbhoT", "totto", "poddhoti", "mugdho", "dogdho", "bondho", "ondho", "sottwa", "kruddho", "lubhdho"],
+        "phrases": ["uddeshsho bhalo", "poddhoti shekhO", "utthan poton", "mugdho hoyechi", "bondho dorja", "sottwa ache"]
+    },
+    {
+        "title": "প, ফ, ব, ভ যুক্ত যুক্তাক্ষর",
+        "words": ["ক্যাপ্টেন", "ফ্ল্যাট", "অব্জ", "সভ্যতা", "সম্পূর্ণ", "সম্প্রদায়", "লব্ধ", "প্রাপ্ত", "শুভ্র", "অভ্র"],
+        "phonetic_words": ["kyapTen", "flyaT", "objo", "shobvota", "shompurNo", "shomprodai", "lobdho", "prapto", "shubhro", "obhro"],
+        "phrases": ["flyaT boRO", "shobvota goRO", "kyapTen khelche", "shompurNo kOro", "shomprodai sheba", "prapto tottho"]
+    },
+    {
+        "title": "ম, য, র, ল, হ্ন, হ্ল যুক্ত যুক্তাক্ষর",
+        "words": ["নিম্ন", "উল্লাস", "সম্মান", "চিহ্ন", "বহ্নি", "আহ্লাদ", "প্রহ্লাদ", "অম্ল", "র্র", "মল্ল"],
+        "phonetic_words": ["nimno", "ullas", "shomman", "chihno", "bohni", "ahlad", "prohlad", "omlo", "rr", "mollo"],
+        "phrases": ["nimno chap", "ullas kOro", "chihno dao", "ahlad hochche", "shomman rakhO", "omlo swad"]
+    },
+    {
+        "title": "উন্নত যুক্তাক্ষর - পর্ব ১",
+        "words": ["প্রশ্ন", "ইচ্ছা", "উচ্ছ্বাস", "কৃষ্ণ", "নিশ্চুপ", "স্বচ্ছ", "বিচ্ছিন্ন", "রশ্মি", "তৃষ্ণা"],
+        "phonetic_words": ["proshno", "ichcha", "uchchash", "krishno", "nishchup", "shochho", "bichchhinno", "roshmi", "trishNa"],
+        "phrases": ["proshno ache", "ichcha puron", "uchchash kOro", "shochho jol", "bichchhinno ghoTona"]
+    },
+    {
+        "title": "উন্নত যুক্তাক্ষর - পর্ব ২",
+        "words": ["মধ্য", "অংশ", "কষ্ট", "শ্রেষ্ঠ", "সংশয়", "স্বাস্থ্য", "স্পষ্ট", "নষ্ট", "গোষ্ঠী", "দৃষ্টি", "আকৃষ্ট"],
+        "phonetic_words": ["moddho", "ongsho", "koSTo", "shreSTho", "shongshoy", "sastho", "spoSTo", "noSTo", "goSTi", "driSTi", "akriSTo"],
+        "phrases": ["moddho rat", "koSTo nei", "shreSTho kaj", "shongshoy dur kOro", "noSTo kOro na", "driSTi dao"]
+    },
+    {
+        "title": "বাংলা নাম ও স্থান",
+        "words": ["কলকাতা", "চট্টগ্রাম", "ঢাকা", "রাজশাহী", "খুলনা", "রবীন্দ্রনাথ", "কাজী নজরুল ইসলাম", "শেখ মুজিবুর রহমান", "সুন্দরবন", "সিলেট", "বরিশাল", "কুমিল্লা", "বগুড়া", "যশোর", "ফরিদপুর", "ময়মনসিংহ", "রংপুর"],
+        "phonetic_words": ["kolkata", "choTTogram", "Dhaka", "rajshahi", "khulna", "robinDroNath", "kaji nojrul islam", "shekh mujibur rohman", "shundorbon", "sileT", "borishal", "kumilla", "boguRa", "joshore", "foridpur", "moymonshingho", "rongpur"],
+        "phrases": ["ami Dhaka thaki|", "robinDroNath Thakur", "choTTogram sundor shohor|", "khulna bibhag", "sileT bhromon", "borishal ache", "moymonshingho jela"]
+    },
+    {
+        "title": "সাধারণ বাংলা বাক্যাংশ",
+        "words": ["শুভ সকাল", "কেমন আছো?", "ধন্যবাদ", "কিছু মনে করো না।", "অনেক ভালো লাগলো।", "দেরি করো না।", "শুভ রাত্রি", "আবার দেখা হবে", "কেমন চলছে?", "কোন সমস্যা নেই", "আমার ভুল হয়েছে", "খুব ভালো", "মন দিয়ে শোনো", "সাবধানে থেকো"],
+        "phonetic_words": ["shubho sakal", "kemon achO?", "dhonnobad", "kichu mOne kOro na|", "onek bhalo laglo|", "deri kOro na|", "shubho rattri", "abar dekha hobe", "kemon cholche?", "kon shomossha nei", "amar bhul hoyeche", "khub bhalo", "mon diye shOnO", "shabdhane thekO"],
+        "phrases": ["shubho sakal", "kemon achO?", "dhonnobad", "kichu mOne kOro na|", "onek bhalo laglo|", "deri kOro na|"]
+    },
+    {
+        "title": "বাংলা প্রবাদ ও প্রবচন",
+        "words": ["অভাবে স্বভাব নষ্ট।", "আলস্য সকল উন্নতির অন্তরায়।", "জ্ঞান যেখানে সীমাবদ্ধ, বুদ্ধি সেখানে আড়ষ্ট।", "একতাই বল।", "যত্ন করলে রত্ন মিলে।", "চোর পালালে বুদ্ধি বাড়ে।", "ভাবিয়া করিও কাজ, করিয়া ভাবিও না।", "লোভে পাপ, পাপে মৃত্যু।", "কষ্ট না করলে কেষ্ট মেলে না।", "মন্ত্রের সাধন কিংবা শরীর পতন।"],
+        "phonetic_words": ["obhabe shobhab noSTo|", "alashsho shokoll unnotir ontoray|", "gyan jekhane shimaboddho, buddhi shekhane aRoSTo|", "ekotai bol|", "jotno korle rotno mile|", "chor palale buddhi baRe|", "bhabiya korio kaj, koriya bhabio na|", "lobhe pap, pape mrittu|", "koSTo na korle keSTo mele na|", "montrer sadhan kimba shorir poton|"],
+        "phrases": ["obhabe shobhab noSTo|", "alashsho shokoll unnotir ontoray|", "ekotai bol|"]
+    },
+    {
+        "title": "দ্রুতি বাড়ানোর অনুশীলন",
+        "words": ["বাংলাদেশ একটি ছোট দেশ, কিন্তু এর সংস্কৃতি অনেক সমৃদ্ধ। এখানে অনেক নদী আছে এবং মানুষ খুব অতিথিপরায়ণ।", "আজকের আবহাওয়া খুব সুন্দর। আকাশ পরিষ্কার এবং বাতাস বইছে। বাইরে হাঁটতে খুব ভালো লাগছে।", "বই পড়া একটি ভালো অভ্যাস। এটি আমাদের জ্ঞান বাড়াতে সাহায্য করে এবং মনকে শান্ত রাখে।"],
+        "phonetic_words": ["bangladesh ekTi choTo desh, kintu er shongskriti onek shomriddho| ekhane onek nodi ache ebong manush khub otithiporayon|", "ajker abohawa khub sundor| akash porishkar ebong batas boichhe| baire ha`Tte khub bhalo lagche|", "boi poRa ekTi bhalo obbhas| eTi amader gyan baRate shohajjo kore ebong monke shanto rakhe|"],
+        "phrases": ["bangladesh ekTi choTo desh|", "boi poRa bhalo obbhas|"]
+    },
+    {
+        "title": "নির্ভুলতা বাড়ানোর অনুশীলন",
+        "words": ["প্রযুক্তির দ্রুত অগ্রগতি মানব সভ্যতার ইতিহাসে এক নতুন দিগন্ত উন্মোচন করেছে, যার ফলস্বরূপ বিশ্বব্যাপী যোগাযোগ ও তথ্য আদান-প্রদান সহজতর হয়েছে।", "জলবায়ু পরিবর্তনের প্রভাব এখন বিশ্বজুড়ে দৃশ্যমান। এর ফলে প্রাকৃতিক দুর্যোগের সংখ্যা ও তীব্রতা বৃদ্ধি পাচ্ছে, যা মানবজাতি ও পরিবেশের জন্য মারাত্মক হুমকি।", "শিক্ষা জাতির মেরুদণ্ড। একটি শিক্ষিত জাতিই কেবল উন্নতির শিখরে পৌঁছাতে পারে। তাই শিক্ষার গুরুত্ব অপরিসীম।"],
+        "phonetic_words": ["projuktir druto oggrogoti manob shobvotar itihase ek notun digonto unmochon koreche, jar foloshOrup bishwoByapi jogajog o tottho adan-prodan shohajtor hoyeche|", "jolobayu poribortoner probhab ekhon bishwojuRe driShshoman| er fole prakritik durjoger shongkha o tibrota briddhi paChhe, ja manobjati o poribesher jonno marattok humki|", "shikkha jatir merudonDo| ekTi shikkhito jati`i kebol unnotir shikkhore pOUChote pare| tai shikkhar gurutto oporishim|"],
+        "phrases": ["shikkha jatir merudonDo|", "projuktir druto oggrogoti|"]
+    },
+    {
+        "title": "কবিতা বা গান টাইপিং",
+        "words": ["আমার সোনার বাংলা, আমি তোমায় ভালোবাসি। চিরদিন তোমার আকাশ, তোমার বাতাস, আমার প্রাণে বাজায় বাঁশি।", "যদি তোর ডাক শুনে কেউ না আসে তবে একলা চলো রে। একla চলো, একলা চলো, একলা চলো রে।", "চল চল চল, ঊর্ধ্ব গগনে বাজে মাদল। নিম্নে উতলা ধরণী তল, অরুণ প্রাতের তরুণ দল।"],
+        "phonetic_words": ["amar sonar bangla, ami tomay bhalobashi| chirodin tomar akash, tomar batas, amar praNe bajay ba`shi|", "jodi tor Dak shune keu na ashe tobe ekla chOlo re| ekla chOlo, ekla chOlo, ekla chOlo re|", "chol chol chol, urddho gogone baje madol| nimne utola dhoroni tol, oruN prater toruN dol|"],
+        "phrases": ["amar sonar bangla, ami tomay bhalobashi|", "ekla chOlo re|"]
+    },
+    {
+        "title": "সার্বিক পর্যালোচনা",
+        "words": ["এই পাঠে আপনি আপনার দুর্বলতা খুঁজে বের করে সে অনুযায়ী অনুশীলন করবেন।"],
+        "phonetic_words": ["ei paThe apni apnar durbolota khuje ber kore she onujayi onushilan korben|"],
+        "phrases": ["typing chaliye jan!"]
+    },
+    {
+        "title": "অটোকরেক্ট ও উন্নত বৈশিষ্ট্য",
+        "words": ["আমরা (am`ra)", "আম্রা (amra)", "সফটওয়্যার (software)", "একটু অপেক্ষা করুন"],
+        "phonetic_words": ["amra (am`ra)", "amra (amra)", "sofT`OyZar (software)", "ekTu opekkha korun"],
+        "phrases": ["autocorrect bybohar korun|"]
+    },
+    {
+        "title": "সঠিক টাইপিং ভঙ্গি",
+        "words": ["সোজা হয়ে বসুন।", "কব্জি সোজা রাখুন।", "কিবোর্ডের দিকে তাকাবেন না।"],
+        "phonetic_words": ["soja hoye bosun|", "kobji soja rakhun|", "kiborDer dike takaben na|"],
+        "phrases": ["soThik bhongi bojaye rakhun|"]
+    }
+]
