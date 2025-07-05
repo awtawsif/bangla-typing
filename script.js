@@ -13,6 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 performance: [] 
             },
             syllabus: [],
+            currentLessonData: {
+                items: [],
+                phonetic_items: []
+            },
+            isHintVisible: false
         };
         this.mainContent = document.getElementById('main-content');
         this.navLinks = document.querySelectorAll('.nav-link');
@@ -23,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         await this.loadSyllabus();
         this.loadProgress();
         const hash = window.location.hash.replace('#', '');
-        const initialPage = ['learn', 'practice', 'progress', 'guide'].includes(hash) ? hash : 'learn';
+        const initialPage = ['learn', 'practice', 'progress'].includes(hash) ? hash : 'learn';
         this.navigateTo(initialPage);
         window.addEventListener('hashchange', () => this.handleHashChange());
         this.mainContent.addEventListener('input', (e) => {
@@ -37,10 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.handleTypingKeydown(e);
             }
         });
-
-        // Listen for physical keyboard events for virtual keyboard feedback
-        window.addEventListener('keydown', (e) => this.handlePhysicalKeydown(e));
-        window.addEventListener('keyup', (e) => this.handlePhysicalKeyup(e));
     };
     
     App.prototype.toggleMobileMenu = function() {
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     App.prototype.handleHashChange = function() {
         const hash = window.location.hash.replace('#', '');
-        if (['learn', 'practice', 'progress', 'guide'].includes(hash) && this.state.currentPage !== hash) {
+        if (['learn', 'practice', 'progress'].includes(hash) && this.state.currentPage !== hash) {
             this.navigateTo(hash);
         }
     };
@@ -77,9 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'progress':
                 this.renderProgressPage();
                 break;
-            case 'guide':
-                this.renderGuidePage();
-                break;
             default:
                 this.renderLearnPage();
         }
@@ -98,9 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     App.prototype.renderLearnPage = function() {
         this.state.currentLesson = null;
-        // Hide keyboard when not in lesson
-        const keyboardContainer = document.getElementById('keyboard-container');
-        if (keyboardContainer) keyboardContainer.innerHTML = '';
 
         let lessonGridHTML = this.state.syllabus.map((lesson, index) => {
             const isCompleted = this.state.progressData.completedLessons.has(index);
@@ -131,66 +126,74 @@ document.addEventListener('DOMContentLoaded', () => {
         this.state.currentWordIndex = 0;
         this.state.userInput = '';
         this.state.startTime = null;
-        this.renderLessonView();
-        this.renderKeyboard();
-        // Highlight the first expected key immediately
+        this.state.isHintVisible = true;
+
         const lesson = this.state.syllabus[this.state.currentLesson];
-        const practiceItems = lesson.words;
-        const currentItem = practiceItems[this.state.currentWordIndex];
-        this.updateKeyboard(currentItem, "");
+        this.state.currentLessonData = {
+            items: [...(lesson.words || []), ...(lesson.phrases || [])],
+            phonetic_items: [...(lesson.phonetic_words || []), ...(lesson.phrases_phonetic || [])]
+        };
+
+        this.renderLessonView();
+    };
+
+    App.prototype.toggleHint = function() {
+        this.state.isHintVisible = !this.state.isHintVisible;
+        this.renderLessonView();
     };
 
     App.prototype.renderLessonView = function() {
         const lesson = this.state.syllabus[this.state.currentLesson];
-        const practiceItems = lesson.words;
-        const phoneticItems = lesson.phonetic_words;
+        const { items, phonetic_items } = this.state.currentLessonData;
 
-        if (this.state.currentWordIndex >= practiceItems.length) {
-            // Hide keyboard after lesson complete
-            const keyboardContainer = document.getElementById('keyboard-container');
-            if (keyboardContainer) keyboardContainer.innerHTML = '';
+        if (this.state.currentWordIndex >= items.length) {
             this.completeLesson();
             return;
         }
 
-        const currentItem = practiceItems[this.state.currentWordIndex];
-        const phoneticItem = phoneticItems[this.state.currentWordIndex];
+        const currentItem = items[this.state.currentWordIndex];
+        const phoneticItem = phonetic_items[this.state.currentWordIndex];
         const displayHTML = this.getDisplayHTML(currentItem, this.state.userInput);
 
-        // Move keyboard below typing area by rendering a placeholder div
+        const keyboardMapHTML = this.state.isHintVisible && lesson.keyboard_map ? 
+            Object.entries(lesson.keyboard_map).map(([key, value]) => `
+                <div class="flex items-center justify-center p-2 bg-gray-200 rounded-md">
+                    <span class="font-mono text-lg font-semibold">${key}</span>
+                    <span class="mx-2">→</span>
+                    <span class="text-lg font-semibold">${value}</span>
+                </div>
+            `).join('') : '';
+
         this.mainContent.innerHTML = `
-            <div class="max-w-3xl mx-auto flex flex-col gap-6">
-                <div class="flex justify-between items-center mb-2">
-                    <button onclick="app.navigateTo('learn')" class="btn-accent py-2 px-4 rounded-lg flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
-                        সব পাঠ
-                    </button>
-                    <h2 class="text-2xl font-bold text-center flex-1">পাঠ ${this.state.currentLesson + 1}: ${lesson.title}</h2>
-                    <div style="width:40px"></div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex justify-between items-center mb-2">
+                        <button onclick="app.navigateTo('learn')" class="btn-accent py-2 px-4 rounded-lg flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                            সব পাঠ
+                        </button>
+                        <h2 class="text-2xl font-bold text-center flex-1">পাঠ ${this.state.currentLesson + 1}: ${lesson.title}</h2>
+                        <button onclick="app.toggleHint()" class="btn-accent py-2 px-4 rounded-lg">Hint</button>
+                    </div>
+                    <div class="bg-secondary p-6 rounded-xl shadow-inner flex flex-col gap-2">
+                        <p class="text-center text-gray-600 mb-2">নিচের লেখাটির জন্য টাইপ করুন:</p>
+                        <div id="typing-display" class="typing-display text-center mb-2">${displayHTML}</div>
+                        <p class="text-center text-gray-500 mb-4">(${phoneticItem})</p>
+                        <textarea id="typing-input" class="w-full p-4 border-2 border-gray-300 rounded-lg text-2xl focus:border-accent focus:ring-accent" rows="3" autofocus></textarea>
+                        <div class="text-center mt-4 text-gray-500">শব্দ: ${this.state.currentWordIndex + 1} / ${items.length}</div>
+                    </div>
                 </div>
-                <div class="bg-secondary p-6 rounded-xl shadow-inner flex flex-col gap-2">
-                    <p class="text-center text-gray-600 mb-2">নিচের লেখাটির জন্য টাইপ করুন:</p>
-                    <div id="typing-display" class="typing-display text-center mb-2">${displayHTML}</div>
-                    <p class="text-center text-gray-500 mb-4">(${phoneticItem})</p>
-                    <textarea id="typing-input" class="w-full p-4 border-2 border-gray-300 rounded-lg text-2xl focus:border-accent focus:ring-accent" rows="3" autofocus></textarea>
-                    <div class="text-center mt-4 text-gray-500">শব্দ: ${this.state.currentWordIndex + 1} / ${practiceItems.length}</div>
+                <div id="hint-container" class="${this.state.isHintVisible ? '' : 'hidden'} md:col-span-1 bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold mb-4 text-center">Keyboard Hints</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 gap-2">
+                        ${keyboardMapHTML}
+                    </div>
                 </div>
-                <div id="onscreen-keyboard-placeholder"></div>
             </div>
         `;
 
-        // Move the keyboard into the placeholder
-        const keyboardContainer = document.getElementById('keyboard-container');
-        const placeholder = document.getElementById('onscreen-keyboard-placeholder');
-        if (keyboardContainer && placeholder) {
-            placeholder.appendChild(keyboardContainer);
-            keyboardContainer.style.display = 'block';
-        }
-
         const input = document.getElementById('typing-input');
         input.focus();
-        // Highlight the first expected key after rendering view
-        this.updateKeyboard(currentItem, this.state.userInput);
     };
 
     App.prototype.handleTyping = function(e) {
@@ -198,35 +201,20 @@ document.addEventListener('DOMContentLoaded', () => {
             this.state.startTime = new Date();
         }
         this.state.userInput = e.target.value;
-        const lesson = this.state.syllabus[this.state.currentLesson];
-        const practiceItems = lesson.words;
-        // const phoneticItems = lesson.phonetic_words;
-        const currentItem = practiceItems[this.state.currentWordIndex];
-        // const currentPhoneticItem = phoneticItems[this.state.currentWordIndex];
+        const { items } = this.state.currentLessonData;
+        const currentItem = items[this.state.currentWordIndex];
         
         const display = document.getElementById('typing-display');
         if (display) {
             display.innerHTML = this.getDisplayHTML(currentItem, this.state.userInput);
         }
-
-        this.updateKeyboard(currentItem, this.state.userInput);
-
-        // Remove auto move to next word here
-        // if (this.state.userInput === currentPhoneticItem) {
-        //     this.moveToNextWord();
-        // }
     };
 
-    // New: handle keydown for space/enter to move to next word/phrase
     App.prototype.handleTypingKeydown = function(e) {
-        // Only act on Space or Enter
         if (e.key === ' ' || e.key === 'Enter') {
-            const lesson = this.state.syllabus[this.state.currentLesson];
-            const practiceItems = lesson.words;
-            const currentItem = practiceItems[this.state.currentWordIndex];
-            // Trim input to avoid trailing spaces
+            const { items } = this.state.currentLessonData;
+            const currentItem = items[this.state.currentWordIndex];
             const trimmedInput = this.state.userInput.trim();
-            // Only move to next if input matches the target exactly
             if (trimmedInput === currentItem) {
                 e.preventDefault();
                 this.moveToNextWord();
@@ -266,9 +254,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const endTime = new Date();
         const timeTaken = (endTime - this.state.startTime) / 1000;
         
-        const lesson = this.state.syllabus[this.state.currentLesson];
-        const phoneticItems = lesson.phonetic_words;
-        const totalChars = phoneticItems.reduce((acc, item) => acc + item.length, 0);
+        const { phonetic_items } = this.state.currentLessonData;
+        const totalChars = phonetic_items.reduce((acc, item) => acc + item.length, 0);
         const wpm = timeTaken > 0 ? Math.round((totalChars / 5) / (timeTaken / 60)) : 0;
 
         this.state.progressData.completedLessons.add(this.state.currentLesson);
@@ -296,9 +283,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     App.prototype.renderPracticePage = function() {
-        // Hide keyboard when not in lesson
-        const keyboardContainer = document.getElementById('keyboard-container');
-        if (keyboardContainer) keyboardContainer.innerHTML = '';
          this.mainContent.innerHTML = `
             <div class="text-center">
                 <h2 class="text-3xl font-bold mb-2">মুক্ত অনুশীলন</h2>
@@ -309,9 +293,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     App.prototype.renderProgressPage = function() {
-        // Hide keyboard when not in lesson
-        const keyboardContainer = document.getElementById('keyboard-container');
-        if (keyboardContainer) keyboardContainer.innerHTML = '';
         this.mainContent.innerHTML = `
             <div class="text-center mb-8">
                 <h2 class="text-3xl font-bold mb-2">আপনার অগ্রগতি</h2>
@@ -370,149 +351,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 options: { responsive: true, maintainAspectRatio: false, cutout: '70%' }
             });
-        }
-    };
-
-    App.prototype.renderGuidePage = function() {
-        // Hide keyboard when not in lesson
-        const keyboardContainer = document.getElementById('keyboard-container');
-        if (keyboardContainer) keyboardContainer.innerHTML = '';
-        this.mainContent.innerHTML = `
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-3xl font-bold text-center mb-8">দ্রুত সহায়িকা</h2>
-                <div class="space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-md">
-                        <h3 class="font-bold text-xl mb-3">মৌলিক স্বরবর্ণ</h3>
-                        <p><strong>অ:</strong> o, <strong>আ:</strong> a, <strong>ই:</strong> i, <strong>ঈ:</strong> I/ee, <strong>উ:</strong> u, <strong>ঊ:</strong> U, <strong>ঋ:</strong> rri, <strong>এ:</strong> e, <strong>ঐ:</strong> OI, <strong>ও:</strong> O, <strong>ঔ:</strong> OU</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md">
-                        <h3 class="font-bold text-xl mb-3">ফলা-চিহ্ন</h3>
-                        <p><strong>ব-ফলা ( ্ব ):</strong> w (e.g., bishwo -> বিশ্ব), <strong>য-ফলা ( ্য ):</strong> y (e.g., byasto -> ব্যস্ত), <strong>র-ফলা ( ্র ):</strong> r (e.g., prokash -> প্রকাশ), <strong>রেফ ( র্র ):</strong> rr (e.g., orrtho -> অর্থ)</p>
-                    </div>
-                     <div class="bg-white p-6 rounded-xl shadow-md">
-                        <h3 class="font-bold text-xl mb-3">বিশেষ অক্ষর ও যতিচিহ্ন</h3>
-                        <ul class="list-disc list-inside space-y-2">
-                            <li><strong>দাঁড়ি (।):</strong> . (period)</li>
-                            <li><strong>টাকা (৳):</strong> $ (dollar sign)</li>
-                            <li><strong>ৎ (খণ্ড-ত):</strong> t\`\` (t followed by two accent keys)</li>
-                            <li><strong>ং (অনুস্বার):</strong> ng</li>
-                            <li><strong>ঃ (বিসর্গ):</strong> : (colon)</li>
-                            <li><strong>ঁ (চন্দ্রবিন্দু):</strong> ^ (caret, may vary)</li>
-                            <li><strong>Accent Key (\`):</strong> যুক্তাক্ষর ভাঙতে বা মূল স্বরবর্ণ লিখতে ব্যবহৃত হয়। যেমন: amra (আম্রা) vs am\`ra (আমরা)</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        `;
-    };
-
-    // Helper: mapping Bangla char to expected key (simplified for demo)
-    App.prototype.getExpectedKey = function(target, input) {
-        // For now, just use the next Bangla character and map to phonetic key
-        // You may want to improve this mapping for full phonetic support
-        const charToKey = {
-            'অ': 'o', 'আ': 'a', 'ই': 'i', 'ঈ': 'I', 'উ': 'u', 'ঊ': 'U', 'ঋ': 'rri', 'এ': 'e', 'ঐ': 'oi', 'ও': 'O', 'ঔ': 'ou',
-            'ক': 'k', 'খ': 'kh', 'গ': 'g', 'ঘ': 'gh', 'ঙ': 'Ng', 'চ': 'c', 'ছ': 'ch', 'জ': 'j', 'ঝ': 'jh', 'ঞ': 'Y',
-            'ট': 'T', 'ঠ': 'Th', 'ড': 'D', 'ঢ': 'Dh', 'ণ': 'N', 'ত': 't', 'থ': 'th', 'দ': 'd', 'ধ': 'dh', 'ন': 'n',
-            'প': 'p', 'ফ': 'f', 'ব': 'b', 'ভ': 'v', 'ম': 'm', 'য': 'z', 'র': 'r', 'ল': 'l', 'শ': 'S', 'ষ': 'Sh', 'স': 's', 'হ': 'h',
-            'ড়': 'R', 'ঢ়': 'Rh', 'য়': 'y', 'ৎ': '.t', 'ং': 'ng', 'ঃ': ':', 'ঁ': 'n',
-            'া': 'a', 'ি': 'i', 'ী': 'I', 'ু': 'u', 'ূ': 'U', 'ৃ': 'rri', 'ে': 'e', 'ৈ': 'oi', 'ো': 'O', 'ৌ': 'ou',
-            ' ': ' ', ',': ',', '.': '.', '?': '?', '।': '.', '৳': '$', ':': ':', '-': '-', '০': '0', '১': '1', '২': '2', '৩': '3', '৪': '4', '৫': '5', '৬': '6', '৭': '7', '৮': '8', '৯': '9'
-        };
-        const nextChar = target[input.length];
-        if (!nextChar) return null;
-        let key = charToKey[nextChar];
-        if (!key) {
-            // fallback: try to use the char itself if it's ascii
-            key = nextChar;
-        }
-        // Only use first letter for highlighting (for multi-letter mappings)
-        return key ? key[0].toLowerCase() : null;
-    };
-
-    App.prototype.renderKeyboard = function() {
-        const keyboardContainer = document.getElementById('keyboard-container');
-        const keys = [
-            ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-            ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-            ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
-            [' ', '.', ',', '?', '$']
-        ];
-
-        let keyboardHTML = '<div class="keyboard">';
-        keys.forEach(row => {
-            keyboardHTML += '<div class="keyboard-row">';
-            row.forEach(key => {
-                let display = key === ' ' ? '&nbsp;' : key;
-                keyboardHTML += `<div class="key" data-key="${key}">${display}</div>`;
-            });
-            keyboardHTML += '</div>';
-        });
-        keyboardHTML += '</div>';
-        keyboardContainer.innerHTML = keyboardHTML;
-    };
-
-    // Responsive keyboard update: show which key to press and which was pressed, color-coded
-    App.prototype.updateKeyboard = function(target, input) {
-        const keys = document.querySelectorAll('.key');
-        keys.forEach(key => {
-            key.classList.remove('active', 'pressed-correct', 'pressed-wrong');
-        });
-
-        // Highlight next expected key
-        const expectedKey = this.getExpectedKey(target, input);
-        if (expectedKey) {
-            const keyToPress = document.querySelector(`.key[data-key="${expectedKey}"]`);
-            if (keyToPress) {
-                keyToPress.classList.add('active');
-            }
-        }
-
-        // If last key pressed, highlight as pressed (handled by physical key events)
-        // This is now handled in handlePhysicalKeydown/keyup
-    };
-
-    // Track last pressed key for feedback
-    App.prototype.handlePhysicalKeydown = function(e) {
-        // Only highlight if typing input is focused
-        const input = document.getElementById('typing-input');
-        if (!input || document.activeElement !== input) return;
-
-        // Normalize key (space, etc.)
-        let pressedKey = e.key;
-        if (pressedKey === ' ') pressedKey = ' ';
-        if (pressedKey.length === 1) pressedKey = pressedKey.toLowerCase();
-
-        // Remove previous pressed states
-        document.querySelectorAll('.key').forEach(key => {
-            key.classList.remove('pressed-correct', 'pressed-wrong');
-        });
-
-        // Get expected key
-        const lesson = this.state.syllabus[this.state.currentLesson];
-        const practiceItems = lesson ? lesson.words : [];
-        const currentItem = practiceItems[this.state.currentWordIndex] || '';
-        const expectedKey = this.getExpectedKey(currentItem, this.state.userInput);
-
-        // Find the virtual key
-        const keyElem = document.querySelector(`.key[data-key="${pressedKey}"]`);
-        if (keyElem) {
-            if (pressedKey === expectedKey) {
-                keyElem.classList.add('pressed-correct');
-            } else {
-                keyElem.classList.add('pressed-wrong');
-            }
-        }
-    };
-
-    App.prototype.handlePhysicalKeyup = function(e) {
-        // Remove pressed state on keyup
-        let releasedKey = e.key;
-        if (releasedKey === ' ') releasedKey = ' ';
-        if (releasedKey.length === 1) releasedKey = releasedKey.toLowerCase();
-        const keyElem = document.querySelector(`.key[data-key="${releasedKey}"]`);
-        if (keyElem) {
-            keyElem.classList.remove('pressed-correct', 'pressed-wrong');
         }
     };
 
