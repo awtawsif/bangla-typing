@@ -114,3 +114,15 @@ body {
             background-color: #6B9080;
             color: white;
         }
+
+        .key.pressed-correct {
+            background-color: #388E3C !important;
+            color: #fff !important;
+            border-color: #388E3C !important;
+        }
+
+        .key.pressed-wrong {
+            background-color: #D32F2F !important;
+            color: #fff !important;
+            border-color: #D32F2F !important;
+        }
