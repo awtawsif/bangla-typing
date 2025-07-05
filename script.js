@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.state.currentWordIndex = 0;
         this.state.userInput = '';
         this.state.startTime = null;
-        this.state.isHintVisible = false;
+        this.state.isHintVisible = true; // Show hint by default when starting a lesson
         this.state.correctCharsCount = 0; // Reset accuracy counts
         this.state.incorrectCharsCount = 0; // Reset accuracy counts
 
