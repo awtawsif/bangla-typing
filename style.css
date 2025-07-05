@@ -1,128 +1,139 @@
 body {
-            font-family: 'Hind Siliguri', sans-serif;
-            background-color: #FDFDFD;
-            color: #3D405B;
-        }
-        .bg-primary { background-color: #FDFDFD; }
-        .bg-secondary { background-color: #F4F3EE; }
-        .bg-accent { background-color: #81B29A; }
-        .text-accent { color: #81B29A; }
-        .border-accent { border-color: #81B29A; }
-        .btn-accent {
-            background-color: #81B29A;
-            color: #FFFFFF;
-            transition: background-color 0.3s ease;
-        }
-        .btn-accent:hover {
-            background-color: #6B9080;
-        }
-        .nav-link {
-            cursor: pointer;
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .nav-link.active {
-            background-color: #81B29A;
-            color: #FFFFFF;
-            font-weight: 600;
-        }
-        .nav-link:not(.active):hover {
-            background-color: #F4F3EE;
-        }
-        .lesson-card {
-            background-color: #FFFFFF;
-            border: 1px solid #E0E0E0;
-            border-radius: 12px;
-            padding: 16px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .lesson-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
-        }
-        .lesson-card.completed {
-            background-color: #E8F5E9;
-            border-color: #A5D6A7;
-        }
-        .typing-display {
-            font-size: 2.25rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            padding: 20px;
-            background-color: #FFFFFF;
-            border-radius: 8px;
-            border: 1px solid #E0E0E0;
-            min-height: 80px;
-        }
-        .correct { color: #388E3C; }
-        .incorrect { color: #D32F2F; text-decoration: underline; }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
-        }
+    font-family: 'Hind Siliguri', sans-serif;
+    background-color: #FDFDFD;
+    color: #3D405B;
+}
 
-        #keyboard-container {
-            margin-top: 20px;
-        }
+.bg-primary { background-color: #FDFDFD; }
+.bg-secondary { background-color: #F4F3EE; }
+.bg-accent { background-color: #81B29A; }
+.text-accent { color: #81B29A; }
+.border-accent { border-color: #81B29A; }
+.btn-accent {
+    background-color: #81B29A;
+    color: #FFFFFF;
+    transition: background-color 0.3s ease;
+}
 
-        .keyboard {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
+.btn-accent:hover {
+    background-color: #6B9080;
+}
 
-        .keyboard-row {
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-        }
+.nav-link {
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
 
-        .key {
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px 15px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.2s, transform 0.1s;
-        }
+.nav-link.active {
+    background-color: #81B29A;
+    color: #FFFFFF;
+    font-weight: 600;
+}
 
-        .key:hover {
-            background-color: #f0f0f0;
-        }
+.nav-link:not(.active):hover {
+    background-color: #F4F3EE;
+}
 
-        .key.active {
-            background-color: #81B29A;
-            color: white;
-            transform: scale(0.95);
-        }
+.lesson-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    padding: 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
 
-        .key.pressed {
-            background-color: #6B9080;
-            color: white;
-        }
+.lesson-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+}
 
-        .key.pressed-correct {
-            background-color: #388E3C !important;
-            color: #fff !important;
-            border-color: #388E3C !important;
-        }
+.lesson-card.completed {
+    background-color: #E8F5E9;
+    border-color: #A5D6A7;
+}
 
-        .key.pressed-wrong {
-            background-color: #D32F2F !important;
-            color: #fff !important;
-            border-color: #D32F2F !important;
-        }
+.typing-display {
+    font-size: 2.25rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    border: 1px solid #E0E0E0;
+    min-height: 80px;
+}
+
+.correct { color: #388E3C; }
+.incorrect { color: #D32F2F; text-decoration: underline; }
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+    max-height: 400px;
+}
+
+@media (min-width: 768px) {
+    .chart-container {
+        height: 350px;
+    }
+}
+
+#keyboard-container {
+    margin-top: 20px;
+}
+
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.key {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.key:hover {
+    background-color: #f0f0f0;
+}
+
+.key.active {
+    background-color: #81B29A;
+    color: white;
+    transform: scale(0.95);
+}
+
+.key.pressed {
+    background-color: #6B9080;
+    color: white;
+}
+
+.key.pressed-correct {
+    background-color: #388E3C !important;
+    color: #fff !important;
+    border-color: #388E3C !important;
+}
+
+.key.pressed-wrong {
+    background-color: #D32F2F !important;
+    color: #fff !important;
+    border-color: #D32F2F !important;
+}

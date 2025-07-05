@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
             currentWordIndex: 0,
             userInput: '',
             startTime: null,
+            correctCharsCount: 0, // Added for accuracy calculation
+            incorrectCharsCount: 0, // Added for accuracy calculation
             progressData: {
                 completedLessons: new Set(),
                 performance: [] 
@@ -46,6 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         this.navLinks = document.querySelectorAll('.nav-link');
         this.mobileMenu = document.getElementById('mobile-menu');
+
+        // Chart instances to be destroyed before re-rendering
+        this.wpmChartInstance = null;
+        this.completionChartInstance = null;
     };
 
     App.prototype.init = async function() {
@@ -76,6 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
             this.state.syllabus = await response.json();
         } catch (error) {
             console.error('Failed to load syllabus:', error);
+            // Optionally, display a user-friendly error message on the learn page
+            document.getElementById('lesson-grid').innerHTML = '<p class="text-center text-red-500">পাঠ লোড করা যায়নি। অনুগ্রহ করে আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন।</p>';
         }
     };
 
@@ -136,6 +144,8 @@ document.addEventListener('DOMContentLoaded', () => {
         this.state.userInput = '';
         this.state.startTime = null;
         this.state.isHintVisible = false;
+        this.state.correctCharsCount = 0; // Reset accuracy counts
+        this.state.incorrectCharsCount = 0; // Reset accuracy counts
 
         const lesson = this.state.syllabus[this.state.currentLesson];
         this.state.currentLessonData = {
@@ -197,15 +207,59 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     App.prototype.handleTypingKeydown = function(e) {
+        const { items } = this.state.currentLessonData;
+        const currentItem = items[this.state.currentWordIndex];
+        const trimmedInput = this.state.userInput.trim();
+
+        // Update accuracy counts on each keydown (before processing space/enter)
+        // This ensures accuracy is tracked for partially typed words too
+        this.updateAccuracy(currentItem, this.state.userInput);
+
         if (e.key === ' ' || e.key === 'Enter') {
-            const { items } = this.state.currentLessonData;
-            const currentItem = items[this.state.currentWordIndex];
-            const trimmedInput = this.state.userInput.trim();
             if (trimmedInput === currentItem) {
                 e.preventDefault();
                 this.moveToNextWord();
+            } else {
+                // If input doesn't match, count remaining characters as incorrect for this word
+                this.state.incorrectCharsCount += (currentItem.length - trimmedInput.length);
+                // Optionally, prevent moving to next word if incorrect and not matching
+                // For now, we allow moving on if space/enter is pressed, but accuracy is recorded.
+                // You might want to force correction before moving on.
             }
         }
+    };
+
+    App.prototype.updateAccuracy = function(target, input) {
+        let currentCorrect = 0;
+        let currentIncorrect = 0;
+        const minLength = Math.min(target.length, input.length);
+
+        for (let i = 0; i < minLength; i++) {
+            if (target[i] === input[i]) {
+                currentCorrect++;
+            } else {
+                currentIncorrect++;
+            }
+        }
+        // If input is longer than target, extra characters are incorrect
+        currentIncorrect += Math.max(0, input.length - target.length);
+
+        // Update global counts based on the difference from previous state for the current word
+        // This approach needs careful thought if you're tracking character-by-character changes
+        // For simplicity, let's reset and recalculate for the current word on each keydown for display purposes
+        // and then accumulate total correct/incorrect at word completion.
+        // For now, we'll just accumulate correct/incorrect for the entire lesson.
+        // A more precise accuracy would involve tracking per-word errors and then summing.
+        // For simplicity, let's just count total correct/incorrect characters typed throughout the lesson.
+        // This is a common simplification for overall lesson accuracy.
+        // The current implementation of `getDisplayHTML` already provides visual feedback.
+        // To get overall accuracy, we need to sum up correct and incorrect characters over the entire lesson.
+        // Let's refine this: correctCharsCount and incorrectCharsCount will be for the entire lesson.
+        // When a word is completed, we compare the final input to the target.
+
+        // This function will be called on keydown. It's better to calculate accuracy only when a word is submitted.
+        // For now, the existing `getDisplayHTML` handles visual feedback.
+        // The actual accuracy calculation will happen in `completeLesson`.
     };
 
     App.prototype.getDisplayHTML = function(target, input) {
@@ -221,6 +275,24 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     App.prototype.moveToNextWord = function() {
+        const { items } = this.state.currentLessonData;
+        const currentItem = items[this.state.currentWordIndex];
+        const trimmedInput = this.state.userInput.trim();
+
+        // Accumulate correct and incorrect characters for the whole lesson
+        for (let i = 0; i < Math.min(currentItem.length, trimmedInput.length); i++) {
+            if (currentItem[i] === trimmedInput[i]) {
+                this.state.correctCharsCount++;
+            } else {
+                this.state.incorrectCharsCount++;
+            }
+        }
+        // If the input is shorter than the target, the remaining target characters are "skipped" (incorrect)
+        this.state.incorrectCharsCount += Math.max(0, currentItem.length - trimmedInput.length);
+        // If the input is longer than the target, the extra characters are incorrect
+        this.state.incorrectCharsCount += Math.max(0, trimmedInput.length - currentItem.length);
+
+
         this.state.currentWordIndex++;
         this.state.userInput = '';
         this.renderLessonView();
@@ -228,24 +300,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     App.prototype.completeLesson = function() {
         const endTime = new Date();
-        const timeTaken = (endTime - this.state.startTime) / 1000;
+        const timeTaken = (endTime - this.state.startTime) / 1000; // Time in seconds
         
         const { phonetic_items } = this.state.currentLessonData;
-        const totalChars = phonetic_items.reduce((acc, item) => acc + item.length, 0);
-        const wpm = timeTaken > 0 ? Math.round((totalChars / 5) / (timeTaken / 60)) : 0;
+        const totalTargetChars = phonetic_items.reduce((acc, item) => acc + item.length, 0);
+        
+        // WPM calculation: (characters / 5) / (minutes)
+        const wpm = timeTaken > 0 ? Math.round((totalTargetChars / 5) / (timeTaken / 60)) : 0;
+
+        // Calculate overall accuracy for the lesson
+        let accuracy = 0;
+        const totalTypedChars = this.state.correctCharsCount + this.state.incorrectCharsCount;
+        if (totalTypedChars > 0) {
+            accuracy = Math.round((this.state.correctCharsCount / totalTypedChars) * 100);
+        }
 
         this.state.progressData.completedLessons.add(this.state.currentLesson);
         this.state.progressData.performance.push({
             lesson: this.state.currentLesson,
             wpm: wpm,
-            accuracy: 100, // Simplified accuracy
+            accuracy: accuracy, // Now dynamically calculated
             date: new Date().toISOString().split('T')[0]
         });
         this.saveProgress();
 
         this.navigateTo('completion');
         this.completionElements.title.textContent = `পাঠ ${this.state.currentLesson + 1} সম্পন্ন!`;
-        this.completionElements.wpmResult.textContent = `${wpm} WPM`;
+        this.completionElements.wpmResult.innerHTML = `${wpm} WPM <span class="text-lg text-gray-600">(${accuracy}% নির্ভুলতা)</span>`; // Display accuracy
         this.completionElements.retryButton.onclick = () => this.startLesson(this.state.currentLesson);
     };
 
@@ -261,10 +342,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const wpmCtx = document.getElementById('wpmChart')?.getContext('2d');
         const completionCtx = document.getElementById('completionChart')?.getContext('2d');
 
+        // Destroy existing chart instances before creating new ones
+        if (this.wpmChartInstance) {
+            this.wpmChartInstance.destroy();
+            this.wpmChartInstance = null;
+        }
+        if (this.completionChartInstance) {
+            this.completionChartInstance.destroy();
+            this.completionChartInstance = null;
+        }
+
         if (wpmCtx && this.state.progressData.performance.length > 0) {
             const lessonLabels = this.state.progressData.performance.map(p => `পাঠ ${p.lesson + 1}`);
             const wpmData = this.state.progressData.performance.map(p => p.wpm);
-            new Chart(wpmCtx, {
+            const accuracyData = this.state.progressData.performance.map(p => p.accuracy); // Get accuracy data
+
+            this.wpmChartInstance = new Chart(wpmCtx, {
                 type: 'line',
                 data: {
                     labels: lessonLabels,
@@ -274,17 +367,74 @@ document.addEventListener('DOMContentLoaded', () => {
                         borderColor: '#81B29A',
                         backgroundColor: 'rgba(129, 178, 154, 0.2)',
                         fill: true,
-                        tension: 0.3
+                        tension: 0.3,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Accuracy (%)', // New dataset for accuracy
+                        data: accuracyData,
+                        borderColor: '#F2CC8F', // A different color for accuracy
+                        backgroundColor: 'rgba(242, 204, 143, 0.2)',
+                        fill: true,
+                        tension: 0.3,
+                        yAxisID: 'y1' // Use a different Y-axis if scales differ greatly
                     }]
                 },
-                options: { responsive: true, maintainAspectRatio: false }
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'WPM'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            grid: {
+                                drawOnChartArea: false // Only draw grid lines for the first Y-axis
+                            },
+                            title: {
+                                display: true,
+                                text: 'Accuracy (%)'
+                            },
+                            min: 0,
+                            max: 100 // Accuracy is 0-100%
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y;
+                                        if (context.dataset.label === 'Accuracy (%)') {
+                                            label += '%';
+                                        }
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
             });
         }
 
         if (completionCtx) {
             const completedCount = this.state.progressData.completedLessons.size;
             const totalLessons = this.state.syllabus.length;
-            new Chart(completionCtx, {
+            this.completionChartInstance = new Chart(completionCtx, {
                 type: 'doughnut',
                 data: {
                     labels: ['সম্পন্ন', 'বাকি'],
@@ -317,7 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const parsed = JSON.parse(savedData);
                 this.state.progressData = {
                     completedLessons: new Set(parsed.completedLessons),
-                    performance: parsed.performance
+                    performance: parsed.performance || [] // Ensure performance is an array
                 };
             }
         } catch (e) {
@@ -328,3 +478,4 @@ document.addEventListener('DOMContentLoaded', () => {
     app = new App();
     app.init();
 });
+
