@@ -1,59 +1,93 @@
 body {
     font-family: 'Hind Siliguri', sans-serif;
-    background-color: #FDFDFD;
-    color: #3D405B;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #2c3e50;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-.bg-primary { background-color: #FDFDFD; }
-.bg-secondary { background-color: #F4F3EE; }
-.bg-accent { background-color: #81B29A; }
-.text-accent { color: #81B29A; }
-.border-accent { border-color: #81B29A; }
+.bg-primary { background-color: #ffffff; }
+.bg-secondary { background-color: #ecf0f1; }
+.bg-accent { background-color: #e74c3c; }
+.text-accent { color: #e74c3c; }
+.border-accent { border-color: #e74c3c; }
 .btn-accent {
-    background-color: #81B29A;
+    background-color: #e74c3c;
     color: #FFFFFF;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .btn-accent:hover {
-    background-color: #6B9080;
+    background-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+.btn-accent:active {
+    transform: translateY(0);
 }
 
 .nav-link {
     cursor: pointer;
     padding: 8px 16px;
     border-radius: 8px;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
 }
 
 .nav-link.active {
-    background-color: #81B29A;
+    background-color: #e74c3c;
     color: #FFFFFF;
     font-weight: 600;
+    box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
 }
 
 .nav-link:not(.active):hover {
-    background-color: #F4F3EE;
+    background-color: #ecf0f1;
+    transform: translateY(-2px);
 }
 
 .lesson-card {
     background-color: #FFFFFF;
-    border: 1px solid #E0E0E0;
+    border: 1px solid #e0e0e0;
     border-radius: 12px;
     padding: 16px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.lesson-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lesson-card:hover::before {
+    opacity: 1;
 }
 
 .lesson-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
 }
 
 .lesson-card.completed {
-    background-color: #E8F5E9;
-    border-color: #A5D6A7;
+    background-color: #e8f5e9; /* Light green for completed */
+    border-color: #a5d6a7;
+    box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2);
 }
 
 .typing-display {
@@ -62,13 +96,16 @@ body {
     letter-spacing: 2px;
     padding: 20px;
     background-color: #FFFFFF;
-    border-radius: 8px;
-    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
     min-height: 80px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
 }
 
-.correct { color: #388E3C; }
-.incorrect { color: #D32F2F; text-decoration: underline; }
+.correct { color: #27ae60; } /* Vibrant green */
+.incorrect { color: #c0392b; text-decoration: underline; } /* Darker red */
 .chart-container {
     position: relative;
     width: 100%;
@@ -77,6 +114,10 @@ body {
     margin-right: auto;
     height: 300px;
     max-height: 400px;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 @media (min-width: 768px) {
@@ -92,48 +133,126 @@ body {
 .keyboard {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 8px;
 }
 
 .keyboard-row {
     display: flex;
     justify-content: center;
-    gap: 5px;
+    gap: 8px;
 }
 
 .key {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px 15px;
-    font-size: 18px;
+    background-color: #fdfdfd;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    min-width: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
 }
 
 .key:hover {
-    background-color: #f0f0f0;
+    background-color: #e0e0e0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .key.active {
-    background-color: #81B29A;
+    background-color: #f39c12; /* Vibrant orange for active */
     color: white;
-    transform: scale(0.95);
+    transform: scale(0.98);
+    box-shadow: 0 4px 12px rgba(243, 156, 18, 0.4);
+    border-color: #f39c12;
 }
 
 .key.pressed {
-    background-color: #6B9080;
+    background-color: #e74c3c; /* Vibrant red-orange for pressed */
     color: white;
+    transform: scale(0.9);
+    box-shadow: 0 6px 15px rgba(231, 76, 60, 0.5);
+    border-color: #e74c3c;
+    animation: key-press-animation 0.15s ease-out;
 }
 
 .key.pressed-correct {
-    background-color: #388E3C !important;
+    background-color: #27ae60 !important; /* Green for correct */
     color: #fff !important;
-    border-color: #388E3C !important;
+    border-color: #27ae60 !important;
+    box-shadow: 0 6px 15px rgba(39, 174, 96, 0.5) !important;
 }
 
 .key.pressed-wrong {
-    background-color: #D32F2F !important;
+    background-color: #c0392b !important; /* Dark red for wrong */
     color: #fff !important;
-    border-color: #D32F2F !important;
+    border-color: #c0392b !important;
+    box-shadow: 0 6px 15px rgba(192, 57, 43, 0.5) !important;
+}
+
+@keyframes key-press-animation {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+/* Animations for page transitions */
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.fade-out {
+    animation: fadeOut 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
+.lesson-card.clicked {
+    animation: cardClick 0.2s ease-out;
+}
+
+@keyframes cardClick {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.98); }
+    100% { transform: scale(1); }
+}
+
+.text-change-animation {
+    animation: textChange 0.3s ease-out;
+}
+
+@keyframes textChange {
+    0% { opacity: 0; transform: translateY(-5px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.typing-input:focus {
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.3);
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.shake-animation {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
 }

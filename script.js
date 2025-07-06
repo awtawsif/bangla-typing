@@ -88,15 +88,42 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     App.prototype.navigateTo = function(page) {
-        this.state.currentPage = page;
-        window.location.hash = page;
-        this.updateNavLinks();
+        const currentPageElement = this.viewElements[this.state.currentPage];
+        const nextPageElement = this.viewElements[page];
 
-        for (const view in this.viewElements) {
-            this.viewElements[view].classList.add('hidden');
+        if (currentPageElement && nextPageElement && currentPageElement !== nextPageElement) {
+            currentPageElement.classList.add('fade-out');
+            currentPageElement.classList.remove('fade-in');
+
+            setTimeout(() => {
+                currentPageElement.classList.add('hidden');
+                currentPageElement.classList.remove('fade-out');
+
+                this.state.currentPage = page;
+                window.location.hash = page;
+                this.updateNavLinks();
+
+                nextPageElement.classList.remove('hidden');
+                nextPageElement.classList.add('fade-in');
+
+                this.executePageSpecificActions(page);
+            }, 300); // Duration of fade-out animation
+        } else {
+            this.state.currentPage = page;
+            window.location.hash = page;
+            this.updateNavLinks();
+
+            for (const view in this.viewElements) {
+                this.viewElements[view].classList.add('hidden');
+                this.viewElements[view].classList.remove('fade-in', 'fade-out');
+            }
+            this.viewElements[page].classList.remove('hidden');
+            this.viewElements[page].classList.add('fade-in');
+            this.executePageSpecificActions(page);
         }
-        this.viewElements[page].classList.remove('hidden');
+    };
 
+    App.prototype.executePageSpecificActions = function(page) {
         switch(page) {
             case 'learn':
                 this.renderLearnPage();
@@ -106,6 +133,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
             case 'progress':
                 this.renderProgressPage();
+                break;
+            case 'lesson':
+                this.renderLessonView();
+                break;
+            case 'completion':
+                // Completion view content is set in completeLesson
                 break;
         }
     };
@@ -127,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lessonGrid.innerHTML = this.state.syllabus.map((lesson, index) => {
             const isCompleted = this.state.progressData.completedLessons.has(index);
             return `
-                <div class="lesson-card ${isCompleted ? 'completed' : ''}" onclick="app.startLesson(${index})">
+                <div class="lesson-card ${isCompleted ? 'completed' : ''}" data-lesson-index="${index}">
                     <div class="flex justify-between items-center">
                         <span class="text-sm font-semibold text-gray-500">পাঠ ${index + 1}</span>
                         ${isCompleted ? '<span class="text-green-600 font-bold">✓</span>' : ''}
@@ -136,6 +169,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
         }).join('');
+
+        // Add event listeners for lesson cards
+        document.querySelectorAll('.lesson-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                const lessonIndex = parseInt(e.currentTarget.dataset.lessonIndex);
+                e.currentTarget.classList.add('clicked');
+                // Remove the 'clicked' class after a short delay to allow the animation to play
+                setTimeout(() => {
+                    e.currentTarget.classList.remove('clicked');
+                }, 200); // Match this with the animation duration
+                this.startLesson(lessonIndex); // Start the lesson immediately
+            });
+        });
     };
 
     App.prototype.startLesson = function(lessonIndex) {
@@ -154,7 +200,6 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         this.navigateTo('lesson');
-        this.renderLessonView();
     };
 
     App.prototype.toggleHint = function() {
@@ -176,6 +221,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         this.lessonElements.title.textContent = `পাঠ ${this.state.currentLesson + 1}: ${lesson.title}`;
         this.lessonElements.typingDisplay.innerHTML = this.getDisplayHTML(currentItem, this.state.userInput);
+        this.lessonElements.typingDisplay.classList.remove('text-change-animation');
+        void this.lessonElements.typingDisplay.offsetWidth; // Trigger reflow
+        this.lessonElements.typingDisplay.classList.add('text-change-animation');
         this.lessonElements.phoneticDisplay.textContent = `(${phoneticItem})`;
         this.lessonElements.wordCount.textContent = `শব্দ: ${this.state.currentWordIndex + 1} / ${items.length}`;
 
@@ -211,20 +259,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentItem = items[this.state.currentWordIndex];
         const trimmedInput = this.state.userInput.trim();
 
-        // Update accuracy counts on each keydown (before processing space/enter)
-        // This ensures accuracy is tracked for partially typed words too
-        this.updateAccuracy(currentItem, this.state.userInput);
+        // Handle shake animation for incorrect input
+        if (e.key !== 'Backspace' && e.key !== 'Shift' && e.key !== 'Tab' && e.key !== 'Control' && e.key !== 'Alt' && e.key !== 'Meta') {
+            const currentTypedChar = this.state.userInput[e.target.selectionStart - 1];
+            if (currentItem[e.target.selectionStart - 1] !== currentTypedChar) {
+                this.lessonElements.typingInput.classList.add('shake-animation');
+                this.lessonElements.typingInput.addEventListener('animationend', () => {
+                    this.lessonElements.typingInput.classList.remove('shake-animation');
+                }, { once: true });
+            }
+        }
 
-        if (e.key === ' ' || e.key === 'Enter') {
-            if (trimmedInput === currentItem) {
-                e.preventDefault();
+        // Logic for moving to the next word/phrase
+        if (e.key === 'Enter' || (e.key === ' ' && this.state.userInput === currentItem)) {
+            e.preventDefault(); // Prevent default behavior for space/enter
+            if (this.state.userInput === currentItem) {
                 this.moveToNextWord();
             } else {
-                // If input doesn't match, count remaining characters as incorrect for this word
-                this.state.incorrectCharsCount += (currentItem.length - trimmedInput.length);
-                // Optionally, prevent moving to next word if incorrect and not matching
-                // For now, we allow moving on if space/enter is pressed, but accuracy is recorded.
-                // You might want to force correction before moving on.
+                // If input doesn't match, prevent moving and shake
+                this.lessonElements.typingInput.classList.add('shake-animation');
+                this.lessonElements.typingInput.addEventListener('animationend', () => {
+                    this.lessonElements.typingInput.classList.remove('shake-animation');
+                }, { once: true });
             }
         }
     };
