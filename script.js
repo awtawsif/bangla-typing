@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
             currentWordIndex: 0,
             userInput: '',
             startTime: null,
-            correctCharsCount: 0, // Added for accuracy calculation
-            incorrectCharsCount: 0, // Added for accuracy calculation
+            correctCharsCount: 0,
+            incorrectCharsCount: 0,
             totalKeystrokes: 0,
             mistakeCount: 0,
             progressData: {
@@ -17,13 +17,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 performance: [],
                 unlockedLevels: new Set([0]) // Start with Level 1 unlocked (index 0)
             },
-            syllabus: [],
+            // User preferences
+            userPreferences: {
+                keyboardLayout: 'avro', // Default to Avro
+                experienceLevel: 'new', // Default to new
+                onboardingCompleted: false // Track if onboarding is done
+            },
+            syllabus: [], // Will hold main lesson content
+            keyboardHintData: { // Will hold hint data for different layouts
+                avro: null, // Will load avro_hint.json here
+                bijoy: null, // Placeholder for bijoy_hint.json
+                probhat: null // Placeholder for probhat_hint.json
+            },
             currentLessonData: {
-                items: [],
-                phonetic_items: []
+                items: [], // Bengali text
+                phonetic_items: [] // Phonetic hints based on selected layout
             },
             isHintVisible: false,
-            // Define lesson levels
             lessonLevels: [
                 { title: "মৌলিক অক্ষর", lessons: [0, 1, 2, 3, 4, 5] }, // Level 1: Lessons 1-6
                 { title: "টপ রো ও বিশেষ স্বরবর্ণ", lessons: [6, 7, 8, 9, 10, 11, 12, 13, 14] }, // Level 2: Lessons 7-15
@@ -38,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             learn: document.getElementById('learn-view'),
             lesson: document.getElementById('lesson-view'),
             practice: document.getElementById('practice-view'),
-            progress: document.getElementById('progress-view'),
+            profile: document.getElementById('profile-view'), // Changed from progress
             completion: document.getElementById('completion-view')
         };
 
@@ -60,6 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         this.navLinks = document.querySelectorAll('.nav-link');
         this.mobileMenu = document.getElementById('mobile-menu');
+        this.onboardingModal = document.getElementById('onboarding-modal');
+        this.confirmationModal = document.getElementById('confirmation-modal');
 
         // Chart instances to be destroyed before re-rendering
         this.wpmChartInstance = null;
@@ -67,11 +79,27 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     App.prototype.init = async function() {
-        await this.loadSyllabus();
-        this.loadProgress();
-        const hash = window.location.hash.replace('#', '');
-        const initialPage = ['learn', 'practice', 'progress'].includes(hash) ? hash : 'learn';
-        this.navigateTo(initialPage);
+        await this.loadAllData();
+        this.loadProgress(); // This also loads user preferences now
+
+        // Set initial keyboard layout in UI dropdowns
+        const keyboardSelect = document.getElementById('keyboard-layout-select');
+        if (keyboardSelect) {
+            keyboardSelect.value = this.state.userPreferences.keyboardLayout;
+        }
+        const profileKeyboardSelect = document.getElementById('profile-keyboard-layout-select');
+        if (profileKeyboardSelect) {
+            profileKeyboardSelect.value = this.state.userPreferences.keyboardLayout;
+        }
+
+        if (!this.state.userPreferences.onboardingCompleted) {
+            this.showOnboarding();
+        } else {
+            const hash = window.location.hash.replace('#', '');
+            const initialPage = ['learn', 'practice', 'profile'].includes(hash) ? hash : 'learn';
+            this.navigateTo(initialPage);
+        }
+        
         window.addEventListener('hashchange', () => this.handleHashChange());
         this.lessonElements.typingInput.addEventListener('input', (e) => this.handleTyping(e));
         this.lessonElements.typingInput.addEventListener('keydown', (e) => this.handleTypingKeydown(e));
@@ -89,10 +117,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     }, 200);
                     this.startLesson(lessonIndex);
                 } else {
-                    console.log("Lesson is locked!"); // Or show a visual cue to the user
+                    // console.log("Lesson is locked!"); // Or show a visual cue to the user
                 }
             }
         });
+
+        // Onboarding button listener
+        document.getElementById('onboarding-start-button').addEventListener('click', () => this.completeOnboarding());
+        // Reset confirmation button listener
+        document.getElementById('confirm-reset-button').addEventListener('click', () => this.resetProgress());
     };
     
     App.prototype.toggleMobileMenu = function() {
@@ -101,19 +134,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     App.prototype.handleHashChange = function() {
         const hash = window.location.hash.replace('#', '');
-        if (['learn', 'practice', 'progress'].includes(hash) && this.state.currentPage !== hash) {
+        if (['learn', 'practice', 'profile'].includes(hash) && this.state.currentPage !== hash) {
             this.navigateTo(hash);
         }
     };
 
-    App.prototype.loadSyllabus = async function() {
+    App.prototype.loadAllData = async function() {
         try {
-            const response = await fetch('syllabus.json');
-            this.state.syllabus = await response.json();
+            const [syllabusResponse, avroHintResponse] = await Promise.all([
+                fetch('syllabus.json'),
+                fetch('avro_hint.json')
+            ]);
+            this.state.syllabus = await syllabusResponse.json();
+            this.state.keyboardHintData.avro = await avroHintResponse.json();
+            // In the future, you would load bijoy_hint.json and probhat_hint.json here:
+            // const bijoyHintResponse = await fetch('bijoy_hint.json');
+            // this.state.keyboardHintData.bijoy = await bijoyHintResponse.json();
+            // const probhatHintResponse = await fetch('probhat_hint.json');
+            // this.state.keyboardHintData.probhat = await probhatHintResponse.json();
+
         } catch (error) {
-            console.error('Failed to load syllabus:', error);
-            // Optionally, display a user-friendly error message on the learn page
-            document.getElementById('levels-container').innerHTML = '<p class="text-center text-red-500">পাঠ লোড করা যায়নি। অনুগ্রহ করে আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন।</p>';
+            console.error('Failed to load data:', error);
+            document.getElementById('levels-container').innerHTML = '<p class="text-center text-red-500">ডেটা লোড করা যায়নি। অনুগ্রহ করে আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন।</p>';
         }
     };
 
@@ -161,8 +203,8 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'practice':
                 this.renderPracticePage();
                 break;
-            case 'progress':
-                this.renderProgressPage();
+            case 'profile': // Changed from progress
+                this.renderProfilePage(); // New method for profile
                 break;
             case 'lesson':
                 this.renderLessonView();
@@ -175,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     App.prototype.updateNavLinks = function() {
         this.navLinks.forEach(link => {
+            // Updated to check for 'profile' instead of 'progress'
             const pageName = link.getAttribute('onclick').match(/'(.*?)'/)[1];
             if (pageName === this.state.currentPage) {
                 link.classList.add('active');
@@ -211,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
             lessonGrid.className = 'lesson-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6';
 
             level.lessons.forEach(lessonIndex => {
-                const lesson = this.state.syllabus[lessonIndex];
+                const lesson = this.state.syllabus[lessonIndex]; // Get main lesson data
                 const isCompleted = this.state.progressData.completedLessons.has(lessonIndex);
                 const isLocked = !this.state.progressData.unlockedLevels.has(levelIndex);
 
@@ -246,7 +289,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Check if the lesson is unlocked
         const levelIndex = this.state.lessonLevels.findIndex(level => level.lessons.includes(lessonIndex));
         if (!this.state.progressData.unlockedLevels.has(levelIndex)) {
-            // This should ideally be prevented by the UI, but as a safeguard:
             console.warn(`Lesson ${lessonIndex + 1} is locked. Unlock previous levels first.`);
             return;
         }
@@ -255,16 +297,27 @@ document.addEventListener('DOMContentLoaded', () => {
         this.state.currentWordIndex = 0;
         this.state.userInput = '';
         this.state.startTime = null;
-        this.state.isHintVisible = true; // Show hint by default when starting a lesson
-        this.state.correctCharsCount = 0; // Reset accuracy counts
-        this.state.incorrectCharsCount = 0; // Reset accuracy counts
+        this.state.isHintVisible = true;
+        this.state.correctCharsCount = 0;
+        this.state.incorrectCharsCount = 0;
         this.state.totalKeystrokes = 0;
         this.state.mistakeCount = 0;
 
-        const lesson = this.state.syllabus[this.state.currentLesson];
+        const lesson = this.state.syllabus[this.state.currentLesson]; // Main lesson content
+        const selectedLayoutHints = this.state.keyboardHintData[this.state.userPreferences.keyboardLayout];
+        let hintData = null;
+        if (selectedLayoutHints && selectedLayoutHints[this.state.currentLesson]) {
+            hintData = selectedLayoutHints[this.state.currentLesson];
+        } else {
+            // Fallback to Avro hints if selected layout hints are not available for this lesson
+            console.warn(`Hints for layout '${this.state.userPreferences.keyboardLayout}' not found for lesson ${this.state.currentLesson}. Falling back to Avro hints.`);
+            hintData = this.state.keyboardHintData.avro[this.state.currentLesson];
+        }
+
         this.state.currentLessonData = {
-            items: [...(lesson.characters || []), ...(lesson.words || []), ...(lesson.phrases || [])],
-            phonetic_items: [...(lesson.phonetic_char || []), ...(lesson.phonetic_words || []), ...(lesson.phrases_phonetic || [])]
+            items: [...(lesson.words || []), ...(lesson.phrases || [])],
+            // Use phonetic data from the selected hint file
+            phonetic_items: [...(hintData.phonetic_words || []), ...(hintData.phrases_phonetic || [])]
         };
 
         this.navigateTo('lesson');
@@ -276,7 +329,17 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     App.prototype.renderLessonView = function() {
-        const lesson = this.state.syllabus[this.state.currentLesson];
+        const lesson = this.state.syllabus[this.state.currentLesson]; // Main lesson content
+        const selectedLayoutHints = this.state.keyboardHintData[this.state.userPreferences.keyboardLayout];
+        let hintData = null;
+        if (selectedLayoutHints && selectedLayoutHints[this.state.currentLesson]) {
+            hintData = selectedLayoutHints[this.state.currentLesson];
+        } else {
+            // Fallback to Avro hints if selected layout hints are not available for this lesson
+            console.warn(`Hints for layout '${this.state.userPreferences.keyboardLayout}' not found for lesson ${this.state.currentLesson} during render. Falling back to Avro hints.`);
+            hintData = this.state.keyboardHintData.avro[this.state.currentLesson];
+        }
+
         const { items, phonetic_items } = this.state.currentLessonData;
 
         if (this.state.currentWordIndex >= items.length) {
@@ -295,9 +358,10 @@ document.addEventListener('DOMContentLoaded', () => {
         this.lessonElements.phoneticDisplay.textContent = `(${phoneticItem})`;
         this.lessonElements.wordCount.textContent = `শব্দ: ${this.convertToBengaliNumber(this.state.currentWordIndex + 1)} / ${this.convertToBengaliNumber(items.length)}`;
 
-        if (this.state.isHintVisible && lesson.keyboard_map) {
+        // Use keyboard_map from the selected hint file
+        if (this.state.isHintVisible && hintData.keyboard_map) {
             this.lessonElements.hintContainer.classList.remove('hidden');
-            this.lessonElements.keyboardMapContainer.innerHTML = Object.entries(lesson.keyboard_map).map(([key, value]) => `
+            this.lessonElements.keyboardMapContainer.innerHTML = Object.entries(hintData.keyboard_map).map(([key, value]) => `
                 <div class="flex items-center justify-center p-2 bg-gray-200 rounded-md">
                     <span class="font-mono text-lg font-semibold">${key}</span>
                     <span class="mx-2">→</span>
@@ -323,14 +387,12 @@ document.addEventListener('DOMContentLoaded', () => {
         this.state.userInput = e.target.value;
         this.lessonElements.typingDisplay.innerHTML = this.getDisplayHTML(currentItem, this.state.userInput);
 
-        // Increment total keystrokes for every character typed
         this.state.totalKeystrokes++;
 
-        // Shake animation for incorrect input
         const currentInputLength = this.state.userInput.length;
         if (currentInputLength > 0 && currentInputLength <= currentItem.length) {
             if (this.state.userInput[currentInputLength - 1] !== currentItem[currentInputLength - 1]) {
-                this.state.mistakeCount++; // Increment mistake count
+                this.state.mistakeCount++;
                 this.lessonElements.typingInput.classList.add('shake-animation');
                 this.lessonElements.typingInput.addEventListener('animationend', () => {
                     this.lessonElements.typingInput.classList.remove('shake-animation');
@@ -343,13 +405,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const { items } = this.state.currentLessonData;
         const currentItem = items[this.state.currentWordIndex];
 
-        // Logic for moving to the next word/phrase
         if (e.key === 'Enter' || (e.key === ' ' && this.state.userInput === currentItem)) {
-            e.preventDefault(); // Prevent default behavior for space/enter
+            e.preventDefault();
             if (this.state.userInput === currentItem) {
                 this.moveToNextWord();
             } else {
-                // If input doesn't match, prevent moving and shake
                 this.lessonElements.typingInput.classList.add('shake-animation');
                 this.lessonElements.typingInput.addEventListener('animationend', () => {
                     this.lessonElements.typingInput.classList.remove('shake-animation');
@@ -378,15 +438,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     App.prototype.completeLesson = function() {
         const endTime = new Date();
-        const timeTaken = (endTime - this.state.startTime) / 1000; // Time in seconds
+        const timeTaken = (endTime - this.state.startTime) / 1000;
         
+        // Use the phonetic_items from the currentLessonData (which is already layout-specific)
         const { phonetic_items } = this.state.currentLessonData;
         const totalTargetChars = phonetic_items.reduce((acc, item) => acc + item.length, 0);
         
-        // WPM calculation: (characters / 5) / (minutes)
         const wpm = timeTaken > 0 ? Math.round((totalTargetChars / 5) / (timeTaken / 60)) : 0;
 
-        // Calculate overall accuracy for the lesson
         let accuracy = 0;
         if (this.state.totalKeystrokes > 0) {
             accuracy = Math.round(100 - (this.state.mistakeCount / this.state.totalKeystrokes) * 100);
@@ -397,23 +456,20 @@ document.addEventListener('DOMContentLoaded', () => {
         this.state.progressData.performance.push({
             lesson: this.state.currentLesson,
             wpm: wpm,
-            accuracy: accuracy, // Now dynamically calculated
+            accuracy: accuracy,
             date: new Date().toISOString().split('T')[0]
         });
 
-        // Check for level unlock
         this.checkForLevelUnlock();
-
         this.saveProgress();
 
         this.navigateTo('completion');
         this.completionElements.title.textContent = `পাঠ ${this.convertToBengaliNumber(this.state.currentLesson + 1)} সম্পন্ন!`;
-        this.completionElements.wpmResult.innerHTML = `${this.convertToBengaliNumber(wpm)} WPM <span class="text-lg text-gray-600">(${this.convertToBengaliNumber(accuracy)}% নির্ভুলতা)</span><br><span class="text-base text-gray-700">মোট অক্ষর: ${this.convertToBengaliNumber(this.state.totalKeystrokes)}, সঠিক: ${this.convertToBengaliNumber(correctChars)}, ভুল: ${this.convertToBengaliNumber(this.state.mistakeCount)}</span>`; // Display accuracy and character counts
+        this.completionElements.wpmResult.innerHTML = `${this.convertToBengaliNumber(wpm)} WPM <span class="text-lg text-gray-600">(${this.convertToBengaliNumber(accuracy)}% নির্ভুলতা)</span><br><span class="text-base text-gray-700">মোট অক্ষর: ${this.convertToBengaliNumber(this.state.totalKeystrokes)}, সঠিক: ${this.convertToBengaliNumber(correctChars)}, ভুল: ${this.convertToBengaliNumber(this.state.mistakeCount)}</span>`;
         this.completionElements.retryButton.onclick = () => this.startLesson(this.state.currentLesson);
     };
 
     App.prototype.checkForLevelUnlock = function() {
-        // Find the level the current lesson belongs to
         const currentLevelIndex = this.state.lessonLevels.findIndex(level => 
             level.lessons.includes(this.state.currentLesson)
         );
@@ -429,8 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (nextLevelIndex < this.state.lessonLevels.length) {
                     if (!this.state.progressData.unlockedLevels.has(nextLevelIndex)) {
                         this.state.progressData.unlockedLevels.add(nextLevelIndex);
-                        console.log(`Level ${nextLevelIndex + 1} unlocked!`);
-                        // Optionally, show a notification to the user
+                        // console.log(`Level ${nextLevelIndex + 1} unlocked!`);
                     }
                 }
             }
@@ -441,15 +496,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // No dynamic content to render, view is already in HTML
     };
 
-    App.prototype.renderProgressPage = function() {
+    App.prototype.renderProfilePage = function() { // New method for profile page
         this.renderCharts();
+        // Set the current keyboard layout in the profile settings dropdown
+        document.getElementById('profile-keyboard-layout-select').value = this.state.userPreferences.keyboardLayout;
     };
     
     App.prototype.renderCharts = function() {
         const wpmCtx = document.getElementById('wpmChart')?.getContext('2d');
         const completionCtx = document.getElementById('completionChart')?.getContext('2d');
 
-        // Destroy existing chart instances before creating new ones
         if (this.wpmChartInstance) {
             this.wpmChartInstance.destroy();
             this.wpmChartInstance = null;
@@ -462,7 +518,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (wpmCtx && this.state.progressData.performance.length > 0) {
             const lessonLabels = this.state.progressData.performance.map(p => `পাঠ ${this.convertToBengaliNumber(p.lesson + 1)}`);
             const wpmData = this.state.progressData.performance.map(p => p.wpm);
-            const accuracyData = this.state.progressData.performance.map(p => p.accuracy); // Get accuracy data
+            const accuracyData = this.state.progressData.performance.map(p => p.accuracy);
 
             this.wpmChartInstance = new Chart(wpmCtx, {
                 type: 'line',
@@ -478,13 +534,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         yAxisID: 'y'
                     },
                     {
-                        label: 'Accuracy (%)', // New dataset for accuracy
+                        label: 'Accuracy (%)',
                         data: accuracyData,
-                        borderColor: '#F2CC8F', // A different color for accuracy
+                        borderColor: '#F2CC8F',
                         backgroundColor: 'rgba(242, 204, 143, 0.2)',
                         fill: true,
                         tension: 0.3,
-                        yAxisID: 'y1' // Use a different Y-axis if scales differ greatly
+                        yAxisID: 'y1'
                     }]
                 },
                 options: { 
@@ -508,14 +564,14 @@ document.addEventListener('DOMContentLoaded', () => {
                             display: true,
                             position: 'right',
                             grid: {
-                                drawOnChartArea: false // Only draw grid lines for the first Y-axis
+                                drawOnChartArea: false
                             },
                             title: {
                                 display: true,
                                 text: 'Accuracy (%)'
                             },
                             min: 0,
-                            max: 100, // Accuracy is 0-100%
+                            max: 100,
                             ticks: {
                                 callback: (value) => this.convertToBengaliNumber(value)
                             }
@@ -587,7 +643,8 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('typingProgress', JSON.stringify({
                 completedLessons: Array.from(this.state.progressData.completedLessons),
                 performance: this.state.progressData.performance,
-                unlockedLevels: Array.from(this.state.progressData.unlockedLevels) // Save unlocked levels
+                unlockedLevels: Array.from(this.state.progressData.unlockedLevels),
+                userPreferences: this.state.userPreferences // Save user preferences
             }));
         } catch (e) {
             console.error("Failed to save progress to localStorage", e);
@@ -602,7 +659,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.state.progressData = {
                     completedLessons: new Set(parsed.completedLessons || []),
                     performance: parsed.performance || [],
-                    unlockedLevels: new Set(parsed.unlockedLevels || [0]) // Load or default to Level 1 unlocked
+                    unlockedLevels: new Set(parsed.unlockedLevels || [0])
+                };
+                // Load user preferences, or use defaults if not found
+                this.state.userPreferences = parsed.userPreferences || {
+                    keyboardLayout: 'avro',
+                    experienceLevel: 'new',
+                    onboardingCompleted: false
                 };
             }
         } catch (e) {
@@ -618,11 +681,67 @@ document.addEventListener('DOMContentLoaded', () => {
             return index !== -1 ? bengaliNumbers[index] : digit;
         }).join('');
     };
+
+    // Onboarding and Profile Customization Methods
+    App.prototype.showOnboarding = function() {
+        this.onboardingModal.classList.remove('hidden');
+        // Ensure initial values are set in the onboarding modal
+        document.getElementById('onboarding-keyboard-layout').value = this.state.userPreferences.keyboardLayout;
+        document.getElementById('onboarding-experience-level').value = this.state.userPreferences.experienceLevel;
+    };
+
+    App.prototype.completeOnboarding = function() {
+        this.state.userPreferences.keyboardLayout = document.getElementById('onboarding-keyboard-layout').value;
+        this.state.userPreferences.experienceLevel = document.getElementById('onboarding-experience-level').value;
+        this.state.userPreferences.onboardingCompleted = true;
+        this.saveProgress(); // Save preferences
+
+        this.onboardingModal.classList.add('hidden');
+        // Update the main header dropdown
+        document.getElementById('keyboard-layout-select').value = this.state.userPreferences.keyboardLayout;
+        this.navigateTo('learn'); // Navigate to learn page after onboarding
+    };
+
+    App.prototype.setKeyboardLayout = function(layout) {
+        this.state.userPreferences.keyboardLayout = layout;
+        this.saveProgress(); // Save preference immediately
+        // Update both dropdowns to reflect the change
+        document.getElementById('keyboard-layout-select').value = layout;
+        const profileKeyboardSelect = document.getElementById('profile-keyboard-layout-select');
+        if (profileKeyboardSelect) {
+            profileKeyboardSelect.value = layout;
+        }
+        // If on a lesson, re-render to update hints
+        if (this.state.currentPage === 'lesson' && this.state.currentLesson !== null) {
+            this.renderLessonView();
+        }
+    };
+
+    App.prototype.showResetConfirmation = function() {
+        this.confirmationModal.classList.remove('hidden');
+    };
+
+    App.prototype.hideConfirmation = function() {
+        this.confirmationModal.classList.add('hidden');
+    };
+
+    App.prototype.resetProgress = function() {
+        // Reset only progress-related data, keep preferences
+        this.state.progressData = {
+            completedLessons: new Set(),
+            performance: [],
+            unlockedLevels: new Set([0]) // Reset to only Level 1 unlocked
+        };
+        this.saveProgress(); // Save the reset state
+        this.hideConfirmation();
+        this.navigateTo('profile'); // Go back to profile to see changes
+        this.renderProfilePage(); // Re-render charts
+        this.renderLearnPage(); // Re-render learn page to show locked lessons
+    };
     
     app = new App();
     app.init();
 });
-
 
 // Utility for phonetic conversion (example, needs proper implementation)
 function convertToPhonetic(banglaText) {

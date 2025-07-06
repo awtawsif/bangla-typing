@@ -1,7 +1,7 @@
 @import "tailwindcss";
 body {
     font-family: 'Hind Siliguri', sans-serif;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, #eef1f6 0%, #c3cfe2 100%); /* Slightly softer gradient */
     color: #2c3e50;
     min-height: 100vh;
     display: flex;
@@ -16,28 +16,31 @@ body {
 .btn-accent {
     background-color: #e74c3c;
     color: #FFFFFF;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     border: none;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 8px; /* Slightly more rounded buttons */
     cursor: pointer;
     font-weight: bold;
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.2);
 }
 
 .btn-accent:hover {
     background-color: #c0392b;
     transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(231, 76, 60, 0.3);
 }
 
 .btn-accent:active {
     transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(231, 76, 60, 0.2);
 }
 
 .nav-link {
     cursor: pointer;
     padding: 8px 16px;
     border-radius: 8px;
-    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s;
 }
 
 .nav-link.active {
@@ -48,9 +51,37 @@ body {
 }
 
 .nav-link:not(.active):hover {
-    background-color: #ecf0f1;
+    background-color: #e0e0e0; /* Lighter hover for non-active */
     transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
 }
+
+/* Custom select dropdown styling */
+.app-select {
+    appearance: none; /* Remove default browser styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #FFFFFF;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 10px 14px;
+    padding-right: 30px; /* Space for custom arrow */
+    font-size: 1rem;
+    color: #2c3e50;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%232c3e50" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Custom arrow */
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 18px;
+}
+
+.app-select:focus {
+    outline: none;
+    border-color: #e74c3c;
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.3);
+}
+
 
 .level-section {
     background-color: #FFFFFF;
@@ -64,6 +95,7 @@ body {
 .level-section.bg-gray-100 {
     background-color: #f8f8f8; /* Softer locked background */
     opacity: 0.7; /* Softer opacity */
+    filter: grayscale(50%); /* Subtle grayscale for locked levels */
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
@@ -72,6 +104,9 @@ body {
     margin-bottom: 1rem;
     position: relative;
 }
+
+/* Removed the ::after element as per user request */
+
 
 .lesson-card {
     background-color: #FFFFFF;
@@ -133,10 +168,10 @@ body {
     letter-spacing: 2px;
     padding: 20px;
     background-color: #FFFFFF;
-    border-radius: 12px;
+    border-radius: 12px; /* Consistent border-radius */
     border: 1px solid #e0e0e0;
     min-height: 80px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Consistent shadow */
     position: relative;
     overflow: hidden;
 }
@@ -152,9 +187,9 @@ body {
     height: 300px;
     max-height: 400px;
     background-color: #FFFFFF;
-    border-radius: 12px;
+    border-radius: 12px; /* Consistent border-radius */
     padding: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Consistent shadow */
 }
 
 @media (min-width: 768px) {
