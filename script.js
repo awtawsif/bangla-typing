@@ -177,15 +177,13 @@ document.addEventListener('DOMContentLoaded', () => {
             return `
                 <div class="lesson-card ${isCompleted ? 'completed' : ''}" data-lesson-index="${index}">
                     <div class="flex justify-between items-center">
-                        <span class="text-sm font-semibold text-gray-500">পাঠ ${index + 1}</span>
+                        <span class="text-sm font-semibold text-gray-500">পাঠ ${this.convertToBengaliNumber(index + 1)}</span>
                         ${isCompleted ? '<span class="text-green-600 font-bold">✓</span>' : ''}
                     </div>
                     <h3 class="mt-2 font-bold text-lg">${lesson.title}</h3>
                 </div>
             `;
         }).join('');
-
-        
     };
 
     App.prototype.startLesson = function(lessonIndex) {
@@ -225,13 +223,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentItem = items[this.state.currentWordIndex];
         const phoneticItem = phonetic_items[this.state.currentWordIndex];
         
-        this.lessonElements.title.textContent = `পাঠ ${this.state.currentLesson + 1}: ${lesson.title}`;
+        this.lessonElements.title.textContent = `পাঠ ${this.convertToBengaliNumber(this.state.currentLesson + 1)}: ${lesson.title}`;
         this.lessonElements.typingDisplay.innerHTML = this.getDisplayHTML(currentItem, this.state.userInput);
         this.lessonElements.typingDisplay.classList.remove('text-change-animation');
         void this.lessonElements.typingDisplay.offsetWidth; // Trigger reflow
         this.lessonElements.typingDisplay.classList.add('text-change-animation');
         this.lessonElements.phoneticDisplay.textContent = `(${phoneticItem})`;
-        this.lessonElements.wordCount.textContent = `শব্দ: ${this.state.currentWordIndex + 1} / ${items.length}`;
+        this.lessonElements.wordCount.textContent = `শব্দ: ${this.convertToBengaliNumber(this.state.currentWordIndex + 1)} / ${this.convertToBengaliNumber(items.length)}`;
 
         if (this.state.isHintVisible && lesson.keyboard_map) {
             this.lessonElements.hintContainer.classList.remove('hidden');
@@ -295,7 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     };
-    
+
     App.prototype.getDisplayHTML = function(target, input) {
         let html = '';
         for (let i = 0; i < target.length; i++) {
@@ -329,6 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (this.state.totalKeystrokes > 0) {
             accuracy = Math.round(100 - (this.state.mistakeCount / this.state.totalKeystrokes) * 100);
         }
+        const correctChars = this.state.totalKeystrokes - this.state.mistakeCount;
 
         this.state.progressData.completedLessons.add(this.state.currentLesson);
         this.state.progressData.performance.push({
@@ -339,11 +338,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         this.saveProgress();
 
-        const correctChars = this.state.totalKeystrokes - this.state.mistakeCount;
-
         this.navigateTo('completion');
-        this.completionElements.title.textContent = `পাঠ ${this.state.currentLesson + 1} সম্পন্ন!`;
-        this.completionElements.wpmResult.innerHTML = `${wpm} WPM <span class="text-lg text-gray-600">(${accuracy}% নির্ভুলতা)</span><br><span class="text-base text-gray-700">মোটঅক্ষর: ${this.state.totalKeystrokes}, সঠিক: ${correctChars}, ভুল: ${this.state.mistakeCount}</span>`; // Display accuracy and character counts
+        this.completionElements.title.textContent = `পাঠ ${this.convertToBengaliNumber(this.state.currentLesson + 1)} সম্পন্ন!`;
+        this.completionElements.wpmResult.innerHTML = `${this.convertToBengaliNumber(wpm)} WPM <span class="text-lg text-gray-600">(${this.convertToBengaliNumber(accuracy)}% নির্ভুলতা)</span><br><span class="text-base text-gray-700">মোট অক্ষর: ${this.convertToBengaliNumber(this.state.totalKeystrokes)}, সঠিক: ${this.convertToBengaliNumber(correctChars)}, ভুল: ${this.convertToBengaliNumber(this.state.mistakeCount)}</span>`; // Display accuracy and character counts
         this.completionElements.retryButton.onclick = () => this.startLesson(this.state.currentLesson);
     };
 
@@ -370,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (wpmCtx && this.state.progressData.performance.length > 0) {
-            const lessonLabels = this.state.progressData.performance.map(p => `পাঠ ${p.lesson + 1}`);
+            const lessonLabels = this.state.progressData.performance.map(p => `পাঠ ${this.convertToBengaliNumber(p.lesson + 1)}`);
             const wpmData = this.state.progressData.performance.map(p => p.wpm);
             const accuracyData = this.state.progressData.performance.map(p => p.accuracy); // Get accuracy data
 
@@ -408,6 +405,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             title: {
                                 display: true,
                                 text: 'WPM'
+                            },
+                            ticks: {
+                                callback: (value) => this.convertToBengaliNumber(value)
                             }
                         },
                         y1: {
@@ -422,19 +422,22 @@ document.addEventListener('DOMContentLoaded', () => {
                                 text: 'Accuracy (%)'
                             },
                             min: 0,
-                            max: 100 // Accuracy is 0-100%
+                            max: 100, // Accuracy is 0-100%
+                            ticks: {
+                                callback: (value) => this.convertToBengaliNumber(value)
+                            }
                         }
                     },
                     plugins: {
                         tooltip: {
                             callbacks: {
-                                label: function(context) {
+                                label: (context) => {
                                     let label = context.dataset.label || '';
                                     if (label) {
                                         label += ': ';
                                     }
                                     if (context.parsed.y !== null) {
-                                        label += context.parsed.y;
+                                        label += this.convertToBengaliNumber(context.parsed.y);
                                         if (context.dataset.label === 'Accuracy (%)') {
                                             label += '%';
                                         }
@@ -461,7 +464,27 @@ document.addEventListener('DOMContentLoaded', () => {
                         borderColor: ['#FFFFFF', '#FFFFFF']
                     }]
                 },
-                options: { responsive: true, maintainAspectRatio: false, cutout: '70%' }
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false, 
+                    cutout: '70%',
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += this.convertToBengaliNumber(context.parsed);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
             });
         }
     };
@@ -491,8 +514,25 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("Failed to load progress from localStorage", e);
         }
     };
+
+    App.prototype.convertToBengaliNumber = function(number) {
+        const englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        const bengaliNumbers = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+        return String(number).split('').map(digit => {
+            const index = englishNumbers.indexOf(digit);
+            return index !== -1 ? bengaliNumbers[index] : digit;
+        }).join('');
+    };
     
     app = new App();
     app.init();
 });
 
+
+// Utility for phonetic conversion (example, needs proper implementation)
+function convertToPhonetic(banglaText) {
+    // This is a placeholder. A real implementation would involve a comprehensive
+    // mapping of Bengali characters and conjuncts to their phonetic English equivalents.
+    // For demonstration, we'll just return the input text.
+    return banglaText;
+}
