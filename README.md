@@ -34,7 +34,22 @@ If you wish to run this project locally for development or customization, follow
     ```bash
     cd bangla-typing
     ```
-3.  **Open `index.html`:** Simply open the `index.html` file in your preferred web browser. No server setup is required as it's a static web application.
+3.  **Install Dependencies:**
+    Install the necessary Node.js packages, including Tailwind CSS.
+    ```bash
+    npm install
+    ```
+4.  **Build Tailwind CSS:**
+    Generate the `tailwind_style.css` file.
+    ```bash
+    npm run build:css
+    ```
+    For continuous compilation during development, use:
+    ```bash
+    npm run watch:css
+    ```
+5.  **Open `index.html`:**
+    Simply open the `index.html` file in your preferred web browser. No server setup is required as it's a static web application.
 
     ```bash
     # On Linux/macOS
@@ -48,6 +63,7 @@ If you wish to run this project locally for development or customization, follow
 
 -   **HTML5:** For the structure of the web application.
 -   **CSS3:** For styling and responsive design.
+-   **Tailwind CSS:** For utility-first CSS styling.
 -   **JavaScript (ES6+):** For interactive functionality, lesson logic, and real-time feedback.
 -   **JSON:** To store syllabus data and typing exercises (`syllabus.json`).
 

@@ -1,3 +1,4 @@
+@import "tailwindcss";
 body {
     font-family: 'Hind Siliguri', sans-serif;
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
