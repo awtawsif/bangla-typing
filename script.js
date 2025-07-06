@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
             startTime: null,
             correctCharsCount: 0, // Added for accuracy calculation
             incorrectCharsCount: 0, // Added for accuracy calculation
+            totalKeystrokes: 0,
+            mistakeCount: 0,
             progressData: {
                 completedLessons: new Set(),
                 performance: [] 
@@ -63,6 +65,19 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('hashchange', () => this.handleHashChange());
         this.lessonElements.typingInput.addEventListener('input', (e) => this.handleTyping(e));
         this.lessonElements.typingInput.addEventListener('keydown', (e) => this.handleTypingKeydown(e));
+
+        // Event delegation for lesson cards
+        document.getElementById('lesson-grid').addEventListener('click', (e) => {
+            const lessonCard = e.target.closest('.lesson-card');
+            if (lessonCard) {
+                const lessonIndex = parseInt(lessonCard.dataset.lessonIndex);
+                lessonCard.classList.add('clicked');
+                setTimeout(() => {
+                    lessonCard.classList.remove('clicked');
+                }, 200);
+                this.startLesson(lessonIndex);
+            }
+        });
     };
     
     App.prototype.toggleMobileMenu = function() {
@@ -170,18 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         }).join('');
 
-        // Add event listeners for lesson cards
-        document.querySelectorAll('.lesson-card').forEach(card => {
-            card.addEventListener('click', (e) => {
-                const lessonIndex = parseInt(e.currentTarget.dataset.lessonIndex);
-                e.currentTarget.classList.add('clicked');
-                // Remove the 'clicked' class after a short delay to allow the animation to play
-                setTimeout(() => {
-                    e.currentTarget.classList.remove('clicked');
-                }, 200); // Match this with the animation duration
-                this.startLesson(lessonIndex); // Start the lesson immediately
-            });
-        });
+        
     };
 
     App.prototype.startLesson = function(lessonIndex) {
@@ -192,6 +196,8 @@ document.addEventListener('DOMContentLoaded', () => {
         this.state.isHintVisible = true; // Show hint by default when starting a lesson
         this.state.correctCharsCount = 0; // Reset accuracy counts
         this.state.incorrectCharsCount = 0; // Reset accuracy counts
+        this.state.totalKeystrokes = 0;
+        this.state.mistakeCount = 0;
 
         const lesson = this.state.syllabus[this.state.currentLesson];
         this.state.currentLessonData = {
@@ -248,27 +254,32 @@ document.addEventListener('DOMContentLoaded', () => {
         if (this.state.startTime === null && e.target.value.length > 0) {
             this.state.startTime = new Date();
         }
+
+        const { items } = this.state.currentLessonData;
+        const currentItem = items[this.state.currentWordIndex];
+
         this.state.userInput = e.target.value;
-        const { items } = this.state.currentLessonData;
-        const currentItem = items[this.state.currentWordIndex];
         this.lessonElements.typingDisplay.innerHTML = this.getDisplayHTML(currentItem, this.state.userInput);
-    };
 
-    App.prototype.handleTypingKeydown = function(e) {
-        const { items } = this.state.currentLessonData;
-        const currentItem = items[this.state.currentWordIndex];
-        const trimmedInput = this.state.userInput.trim();
+        // Increment total keystrokes for every character typed
+        this.state.totalKeystrokes++;
 
-        // Handle shake animation for incorrect input
-        if (e.key !== 'Backspace' && e.key !== 'Shift' && e.key !== 'Tab' && e.key !== 'Control' && e.key !== 'Alt' && e.key !== 'Meta') {
-            const currentTypedChar = this.state.userInput[e.target.selectionStart - 1];
-            if (currentItem[e.target.selectionStart - 1] !== currentTypedChar) {
+        // Shake animation for incorrect input
+        const currentInputLength = this.state.userInput.length;
+        if (currentInputLength > 0 && currentInputLength <= currentItem.length) {
+            if (this.state.userInput[currentInputLength - 1] !== currentItem[currentInputLength - 1]) {
+                this.state.mistakeCount++; // Increment mistake count
                 this.lessonElements.typingInput.classList.add('shake-animation');
                 this.lessonElements.typingInput.addEventListener('animationend', () => {
                     this.lessonElements.typingInput.classList.remove('shake-animation');
                 }, { once: true });
             }
         }
+    };
+
+    App.prototype.handleTypingKeydown = function(e) {
+        const { items } = this.state.currentLessonData;
+        const currentItem = items[this.state.currentWordIndex];
 
         // Logic for moving to the next word/phrase
         if (e.key === 'Enter' || (e.key === ' ' && this.state.userInput === currentItem)) {
@@ -284,40 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     };
-
-    App.prototype.updateAccuracy = function(target, input) {
-        let currentCorrect = 0;
-        let currentIncorrect = 0;
-        const minLength = Math.min(target.length, input.length);
-
-        for (let i = 0; i < minLength; i++) {
-            if (target[i] === input[i]) {
-                currentCorrect++;
-            } else {
-                currentIncorrect++;
-            }
-        }
-        // If input is longer than target, extra characters are incorrect
-        currentIncorrect += Math.max(0, input.length - target.length);
-
-        // Update global counts based on the difference from previous state for the current word
-        // This approach needs careful thought if you're tracking character-by-character changes
-        // For simplicity, let's reset and recalculate for the current word on each keydown for display purposes
-        // and then accumulate total correct/incorrect at word completion.
-        // For now, we'll just accumulate correct/incorrect for the entire lesson.
-        // A more precise accuracy would involve tracking per-word errors and then summing.
-        // For simplicity, let's just count total correct/incorrect characters typed throughout the lesson.
-        // This is a common simplification for overall lesson accuracy.
-        // The current implementation of `getDisplayHTML` already provides visual feedback.
-        // To get overall accuracy, we need to sum up correct and incorrect characters over the entire lesson.
-        // Let's refine this: correctCharsCount and incorrectCharsCount will be for the entire lesson.
-        // When a word is completed, we compare the final input to the target.
-
-        // This function will be called on keydown. It's better to calculate accuracy only when a word is submitted.
-        // For now, the existing `getDisplayHTML` handles visual feedback.
-        // The actual accuracy calculation will happen in `completeLesson`.
-    };
-
+    
     App.prototype.getDisplayHTML = function(target, input) {
         let html = '';
         for (let i = 0; i < target.length; i++) {
@@ -331,24 +309,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     App.prototype.moveToNextWord = function() {
-        const { items } = this.state.currentLessonData;
-        const currentItem = items[this.state.currentWordIndex];
-        const trimmedInput = this.state.userInput.trim();
-
-        // Accumulate correct and incorrect characters for the whole lesson
-        for (let i = 0; i < Math.min(currentItem.length, trimmedInput.length); i++) {
-            if (currentItem[i] === trimmedInput[i]) {
-                this.state.correctCharsCount++;
-            } else {
-                this.state.incorrectCharsCount++;
-            }
-        }
-        // If the input is shorter than the target, the remaining target characters are "skipped" (incorrect)
-        this.state.incorrectCharsCount += Math.max(0, currentItem.length - trimmedInput.length);
-        // If the input is longer than the target, the extra characters are incorrect
-        this.state.incorrectCharsCount += Math.max(0, trimmedInput.length - currentItem.length);
-
-
         this.state.currentWordIndex++;
         this.state.userInput = '';
         this.renderLessonView();
@@ -366,9 +326,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Calculate overall accuracy for the lesson
         let accuracy = 0;
-        const totalTypedChars = this.state.correctCharsCount + this.state.incorrectCharsCount;
-        if (totalTypedChars > 0) {
-            accuracy = Math.round((this.state.correctCharsCount / totalTypedChars) * 100);
+        if (this.state.totalKeystrokes > 0) {
+            accuracy = Math.round(100 - (this.state.mistakeCount / this.state.totalKeystrokes) * 100);
         }
 
         this.state.progressData.completedLessons.add(this.state.currentLesson);
@@ -380,9 +339,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         this.saveProgress();
 
+        const correctChars = this.state.totalKeystrokes - this.state.mistakeCount;
+
         this.navigateTo('completion');
         this.completionElements.title.textContent = `পাঠ ${this.state.currentLesson + 1} সম্পন্ন!`;
-        this.completionElements.wpmResult.innerHTML = `${wpm} WPM <span class="text-lg text-gray-600">(${accuracy}% নির্ভুলতা)</span>`; // Display accuracy
+        this.completionElements.wpmResult.innerHTML = `${wpm} WPM <span class="text-lg text-gray-600">(${accuracy}% নির্ভুলতা)</span><br><span class="text-base text-gray-700">মোটঅক্ষর: ${this.state.totalKeystrokes}, সঠিক: ${correctChars}, ভুল: ${this.state.mistakeCount}</span>`; // Display accuracy and character counts
         this.completionElements.retryButton.onclick = () => this.startLesson(this.state.currentLesson);
     };
 
