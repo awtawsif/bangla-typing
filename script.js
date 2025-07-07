@@ -696,10 +696,26 @@ document.addEventListener('DOMContentLoaded', () => {
         this.state.userPreferences.onboardingCompleted = true;
         this.saveProgress(); // Save preferences
 
+        // Apply level unlocking based on experience level
+        this.state.progressData.unlockedLevels.clear(); // Clear existing unlocked levels
+        this.state.progressData.unlockedLevels.add(0); // Always unlock Level 1 (index 0)
+
+        if (this.state.userPreferences.experienceLevel === 'intermediate') {
+            this.state.progressData.unlockedLevels.add(1); // Unlock Level 2
+            this.state.progressData.unlockedLevels.add(2); // Unlock Level 3
+        } else if (this.state.userPreferences.experienceLevel === 'experienced') {
+            // Unlock all levels
+            for (let i = 0; i < this.state.lessonLevels.length; i++) {
+                this.state.progressData.unlockedLevels.add(i);
+            }
+        }
+        this.saveProgress(); // Save updated unlocked levels
+
         this.onboardingModal.classList.add('hidden');
         // Update the main header dropdown
         document.getElementById('keyboard-layout-select').value = this.state.userPreferences.keyboardLayout;
         this.navigateTo('learn'); // Navigate to learn page after onboarding
+        this.renderLearnPage(); // Re-render learn page to show newly unlocked lessons
     };
 
     App.prototype.setKeyboardLayout = function(layout) {
