@@ -315,9 +315,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         this.state.currentLessonData = {
-            items: [...(lesson.words || []), ...(lesson.phrases || [])],
+            items: [...(lesson.characters || []), ...(lesson.words || []), ...(lesson.phrases || [])],
             // Use phonetic data from the selected hint file
-            phonetic_items: [...(hintData.phonetic_words || []), ...(hintData.phrases_phonetic || [])]
+            phonetic_items: [...(hintData.phonetic_char || []), ...(hintData.phonetic_words || []), ...(hintData.phrases_phonetic || [])]
         };
 
         this.navigateTo('lesson');
@@ -614,25 +614,39 @@ document.addEventListener('DOMContentLoaded', () => {
                     }]
                 },
                 options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false, 
-                    cutout: '70%',
-                    plugins: {
-                        tooltip: {
-                            callbacks: {
-                                label: (context) => {
-                                    let label = context.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    if (context.parsed !== null) {
-                                        label += this.convertToBengaliNumber(context.parsed);
-                                    }
-                                    return label;
-                                }
-                            }
+                responsive: true, 
+                maintainAspectRatio: false, 
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                    labels: {
+                        font: {
+                        family: 'Hind Siliguri', // <-- your custom font
+                        size: 14,
+                        weight: 'normal'
+                        },
+                        color: '#000' // optional
+                    }
+                    },
+                    tooltip: {
+                    bodyFont: {
+                        family: 'Hind Siliguri', // <-- font for tooltip body
+                        size: 14
+                    },
+                    callbacks: {
+                        label: (context) => {
+                        let label = context.label || '';
+                        if (label) {
+                            label += ': ';
+                        }
+                        if (context.parsed !== null) {
+                            label += this.convertToBengaliNumber(context.parsed);
+                        }
+                        return label;
                         }
                     }
+                    }
+                }
                 }
             });
         }

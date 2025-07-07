@@ -1,57 +1,65 @@
 [
     {
-        "phonetic_char": ["a", "s"],
+        "phonetic_char": ["a", "s", "A", "d", "."],
         "phonetic_words": ["asa", "sada", "as", "sa"],
         "phrases_phonetic": ["asa asa.", "sada sada.", "as as."],
         "keyboard_map": {
             "a": "আ",
-            "s": "স"
+            "s": "স",
+            "A": "া",
+            "d": "দ",
+            ".": "।"
         }
     },
     {
-        "phonetic_char": ["d", "f"],
+        "phonetic_char": ["f", "b", "e", "o"],
         "phonetic_words": ["dada", "fada", "ad", "saf", "das", "fas", "ada", "dasa"],
         "phrases_phonetic": ["dada ase.", "fada dao.", "ada dao.", "saf saf."],
         "keyboard_map": {
-            "d": "দ",
-            "f": "ফ"
+            "f": "ফ",
+            "b": "ব",
+            "e": "ে",
+            "o": "ো"
         }
     },
     {
-        "phonetic_char": ["k", "m"],
+        "phonetic_char": ["k", "m", "l", "ch", "j"],
         "phonetic_words": ["kaka", "mala", "mama", "kam", "mak", "ama", "akom", "koma"],
         "phrases_phonetic": ["kaka ase.", "mala ache.", "mama ase.", "kam kaj."],
         "keyboard_map": {
             "k": "ক",
-            "m": "ম"
+            "m": "ম",
+            "l": "ল",
+            "ch": "ছ",
+            "j": "জ"
         }
     },
     {
-        "phonetic_char": ["l", "I", "i"],
+        "phonetic_char": ["I", "i", "v"],
         "phonetic_words": ["kolom", "komi", "kaki", "masi", "mali", "kiki", "kali", "ami", "akal", "kolam", "kakima", "lika"],
         "phrases_phonetic": ["amar kolom.", "komi aj.", "kaki bhalo.", "masi ase.", "mali kaj.", "kali dao."],
         "keyboard_map": {
-            "l": "ল",
             "I": "ই",
-            "i": "ি"
+            "i": "ি",
+            "v": "ভ"
         }
     },
     {
-        "phonetic_char": ["b", "n"],
+        "phonetic_char": ["n"],
         "phonetic_words": ["bon", "nonod", "nob", "bochon", "monon", "lobon", "bina", "bamon", "kobon", "nokol", "nabik", "bonolota"],
         "phrases_phonetic": ["amar bon.", "nonod ase.", "nob kaka.", "bochon bolo.", "lobon dao.", "bina kaj."],
         "keyboard_map": {
-            "b": "ব",
             "n": "ন"
         }
     },
     {
-        "phonetic_char": ["o", "e"],
+        "phonetic_char": ["y", "?", "h"],
         "phonetic_words": ["mone", "kone", "bolo", "sonali", "keno", "kono", "jeno", "lok", "bonas", "kemon", "bela", "lekhe", "kol", "nem"],
         "phrases_phonetic": ["mone koro.", "kone ase.", "bolo na.", "keno bolo.", "kono kaj.", "kemon acho?", "bela holo."],
         "keyboard_map": {
-            "o": "ো",
-            "e": "ে"
+            "y": "য",
+            "?": "?",
+            "h": "হ"
         }
     },
     {
@@ -64,30 +72,32 @@
         }
     },
     {
-        "phonetic_char": ["p", "c"],
+        "phonetic_char": ["p", "c", "u"],
         "phonetic_words": ["pap", "chacha", "chap", "papi", "chup", "pur", "putul", "chaka", "pach", "chapol"],
         "phrases_phonetic": ["pap koro na.", "chacha ase.", "chap dao.", "chup koro.", "putul nache."],
         "keyboard_map": {
             "p": "প",
-            "c": "চ"
+            "c": "চ",
+            "u": "ু"
         }
     },
     {
-        "phonetic_char": ["j", "y"],
-        "phonetic_words": ["jol", "jama", "jola", "jay", "joy", "joyi", "payra", "upay", "chachajan", "aj", "kaj", "jao"],
-        "phrases_phonetic": ["jol dao.", "jama poro.", "joy hok.", "payra ore.", "upay bolo.", "aj kaj."],
+        "phonetic_char": ["y"],
+        "phonetic_words": ["jol", "jma", "jola", "jay", "joy", "joyi", "payra", "upay", "chachajan", "aj", "kaj", "jao"],
         "keyboard_map": {
-            "j": "জ",
             "y": "য়"
         }
     },
     {
-        "phonetic_char": ["D", "R"],
+        "phonetic_char": ["D", "R", "g", "kh", "U"],
         "phonetic_words": ["Dal", "Dim", "Dana", "Dor", "poRa", "boRo", "gari", "paR", "Dimbo", "Daka", "Dor"],
         "phrases_phonetic": ["Dal ranna koro.", "Dim bhaja khao.", "pakhi Dana mele.", "boRo gari.", "poRaleKha koro.", "paR ache."],
         "keyboard_map": {
             "D": "ড",
-            "R": "ড়"
+            "R": "ড়",
+            "g": "গ",
+            "kh": "খ",
+            "U": "ূ"
         }
     },
     {
@@ -100,21 +110,19 @@
         }
     },
     {
-        "phonetic_char": ["Th"],
+        "phonetic_char": ["Th", "`"],
         "phonetic_words": ["Thakuma", "Thanda", "ThoT", "Thanda", "Tha`i", "Thok", "Thunko"],
         "phrases_phonetic": ["Thakuma golpo bolen.", "Thanda jol dao.", "ThoT bhalo.", "Tha`i dao."],
         "keyboard_map": {
-            "Th": "ঠ"
+            "Th": "ঠ",
+            "`": "ঁ"
         }
     },
     {
-        "phonetic_char": ["h", "v"],
+        "phonetic_char": [],
         "phonetic_words": ["ha`s", "haR", "hata", "hat", "bhab", "bhalo", "bhari", "bhoy", "bhor", "ha`Ta", "bhromon", "har", "bhora"],
         "phrases_phonetic": ["ha`s jole bhase.", "amar hat.", "bhalo kore bhabo.", "bhoy peo na.", "bhor holo.", "har ache."],
-        "keyboard_map": {
-            "h": "হ",
-            "v": "ভ"
-        }
+        "keyboard_map": {}
     },
     {
         "phonetic_char": ["I", "U"],
@@ -143,20 +151,18 @@
         }
     },
     {
-        "phonetic_char": ["`", ".t"],
+        "phonetic_char": [".t"],
         "phonetic_words": ["ha`s", "cha`d", "ba`sh", "sot", "fol", "utshob", "ha`Ta", "pa`ch", "a`ka", "kha`Ti"],
         "phrases_phonetic": ["ha`s jole bhase.", "cha`d uTheche.", "ba`sh ache.", "sot lok.", "utshob holo."],
         "keyboard_map": {
-            "`": "ঁ",
             ".t": "ৎ"
         }
     },
     {
-        "phonetic_char": [".", ","],
+        "phonetic_char": [","],
         "phonetic_words": ["ami bhalo achi.", "kemon acho?", "jao, khao.", "she ase.", "jol dao.", "shomoy holo."],
         "phrases_phonetic": ["amar nam roma.", "tumi kothay?", "aj kaj ache.", "she bhalo, ami bhalo."],
         "keyboard_map": {
-            ".": "।",
             ",": ","
         }
     },
@@ -194,14 +200,14 @@
         }
     },
     {
-        "phonetic_char": ["kk", "kt", "kw", "km"],
+        "phonetic_char": ["kk", "kt", "km", "kw"],
         "phonetic_words": ["okka", "rokto", "byakti", "pokko", "boktobyo", "shokto", "chokro"],
         "phrases_phonetic": ["rokto dao.", "byakti ase.", "boktobyo bolo.", "pokko fol."],
         "keyboard_map": {
             "kk": "ক্ক",
             "kt": "ক্ত",
-            "kw": "ক্ব",
-            "km": "ক্ম"
+            "km": "ক্ম",
+            "kw": "ক্ব"
         }
     },
     {
@@ -441,12 +447,11 @@
         }
     },
     {
-        "phonetic_char": ["r", "rr"],
+        "phonetic_char": ["r"],
         "phonetic_words": ["chattro", "proshno", "krom", "dhormo", "kormo", "bokro", "boktrita", "potro", "shrom", "groho", "orko", "arttonad", "khudro", "bhromon", "prostab"],
         "phrases_phonetic": ["chattro poRoshona kore.", "proshno jiggesha koro.", "dhormo palon koro.", "kormo-i jibon.", "bokro pothe jeo na.", "boktrita bhalo.", "potro lekho."],
         "keyboard_map": {
-            "r": "্র",
-            "rr": "্র"
+            "r": "্র"
         }
     },
     {
