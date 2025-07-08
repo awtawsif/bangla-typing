@@ -22,8 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 keyboardLayout: 'avro', // Default to Avro
                 experienceLevel: 'new', // Default to new
                 onboardingCompleted: false, // Track if onboarding is done
-                isDarkMode: false, // New: Track dark mode preference
-            theme: 'system' // New: 'system', 'light', 'dark'
+                theme: 'system' // New: 'system', 'light', 'dark'
             },
             syllabus: [], // Will hold main lesson content
             keyboardHintData: { // Will hold hint data for different layouts
@@ -473,6 +472,39 @@ document.addEventListener('DOMContentLoaded', () => {
         this.completionElements.title.textContent = `পাঠ ${this.convertToBengaliNumber(this.state.currentLesson + 1)} সম্পন্ন!`;
         this.completionElements.wpmResult.innerHTML = `${this.convertToBengaliNumber(wpm)} WPM <span class="text-lg text-gray-600">(${this.convertToBengaliNumber(accuracy)}% নির্ভুলতা)</span><br><span class="text-base text-gray-700">মোট অক্ষর: ${this.convertToBengaliNumber(this.state.totalKeystrokes)}, সঠিক: ${this.convertToBengaliNumber(correctChars)}, ভুল: ${this.convertToBengaliNumber(this.state.mistakeCount)}</span>`;
         this.completionElements.retryButton.onclick = () => this.startLesson(this.state.currentLesson);
+
+        const nextLessonButton = document.getElementById('next-lesson-button');
+        const nextLesson = this.state.currentLesson + 1;
+
+        // Check if there is a next lesson
+        if (nextLesson < this.state.syllabus.length) {
+            const nextLessonLevelIndex = this.state.lessonLevels.findIndex(level => level.lessons.includes(nextLesson));
+            const isNextLevelUnlocked = this.state.progressData.unlockedLevels.has(nextLessonLevelIndex);
+
+            // If the next level is unlocked, show "Next Lesson" button
+            if (isNextLevelUnlocked) {
+                nextLessonButton.textContent = 'পরবর্তী পাঠ';
+                nextLessonButton.onclick = () => this.startLesson(nextLesson);
+                nextLessonButton.classList.remove('hidden'); // Ensure it's visible
+            } else {
+                // If the next level is locked, show "Other Lessons" button
+                nextLessonButton.textContent = 'অন্য পাঠ';
+                nextLessonButton.onclick = () => this.navigateTo('learn');
+                nextLessonButton.classList.remove('hidden'); // Ensure it's visible
+            }
+        } else {
+            // If it's the last lesson of the syllabus, show "Other Lessons" button
+            nextLessonButton.textContent = 'অন্য পাঠ';
+            nextLessonButton.onclick = () => this.navigateTo('learn');
+            nextLessonButton.classList.remove('hidden'); // Ensure it's visible
+        }
+    };
+
+    App.prototype.startNextLesson = function() {
+        const nextLesson = this.state.currentLesson + 1;
+        if (nextLesson < this.state.syllabus.length) {
+            this.startLesson(nextLesson);
+        }
     };
 
     App.prototype.checkForLevelUnlock = function() {
@@ -579,6 +611,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             type: 'linear',
                             display: true,
                             position: 'left',
+                            beginAtZero: true,
                             title: {
                                 display: true,
                                 text: 'WPM',
@@ -596,6 +629,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             type: 'linear',
                             display: true,
                             position: 'right',
+                            beginAtZero: true,
                             grid: {
                                 drawOnChartArea: false
                             },
@@ -715,17 +749,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     performance: parsed.performance || [],
                     unlockedLevels: new Set(parsed.unlockedLevels || [0])
                 };
-                // Load user preferences, or use defaults if not found
-                this.state.userPreferences = parsed.userPreferences || {
+                // Load user preferences, merging with defaults to prevent missing properties
+                const defaultPreferences = {
                     keyboardLayout: 'avro',
                     experienceLevel: 'new',
                     onboardingCompleted: false,
-                    theme: 'system' // Default to system preference
+                    theme: 'system'
                 };
+                this.state.userPreferences = Object.assign({}, defaultPreferences, parsed.userPreferences);
+
                 // If old data format, convert isDarkMode to theme
-                if (parsed.userPreferences && typeof parsed.userPreferences.isDarkMode !== 'undefined') {
-                    this.state.userPreferences.theme = parsed.userPreferences.isDarkMode ? 'dark' : 'light';
-                    delete parsed.userPreferences.isDarkMode; // Clean up old property
+                if (this.state.userPreferences.isDarkMode !== undefined) {
+                    this.state.userPreferences.theme = this.state.userPreferences.isDarkMode ? 'dark' : 'light';
+                    delete this.state.userPreferences.isDarkMode; // Clean up old property
                 }
             } else {
                 // If no saved data, set theme to system preference
@@ -733,8 +769,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (e) {
             console.error("Failed to load progress from localStorage", e);
-            // Fallback to system preference if loading fails
-            this.state.userPreferences.theme = 'system';
+            // Defaults are now handled by Object.assign, so no specific fallback is needed here.
         }
     };
 

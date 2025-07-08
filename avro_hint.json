@@ -1,6 +1,6 @@
 [
     {
-        "phonetic_char": ["a", "s", "A", "d", "."],
+        "phonetic_char": ["a", "s", "d", "."],
         "phonetic_words": ["asa", "sada", "as", "sa"],
         "phrases_phonetic": ["asa asa.", "sada sada.", "as as."],
         "keyboard_map": {
@@ -12,7 +12,7 @@
         }
     },
     {
-        "phonetic_char": ["f", "b", "e", "o"],
+        "phonetic_char": ["f", "b"],
         "phonetic_words": ["dada", "fada", "ad", "saf", "das", "fas", "ada", "dasa"],
         "phrases_phonetic": ["dada ase.", "fada dao.", "ada dao.", "saf saf."],
         "keyboard_map": {
@@ -35,7 +35,7 @@
         }
     },
     {
-        "phonetic_char": ["I", "i", "v"],
+        "phonetic_char": ["I", "v"],
         "phonetic_words": ["kolom", "komi", "kaki", "masi", "mali", "kiki", "kali", "ami", "akal", "kolam", "kakima", "lika"],
         "phrases_phonetic": ["amar kolom.", "komi aj.", "kaki bhalo.", "masi ase.", "mali kaj.", "kali dao."],
         "keyboard_map": {
@@ -72,7 +72,7 @@
         }
     },
     {
-        "phonetic_char": ["p", "c", "u"],
+        "phonetic_char": ["p", "c"],
         "phonetic_words": ["pap", "chacha", "chap", "papi", "chup", "pur", "putul", "chaka", "pach", "chapol"],
         "phrases_phonetic": ["pap koro na.", "chacha ase.", "chap dao.", "chup koro.", "putul nache."],
         "keyboard_map": {
@@ -89,7 +89,7 @@
         }
     },
     {
-        "phonetic_char": ["D", "R", "g", "kh", "U"],
+        "phonetic_char": ["D", "R", "g", "kh"],
         "phonetic_words": ["Dal", "Dim", "Dana", "Dor", "poRa", "boRo", "gari", "paR", "Dimbo", "Daka", "Dor"],
         "phrases_phonetic": ["Dal ranna koro.", "Dim bhaja khao.", "pakhi Dana mele.", "boRo gari.", "poRaleKha koro.", "paR ache."],
         "keyboard_map": {
