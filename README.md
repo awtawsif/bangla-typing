@@ -78,6 +78,28 @@ Contributions are welcome! If you have suggestions for improvements, new feature
 5.  Push to the branch (`git push origin feature/YourFeature`).
 6.  Open a Pull Request.
 
+## Future Plans
+
+Here's a roadmap of what's planned for the future of the Bangla Typing Tutor.
+
+### Features to Add
+
+*   **User Accounts:** To save progress and track performance across sessions.
+*   **More Lessons:** Expanding the syllabus with more advanced lessons and exercises.
+*   **Custom Lessons:** Allowing users to create and practice their own custom lessons.
+*   **Typing Games:** Adding fun and interactive games to make learning more engaging.
+*   **Multi-Layout Support:** Adding support for various Bangla keyboard layouts (e.g., Probhat, Jatiya) to cater to different user preferences.
+
+### Improvements to Make
+
+*   **UI/UX:** Enhancing the user interface for a more modern and intuitive experience.
+*   **Performance:** Optimizing the application for faster loading and smoother performance.
+
+### Bugs to Fix
+
+*   **Syllabus Correction:** Reviewing and correcting inaccuracies, typos, and inconsistencies within the `syllabus.json` and `avro_hint.json` lesson files.
+*   **Cross-browser Compatibility:** Ensuring the application works flawlessly across all major browsers.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
