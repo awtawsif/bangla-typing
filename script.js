@@ -458,12 +458,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const correctChars = this.state.totalKeystrokes - this.state.mistakeCount;
 
         this.state.progressData.completedLessons.add(this.state.currentLesson);
-        this.state.progressData.performance.push({
+        const performanceEntry = {
             lesson: this.state.currentLesson,
             wpm: wpm,
             accuracy: accuracy,
             date: new Date().toISOString().split('T')[0]
-        });
+        };
+
+        const existingPerformanceIndex = this.state.progressData.performance.findIndex(p => p.lesson === this.state.currentLesson);
+
+        if (existingPerformanceIndex !== -1) {
+            this.state.progressData.performance[existingPerformanceIndex] = performanceEntry;
+        } else {
+            this.state.progressData.performance.push(performanceEntry);
+        }
 
         this.checkForLevelUnlock();
         this.saveProgress();

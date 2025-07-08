@@ -194,6 +194,9 @@
   }
 }
 @layer utilities {
+  .visible {
+    visibility: visible;
+  }
   .sr-only {
     position: absolute;
     width: 1px;
@@ -339,6 +342,9 @@
   }
   .cursor-not-allowed {
     cursor: not-allowed;
+  }
+  .resize-none {
+    resize: none;
   }
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
