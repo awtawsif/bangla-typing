@@ -17,6 +17,7 @@
                 <div class="flex items-center justify-between h-16">
                     <a href="./" class="text-xl sm:text-2xl font-bold text-accent">ইন্টারেক্টিভ বাংলা টাইপিং শিক্ষক</a>
                     <div class="flex items-center space-x-4">
+                        
                         <div class="relative">
                             <label for="keyboard-layout-select" class="sr-only">কিবোর্ড লেআউট</label>
                             <select id="keyboard-layout-select" onchange="app.setKeyboardLayout(this.value)" class="app-select">
@@ -141,7 +142,7 @@
                 <div class="text-center">
                     <h2 class="text-3xl font-bold mb-2">মুক্ত অনুশীলন</h2>
                     <p class="text-gray-600 mb-8">এইখানে আপনি যা ইচ্ছা টাইপ করে অনুশীলন করতে পারেন।</p>
-                    <textarea class="w-full max-w-4xl mx-auto p-4 border-2 border-gray-300 rounded-lg text-lg focus:border-accent focus:ring-accent" rows="10" placeholder="এখানে টাইপ করুন..."></textarea>
+                    <textarea class="bg-white w-full max-w-4xl mx-auto p-4 border-2 border-gray-300 rounded-lg text-lg focus:border-accent focus:ring-accent" rows="10" placeholder="এখানে টাইপ করুন..."></textarea>
                 </div>
             </div>
 
@@ -168,6 +169,14 @@
                                     <option value="avro">Avro Phonetic</option>
                                     <option value="bijoy">Bijoy (উদাহরণ)</option>
                                     <option value="probhat">Probhat (উদাহরণ)</option>
+                                </select>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <label for="profile-dark-mode-select" class="text-lg">থিম:</label>
+                                <select id="profile-dark-mode-select" onchange="app.setDarkMode(this.value)" class="app-select">
+                                    <option value="system">সিস্টেম</option>
+                                    <option value="light">লাইট</option>
+                                    <option value="dark">ডার্ক</option>
                                 </select>
                             </div>
                             <button onclick="app.showResetConfirmation()" class="btn-accent py-2 px-6 rounded-lg bg-red-500 hover:bg-red-600">অগ্রগতি রিসেট করুন</button>
@@ -212,6 +221,15 @@
                         <option value="new">নতুন</option>
                         <option value="intermediate">মাঝারি</option>
                         <option value="experienced">অভিজ্ঞ</option>
+                    </select>
+                </div>
+
+                <div class="mb-8 text-left">
+                    <label for="onboarding-dark-mode" class="block text-gray-700 text-sm font-bold mb-2">থিম:</label>
+                    <select id="onboarding-dark-mode" class="app-select w-full">
+                        <option value="system">সিস্টেম</option>
+                        <option value="light">লাইট</option>
+                        <option value="dark">ডার্ক</option>
                     </select>
                 </div>
 

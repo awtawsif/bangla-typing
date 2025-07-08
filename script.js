@@ -21,7 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
             userPreferences: {
                 keyboardLayout: 'avro', // Default to Avro
                 experienceLevel: 'new', // Default to new
-                onboardingCompleted: false // Track if onboarding is done
+                onboardingCompleted: false, // Track if onboarding is done
+                isDarkMode: false, // New: Track dark mode preference
+            theme: 'system' // New: 'system', 'light', 'dark'
             },
             syllabus: [], // Will hold main lesson content
             keyboardHintData: { // Will hold hint data for different layouts
@@ -72,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.mobileMenu = document.getElementById('mobile-menu');
         this.onboardingModal = document.getElementById('onboarding-modal');
         this.confirmationModal = document.getElementById('confirmation-modal');
+        
 
         // Chart instances to be destroyed before re-rendering
         this.wpmChartInstance = null;
@@ -91,6 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (profileKeyboardSelect) {
             profileKeyboardSelect.value = this.state.userPreferences.keyboardLayout;
         }
+
+        // Apply theme preference on init
+        this.applyTheme(this.state.userPreferences.theme);
 
         if (!this.state.userPreferences.onboardingCompleted) {
             this.showOnboarding();
@@ -350,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentItem = items[this.state.currentWordIndex];
         const phoneticItem = phonetic_items[this.state.currentWordIndex];
         
-        this.lessonElements.title.textContent = `পাঠ ${this.convertToBengaliNumber(this.state.currentLesson + 1)}: ${lesson.title}`;
+        this.lessonElements.title.textContent = `${lesson.title}`;
         this.lessonElements.typingDisplay.innerHTML = this.getDisplayHTML(currentItem, this.state.userInput);
         this.lessonElements.typingDisplay.classList.remove('text-change-animation');
         void this.lessonElements.typingDisplay.offsetWidth; // Trigger reflow
@@ -500,6 +506,8 @@ document.addEventListener('DOMContentLoaded', () => {
         this.renderCharts();
         // Set the current keyboard layout in the profile settings dropdown
         document.getElementById('profile-keyboard-layout-select').value = this.state.userPreferences.keyboardLayout;
+        // Set the current theme in the profile settings dropdown
+        document.getElementById('profile-dark-mode-select').value = this.state.userPreferences.theme;
     };
     
     App.prototype.renderCharts = function() {
@@ -515,6 +523,18 @@ document.addEventListener('DOMContentLoaded', () => {
             this.completionChartInstance = null;
         }
 
+        // Determine text color for charts based on theme
+        const chartTextColor = (this.state.userPreferences.theme === 'dark' || (this.state.userPreferences.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) ? '#e2e8f0' : '#000';
+        const chartGridColor = (this.state.userPreferences.theme === 'dark' || (this.state.userPreferences.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+        const chartLineColorWPM = (this.state.userPreferences.theme === 'dark' || (this.state.userPreferences.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) ? '#81B29A' : '#81B29A'; // Greenish
+        const chartLineFillWPM = (this.state.userPreferences.theme === 'dark' || (this.state.userPreferences.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) ? 'rgba(129, 178, 154, 0.3)' : 'rgba(129, 178, 154, 0.2)';
+        const chartLineColorAccuracy = (this.state.userPreferences.theme === 'dark' || (this.state.userPreferences.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) ? '#F2CC8F' : '#F2CC8F'; // Yellowish
+        const chartLineFillAccuracy = (this.state.userPreferences.theme === 'dark' || (this.state.userPreferences.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) ? 'rgba(242, 204, 143, 0.3)' : 'rgba(242, 204, 143, 0.2)';
+        const chartDoughnutCompleted = (this.state.userPreferences.theme === 'dark' || (this.state.userPreferences.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) ? '#81B29A' : '#81B29A';
+        const chartDoughnutRemaining = (this.state.userPreferences.theme === 'dark' || (this.state.userPreferences.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) ? '#4a5568' : '#F4F3EE';
+        const chartDoughnutBorder = (this.state.userPreferences.theme === 'dark' || (this.state.userPreferences.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) ? '#1a202c' : '#FFFFFF';
+
+
         if (wpmCtx && this.state.progressData.performance.length > 0) {
             const lessonLabels = this.state.progressData.performance.map(p => `পাঠ ${this.convertToBengaliNumber(p.lesson + 1)}`);
             const wpmData = this.state.progressData.performance.map(p => p.wpm);
@@ -527,8 +547,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     datasets: [{
                         label: 'WPM',
                         data: wpmData,
-                        borderColor: '#81B29A',
-                        backgroundColor: 'rgba(129, 178, 154, 0.2)',
+                        borderColor: chartLineColorWPM,
+                        backgroundColor: chartLineFillWPM,
                         fill: true,
                         tension: 0.3,
                         yAxisID: 'y'
@@ -536,8 +556,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     {
                         label: 'Accuracy (%)',
                         data: accuracyData,
-                        borderColor: '#F2CC8F',
-                        backgroundColor: 'rgba(242, 204, 143, 0.2)',
+                        borderColor: chartLineColorAccuracy,
+                        backgroundColor: chartLineFillAccuracy,
                         fill: true,
                         tension: 0.3,
                         yAxisID: 'y1'
@@ -547,16 +567,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     responsive: true, 
                     maintainAspectRatio: false,
                     scales: {
+                        x: {
+                            ticks: {
+                                color: chartTextColor // X-axis labels
+                            },
+                            grid: {
+                                color: chartGridColor
+                            }
+                        },
                         y: {
                             type: 'linear',
                             display: true,
                             position: 'left',
                             title: {
                                 display: true,
-                                text: 'WPM'
+                                text: 'WPM',
+                                color: chartTextColor // Y-axis title
                             },
                             ticks: {
-                                callback: (value) => this.convertToBengaliNumber(value)
+                                callback: (value) => this.convertToBengaliNumber(value),
+                                color: chartTextColor // Y-axis labels
+                            },
+                            grid: {
+                                color: chartGridColor
                             }
                         },
                         y1: {
@@ -568,16 +601,23 @@ document.addEventListener('DOMContentLoaded', () => {
                             },
                             title: {
                                 display: true,
-                                text: 'Accuracy (%)'
+                                text: 'Accuracy (%)',
+                                color: chartTextColor // Y1-axis title
                             },
                             min: 0,
                             max: 100,
                             ticks: {
-                                callback: (value) => this.convertToBengaliNumber(value)
+                                callback: (value) => this.convertToBengaliNumber(value),
+                                color: chartTextColor // Y1-axis labels
                             }
                         }
                     },
                     plugins: {
+                        legend: {
+                            labels: {
+                                color: chartTextColor // Legend text color
+                            }
+                        },
                         tooltip: {
                             callbacks: {
                                 label: (context) => {
@@ -609,8 +649,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     labels: ['সম্পন্ন', 'বাকি'],
                     datasets: [{
                         data: [completedCount, totalLessons - completedCount],
-                        backgroundColor: ['#81B29A', '#F4F3EE'],
-                        borderColor: ['#FFFFFF', '#FFFFFF']
+                        backgroundColor: [chartDoughnutCompleted, chartDoughnutRemaining],
+                        borderColor: chartDoughnutBorder
                     }]
                 },
                 options: { 
@@ -625,7 +665,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         size: 14,
                         weight: 'normal'
                         },
-                        color: '#000' // optional
+                        color: chartTextColor // Legend text color
                     }
                     },
                     tooltip: {
@@ -679,11 +719,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.state.userPreferences = parsed.userPreferences || {
                     keyboardLayout: 'avro',
                     experienceLevel: 'new',
-                    onboardingCompleted: false
+                    onboardingCompleted: false,
+                    theme: 'system' // Default to system preference
                 };
+                // If old data format, convert isDarkMode to theme
+                if (parsed.userPreferences && typeof parsed.userPreferences.isDarkMode !== 'undefined') {
+                    this.state.userPreferences.theme = parsed.userPreferences.isDarkMode ? 'dark' : 'light';
+                    delete parsed.userPreferences.isDarkMode; // Clean up old property
+                }
+            } else {
+                // If no saved data, set theme to system preference
+                this.state.userPreferences.theme = 'system';
             }
         } catch (e) {
             console.error("Failed to load progress from localStorage", e);
+            // Fallback to system preference if loading fails
+            this.state.userPreferences.theme = 'system';
         }
     };
 
@@ -702,13 +753,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Ensure initial values are set in the onboarding modal
         document.getElementById('onboarding-keyboard-layout').value = this.state.userPreferences.keyboardLayout;
         document.getElementById('onboarding-experience-level').value = this.state.userPreferences.experienceLevel;
+        document.getElementById('onboarding-dark-mode').value = this.state.userPreferences.theme;
     };
 
     App.prototype.completeOnboarding = function() {
         this.state.userPreferences.keyboardLayout = document.getElementById('onboarding-keyboard-layout').value;
         this.state.userPreferences.experienceLevel = document.getElementById('onboarding-experience-level').value;
+        this.state.userPreferences.theme = document.getElementById('onboarding-dark-mode').value;
         this.state.userPreferences.onboardingCompleted = true;
         this.saveProgress(); // Save preferences
+        this.applyTheme(this.state.userPreferences.theme); // Apply the selected theme immediately
 
         // Apply level unlocking based on experience level
         this.state.progressData.unlockedLevels.clear(); // Clear existing unlocked levels
@@ -767,6 +821,34 @@ document.addEventListener('DOMContentLoaded', () => {
         this.navigateTo('profile'); // Go back to profile to see changes
         this.renderProfilePage(); // Re-render charts
         this.renderLearnPage(); // Re-render learn page to show locked lessons
+    };
+
+    
+    App.prototype.setDarkMode = function(theme) {
+        this.state.userPreferences.theme = theme;
+        this.applyTheme(theme);
+        this.saveProgress();
+        // Re-render charts if on profile page to apply new colors
+        if (this.state.currentPage === 'profile') {
+            this.renderProfilePage();
+        }
+    };
+
+    App.prototype.applyTheme = function(theme) {
+        let isDarkMode = false;
+        if (theme === 'dark') {
+            isDarkMode = true;
+        } else if (theme === 'light') {
+            isDarkMode = false;
+        } else { // system
+            isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+
+        if (isDarkMode) {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
     };
     
     app = new App();

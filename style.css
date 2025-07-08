@@ -1,20 +1,120 @@
 @import "tailwindcss";
+
+/* Light Mode Variables (Default) */
+:root {
+--bg-primary: #F0F2F5;
+--bg-secondary: #FFFFFF;
+--bg-tertiary: #E4E6EB;
+--bg-accent: #1877F2;
+--text-primary: #050505;
+--text-secondary: #65676B;
+--text-accent: #1877F2;
+--border-color: #CED0D4;
+--shadow-color: rgba(0, 0, 0, 0.1);
+--input-border: #CCD0D5;
+--input-focus-shadow: rgba(24, 119, 242, 0.3);
+--lesson-completed-bg: #c5f7c9;
+--lesson-completed-border: #A5D6A7;
+--lesson-completed-shadow: rgba(39, 174, 96, 0.2);
+--lesson-locked-bg: #F0F0F0;
+--key-bg: #FFFFFF;
+--key-border: #BCC0C4;
+--key-shadow: rgba(0, 0, 0, 0.1);
+--key-hover-bg: #F0F2F5;
+--key-hover-shadow: rgba(0, 0, 0, 0.15);
+--key-active-bg: #1877F2;
+--key-active-color: #FFFFFF;
+--key-active-shadow: rgba(24, 119, 242, 0.4);
+--key-pressed-bg: #365899;
+--key-pressed-color: #FFFFFF;
+--key-pressed-shadow: rgba(54, 88, 153, 0.5);
+--key-correct-bg: #42B72A;
+--key-wrong-bg: #FA383E;
+--chart-bg: #FFFFFF;
+--chart-border: #E4E6EB;
+--chart-shadow: rgba(0, 0, 0, 0.16);
+--chart-label-color: #65676B;
+--chart-line-color-wpm: #1877F2;
+--chart-line-fill-wpm: rgba(24, 119, 242, 0.2);
+--chart-line-color-accuracy: #42B72A;
+--chart-line-fill-accuracy: rgba(66, 183, 42, 0.2);
+--chart-doughnut-completed: #1877F2;
+--chart-doughnut-remaining: #E4E6EB;
+--chart-doughnut-border: #FFFFFF;
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+--bg-primary: #18191A;
+--bg-secondary: #242526;
+--bg-tertiary: #3A3B3C;
+--bg-accent: #2D88FF;
+--text-primary: #E4E6EB;
+--text-secondary: #bec0c5;
+--text-accent: #2D88FF;
+--border-color: #393A3B;
+--shadow-color: rgba(0, 0, 0, 0.3);
+--input-border: #3A3B3C;
+--input-focus-shadow: rgba(45, 136, 255, 0.4);
+--lesson-completed-bg: #38a149;
+--lesson-completed-border: #2F855A;
+--lesson-completed-shadow: rgba(56, 161, 105, 0.3);
+--lesson-locked-bg: #242526;
+--key-bg: #3A3B3C;
+--key-border: #4E4F50;
+--key-shadow: rgba(0, 0, 0, 0.2);
+--key-hover-bg: #4E4F50;
+--key-hover-shadow: rgba(0, 0, 0, 0.25);
+--key-active-bg: #2D88FF;
+--key-active-color: #FFFFFF;
+--key-active-shadow: rgba(45, 136, 255, 0.5);
+--key-pressed-bg: #1A73E8;
+--key-pressed-color: #FFFFFF;
+--key-pressed-shadow: rgba(26, 115, 232, 0.6);
+--key-correct-bg: #31A24C;
+--key-wrong-bg: #E41E3F;
+--chart-bg: #242526;
+--chart-border: #3A3B3C;
+--chart-shadow: rgba(0, 0, 0, 0.2);
+--chart-label-color: #B0B3B8;
+--chart-line-color-wpm: #2D88FF;
+--chart-line-fill-wpm: rgba(45, 136, 255, 0.3);
+--chart-line-color-accuracy: #31A24C;
+--chart-line-fill-accuracy: rgba(49, 162, 76, 0.3);
+--chart-doughnut-completed: #2D88FF;
+--chart-doughnut-remaining: #3A3B3C;
+--chart-doughnut-border: #18191A;
+}
+
+
 body {
     font-family: 'Hind Siliguri', sans-serif;
-    background: linear-gradient(135deg, #eef1f6 0%, #c3cfe2 100%); /* Slightly softer gradient */
-    color: #2c3e50;
+    background: var(--bg-primary); /* Use variable for background */
+    color: var(--text-primary); /* Use variable for text color */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
-.bg-primary { background-color: #ffffff; }
-.bg-secondary { background-color: #ecf0f1; }
-.bg-accent { background-color: #e74c3c; }
-.text-accent { color: #e74c3c; }
-.border-accent { border-color: #e74c3c; }
+/* Specific background and text colors using variables */
+/* These classes are now defined to use the CSS variables */
+.bg-primary { background-color: var(--bg-primary); }
+.bg-secondary { background-color: var(--bg-secondary); }
+.bg-accent { background-color: var(--bg-accent); }
+.text-accent { color: var(--text-accent); }
+.border-accent { border-color: var(--bg-accent); }
+
+/* General text colors */
+.text-gray-600 { color: var(--text-secondary); }
+.text-gray-700 { color: var(--text-primary); }
+.text-gray-500 { color: var(--text-secondary); }
+/* Ensure this is also dynamic for dark mode */
+.text-gray-800 { color: var(--text-primary); }
+
+
 .btn-accent {
-    background-color: #e74c3c;
+    background-color: var(--bg-accent);
     color: #FFFFFF;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     border: none;
@@ -22,38 +122,45 @@ body {
     border-radius: 8px; /* Slightly more rounded buttons */
     cursor: pointer;
     font-weight: bold;
-    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.2);
+    box-shadow: 0 4px 10px rgba(24, 119, 242, 0.2); /* Accent specific shadow */
 }
 
 .btn-accent:hover {
-    background-color: #c0392b;
+    background-color: #166FE5; /* Darker accent on hover */
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(231, 76, 60, 0.3);
+    box-shadow: 0 6px 15px rgba(24, 119, 242, 0.3);
 }
 
 .btn-accent:active {
     transform: translateY(0);
-    box-shadow: 0 2px 5px rgba(231, 76, 60, 0.2);
+    box-shadow: 0 2px 5px rgba(24, 119, 242, 0.2);
 }
+
+/* Gray buttons (e.g., "Cancel", "Other lesson") */
+/* Ensure these use the appropriate variables for both themes */
+.bg-gray-200 { background-color: var(--bg-tertiary); } /* Changed to tertiary for light mode consistency */
+.hover\:bg-gray-300:hover { background-color: var(--border-color); }
+
 
 .nav-link {
     cursor: pointer;
     padding: 8px 16px;
     border-radius: 8px;
     transition: background-color 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s;
+    color: var(--text-primary); /* Default nav link color */
 }
 
 .nav-link.active {
-    background-color: #e74c3c;
+    background-color: var(--bg-accent);
     color: #FFFFFF;
     font-weight: 600;
     box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
 }
 
 .nav-link:not(.active):hover {
-    background-color: #e0e0e0; /* Lighter hover for non-active */
+    background-color: var(--border-color); /* Lighter hover for non-active */
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08); /* General shadow */
 }
 
 /* Custom select dropdown styling */
@@ -61,61 +168,66 @@ body {
     appearance: none; /* Remove default browser styling */
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-color: #FFFFFF;
-    border: 1px solid #dcdcdc;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--input-border);
     border-radius: 8px;
     padding: 10px 14px;
     padding-right: 30px; /* Space for custom arrow */
     font-size: 1rem;
-    color: #2c3e50;
+    color: var(--text-primary);
     cursor: pointer;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    background-image: url('data:image/svg+xml;utf8,<svg fill="%232c3e50" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Custom arrow */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+    background-image: var(--select-arrow-svg, url('data:image/svg+xml;utf8,<svg fill="%232c3e50" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>')); /* Custom arrow */
     background-repeat: no-repeat;
     background-position: right 8px center;
     background-size: 18px;
 }
 
+body.dark-mode .app-select {
+    --select-arrow-svg: url('data:image/svg+xml;utf8,<svg fill="%23e2e8f0" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+}
+
 .app-select:focus {
     outline: none;
-    border-color: #e74c3c;
-    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.3);
+    border-color: var(--bg-accent);
+    box-shadow: 0 0 0 3px var(--input-focus-shadow);
 }
 
 
 .level-section {
-    background-color: #FFFFFF;
-    border: 1px solid #e0e0e0;
+    background-color: var(--bg-secondary); /* Changed from --bg-primary */
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 24px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.12); /* Unified shadow */
+    box-shadow: 0 6px 18px var(--shadow-color);
     transition: all 0.3s ease;
 }
 
-.level-section.bg-gray-100 {
-    background-color: #f8f8f8; /* Softer locked background */
-    opacity: 0.7; /* Softer opacity */
-    filter: grayscale(50%); /* Subtle grayscale for locked levels */
+.level-section.bg-gray-100 { /* For locked levels */
+    background-color: var(--lesson-locked-bg);
+    opacity: 0.7;
+    filter: grayscale(50%);
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 .level-title {
-    color: #2c3e50;
+    color: var(--text-primary);
     margin-bottom: 1rem;
     position: relative;
 }
 
-/* Removed the ::after element as per user request */
+.level-status.text-green-600 { color: #27ae60; }
+.level-status.text-red-500 { color: #e74c3c; }
 
 
 .lesson-card {
-    background-color: #FFFFFF;
-    border: 1px solid #e0e0e0;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 16px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
     cursor: pointer;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.12); /* Unified shadow */
+    box-shadow: 0 6px 18px var(--shadow-color);
     position: relative;
     overflow: hidden;
 }
@@ -124,31 +236,34 @@ body {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
+    left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+body.dark-mode .lesson-card::before {
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.1), transparent);
 }
 
 .lesson-card:hover::before {
-    opacity: 1;
+    left: 100%;
 }
 
 .lesson-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.18); /* Slightly stronger hover shadow */
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 12px 24px var(--shadow-color);
 }
 
 .lesson-card.completed {
-    background-color: #e8f5e9; /* Light green for completed */
-    border-color: #a5d6a7;
-    box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2);
+    background-color: var(--lesson-completed-bg);
+    border-color: var(--lesson-completed-border);
+    box-shadow: 0 4px 12px var(--lesson-completed-shadow);
 }
 
 .lesson-card.locked {
-    background-color: #f0f0f0;
+    background-color: var(--lesson-locked-bg);
     cursor: not-allowed;
     opacity: 0.6;
     filter: grayscale(100%);
@@ -167,17 +282,31 @@ body {
     font-weight: 600;
     letter-spacing: 2px;
     padding: 20px;
-    background-color: #FFFFFF;
-    border-radius: 12px; /* Consistent border-radius */
-    border: 1px solid #e0e0e0;
+    background-color: var(--bg-primary);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
     min-height: 80px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Consistent shadow */
+    box-shadow: 0 4px 12px var(--shadow-color);
     position: relative;
     overflow: hidden;
+    color: var(--text-primary); /* Default text color for typing display */
 }
 
-.correct { color: #27ae60; } /* Vibrant green */
-.incorrect { color: #c0392b; text-decoration: underline; } /* Darker red */
+.correct { color: var(--key-correct-bg); }
+.incorrect { color: var(--key-wrong-bg); text-decoration: underline; }
+
+.typing-input {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border-color: var(--input-border);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.typing-input:focus {
+    box-shadow: 0 0 0 3px var(--input-focus-shadow);
+    transition: box-shadow 0.2s ease-in-out;
+}
+
 .chart-container {
     position: relative;
     width: 100%;
@@ -186,10 +315,11 @@ body {
     margin-right: auto;
     height: 300px;
     max-height: 400px;
-    background-color: #FFFFFF;
-    border-radius: 12px; /* Consistent border-radius */
+    background-color: var(--chart-bg);
+    border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Consistent shadow */
+    box-shadow: 0 4px 12px var(--chart-shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 @media (min-width: 768px) {
@@ -215,61 +345,75 @@ body {
 }
 
 .key {
-    background-color: #fdfdfd;
-    border: 1px solid #dcdcdc;
+    background-color: var(--key-bg);
+    border: 1px solid var(--key-border);
     border-radius: 8px;
     padding: 12px 18px;
     font-size: 1.1rem;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease, color 0.2s ease;
+    box-shadow: 0 2px 4px var(--key-shadow);
     min-width: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: 500;
+    color: var(--text-primary); /* Default key text color */
 }
 
 .key:hover {
-    background-color: #e0e0e0;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: var(--key-hover-bg);
+    box-shadow: 0 4px 8px var(--key-hover-shadow);
 }
 
 .key.active {
-    background-color: #f39c12; /* Vibrant orange for active */
-    color: white;
+    background-color: var(--key-active-bg);
+    color: var(--key-active-color);
     transform: scale(0.98);
-    box-shadow: 0 4px 12px rgba(243, 156, 18, 0.4);
-    border-color: #f39c12;
+    box-shadow: 0 4px 12px var(--key-active-shadow);
+    border-color: var(--key-active-bg);
 }
 
 .key.pressed {
-    background-color: #e74c3c; /* Vibrant red-orange for pressed */
-    color: white;
-    transform: scale(0.9);
-    box-shadow: 0 6px 15px rgba(231, 76, 60, 0.5);
-    border-color: #e74c3c;
-    animation: key-press-animation 0.15s ease-out;
+    animation: key-press-animation 0.2s ease-out;
+    transform: scale(0.95);
+    background-color: var(--key-pressed-bg);
+    color: var(--key-pressed-color);
+    box-shadow: 0 4px 12px var(--key-pressed-shadow);
+    border-color: var(--key-pressed-bg);
 }
 
 .key.pressed-correct {
-    background-color: #27ae60 !important; /* Green for correct */
+    background-color: var(--key-correct-bg) !important;
     color: #fff !important;
-    border-color: #27ae60 !important;
-    box-shadow: 0 6px 15px rgba(39, 174, 96, 0.5) !important;
+    border-color: var(--key-correct-bg) !important;
+    box-shadow: 0 6px 15px rgba(49, 162, 76, 0.5) !important;
+    animation: key-correct-animation 0.3s ease-out;
 }
 
 .key.pressed-wrong {
-    background-color: #c0392b !important; /* Dark red for wrong */
+    background-color: var(--key-wrong-bg) !important;
     color: #fff !important;
-    border-color: #c0392b !important;
-    box-shadow: 0 6px 15px rgba(192, 57, 43, 0.5) !important;
+    border-color: var(--key-wrong-bg) !important;
+    box-shadow: 0 6px 15px rgba(228, 30, 63, 0.5) !important;
+    animation: key-wrong-animation 0.4s ease;
 }
 
 @keyframes key-press-animation {
     0% { transform: scale(1); }
-    50% { transform: scale(0.9); }
-    100% { transform: scale(1); }
+    50% { transform: scale(0.92); }
+    100% { transform: scale(0.95); }
+}
+
+@keyframes key-correct-animation {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes key-wrong-animation {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
 }
 
 /* Animations for page transitions */
@@ -327,4 +471,90 @@ body {
     20%, 80% { transform: translate3d(2px, 0, 0); }
     30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
     40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* Dark Mode specific overrides for elements */
+
+/* Header, modals, and other containers that use bg-secondary or bg-white */
+body.dark-mode .bg-secondary {
+    background-color: var(--bg-secondary);
+}
+
+body.dark-mode .bg-white { /* This targets elements that explicitly use bg-white in HTML */
+    background-color: var(--bg-secondary); /* Use secondary background for cards/modals in dark mode */
+    border-color: var(--border-color);
+    box-shadow: 0 6px 18px var(--shadow-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .bg-gray-100 { /* For locked levels */
+    background-color: var(--lesson-locked-bg);
+}
+
+/* Hint Container and Items */
+body.dark-mode #hint-container {
+    background-color: var(--bg-secondary); /* Ensure hint container uses dark mode background */
+    border-color: var(--border-color);
+    box-shadow: 0 6px 18px var(--shadow-color);
+}
+
+body.dark-mode #keyboard-map-container .flex { /* The individual hint boxes */
+    background-color: var(--bg-tertiary); /* Use a slightly different dark background for hint items */
+    color: var(--text-primary);
+    border-color: var(--key-border);
+}
+
+/* Charts */
+body.dark-mode .chart-container {
+    background-color: var(--chart-bg);
+    border: 1px solid var(--chart-border);
+    box-shadow: 0 4px 12px var(--chart-shadow);
+}
+
+/* Ensure text colors within charts are correct - handled in script.js, but good to have fallback */
+body.dark-mode .chart-container h3 {
+    color: var(--text-primary);
+}
+
+/* Profile Settings - Keyboard Layout Select */
+/* This is already covered by .app-select using variables, but explicitly ensuring text color */
+body.dark-mode .app-select {
+    color: var(--text-primary);
+    background-color: var(--bg-secondary); /* Ensure dropdown background is dark */
+    border-color: var(--input-border);
+}
+
+/* Onboarding and Confirmation Modals */
+body.dark-mode #onboarding-modal .bg-white,
+body.dark-mode #confirmation-modal .bg-white {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode #onboarding-modal label,
+body.dark-mode #onboarding-modal select,
+body.dark-mode #confirmation-modal p {
+    color: var(--text-primary);
+}
+
+body.dark-mode .text-gray-700 {
+    color: var(--text-primary);
+}
+
+body.dark-mode .text-gray-600 {
+    color: var(--text-secondary);
+}
+
+input:checked + .block {
+    background-color: var(--bg-accent); /* Accent color when checked */
+}
+
+input:checked + .block .dot {
+    transform: translateX(110%);
+}
+
+body.dark-mode .chart-container {
+    background-color: var(--chart-bg);
+    box-shadow: 0 4px 12px var(--chart-shadow);
 }
