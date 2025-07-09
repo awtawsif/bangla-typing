@@ -12,7 +12,7 @@
 </head>
 <body class="bg-primary">
     <div id="app-container" class="min-h-screen flex flex-col">
-        <header class="bg-secondary shadow-md sticky top-0 z-10">
+        <header id="main-header" class="bg-secondary shadow-md sticky top-0 z-10 transition-all duration-300">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                     <a href="./" class="text-xl sm:text-2xl font-bold text-accent">ইন্টারেক্টিভ বাংলা টাইপিং শিক্ষক</a>
@@ -46,10 +46,10 @@
             </div>
         </header>
 
-        <main id="main-content" class="flex-grow container mx-auto p-4 sm:p-6 lg:p-8">
+        <main id="main-content" class="flex-grow container mx-auto">
             <div id="learn-view" class="hidden">
                 <div class="text-center mb-8">
-                    <h2 class="text-3xl font-bold mb-2">আপনার পাঠ শুরু করুন</h2>
+                    <h2 class="text-3xl font-bold mb-2 pt-8">আপনার পাঠ শুরু করুন</h2>
                     <p class="text-gray-600">যেকোনো একটি পাঠে ক্লিক করে আপনার টাইপিং অনুশীলন শুরু করুন।</p>
                 </div>
                 <!-- Levels Container -->
@@ -111,29 +111,20 @@
                 </div>
             </div>
 
-            <div id="lesson-view" class="hidden">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="md:col-span-2">
-                        <div class="flex justify-between items-center mb-2">
-                            <button onclick="app.navigateTo('learn')" class="btn-accent py-2 px-4 rounded-lg flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
-                                সব পাঠ
-                            </button>
-                            <h2 id="lesson-title" class="text-2xl font-bold text-center flex-1"></h2>
-                            <button onclick="app.toggleHint()" class="btn-accent py-2 px-4 rounded-lg">Hint</button>
-                        </div>
-                        <div class="bg-secondary p-6 rounded-xl shadow-inner flex flex-col gap-2">
-                            <p class="text-center text-gray-600 mb-2">নিচের লেখাটির জন্য টাইপ করুন:</p>
-                            <div id="typing-display" class="typing-display text-center mb-2"></div>
-                            <p id="phonetic-display" class="text-center text-gray-500 mb-4"></p>
-                            <input id="typing-input" placeholder="Press Space/Enter to continue" class="w-full p-4 border-2 border-gray-300 rounded-lg text-2xl focus:border-accent focus:ring-accent" rows="3" autofocus></input>
-                            <div id="word-count" class="text-center mt-4 text-gray-500"></div>
-                        </div>
-                    </div>
-                    <div id="hint-container" class="hidden md:col-span-1 bg-white p-6 rounded-xl shadow-md">
-                        <h3 class="text-xl font-bold mb-4 text-center">Keyboard Hints</h3>
-                        <div id="keyboard-map-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 gap-2">
-                        </div>
+            <div id="lesson-view" class="hidden flex flex-col items-center justify-center min-h-screen">
+                <div class="w-full max-w-4xl flex justify-start mb-4">
+                </div>
+                <div class="bg-secondary p-6 rounded-xl shadow-inner flex flex-col gap-2 mb-4 w-full max-w-4xl">
+                    <p id="lesson-instruction" class="text-center text-gray-600 mb-2"></p>
+                    <div id="typing-display" class="typing-display text-center mb-2"></div>
+                    <p id="phonetic-display" class="text-center text-gray-500 mb-4"></p>
+                    <input id="typing-input" placeholder="Press Space/Enter to continue" class="w-full p-4 border-2 border-gray-300 rounded-lg text-2xl focus:border-accent focus:ring-accent" rows="3" autofocus></input>
+                    <div id="word-count" class="text-center mt-4 text-gray-500"></div>
+                </div>
+                <!-- Dynamic Keyboard will be rendered here, moved below the typing area -->
+                <div id="hint-container" class="bg-secondary rounded-xl shadow-md flex flex-col justify-between hidden max-w-4xl">
+                    <div id="on-screen-keyboard" class="keyboard-layout">
+                        <!-- Keyboard will be rendered here by JavaScript -->
                     </div>
                 </div>
             </div>
@@ -173,10 +164,24 @@
                             </div>
                             <div class="flex items-center space-x-2">
                                 <label for="profile-dark-mode-select" class="text-lg">থিম:</label>
-                                <select id="profile-dark-mode-select" onchange="app.setDarkMode(this.value)" class="app-select">
+                                <select id="profile-dark-mode-select" onchange="app.setTheme(this.value)" class="app-select">
                                     <option value="system">সিস্টেম</option>
                                     <option value="light">লাইট</option>
                                     <option value="dark">ডার্ক</option>
+                                </select>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <label for="profile-show-phonetic-hint" class="text-lg">ফোনেটিক ইঙ্গিত:</label>
+                                <select id="profile-show-phonetic-hint" onchange="app.setPreference('showPhoneticHint', this.value === 'true')" class="app-select">
+                                    <option value="true">দেখাও</option>
+                                    <option value="false">লুকান</option>
+                                </select>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <label for="profile-show-keyboard-hint" class="text-lg">কিবোর্ড ইঙ্গিত:</label>
+                                <select id="profile-show-keyboard-hint" onchange="app.setPreference('showKeyboardHint', this.value === 'true')" class="app-select">
+                                    <option value="true">দেখাও</option>
+                                    <option value="false">লুকান</option>
                                 </select>
                             </div>
                             <button onclick="app.showResetConfirmation()" class="btn-accent py-2 px-6 rounded-lg bg-red-500 hover:bg-red-600">অগ্রগতি রিসেট করুন</button>

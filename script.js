@@ -21,7 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
             userPreferences: {
                 keyboardLayout: 'avro', // Default to Avro
                 onboardingCompleted: false, // Track if onboarding is done
-                theme: 'system' // New: 'system', 'light', 'dark'
+                theme: 'system', // New: 'system', 'light', 'dark'
+                showPhoneticHint: true, // New: show phonetic hint below typing area
+                showWordCount: true, // New: show word count below typing area
+                showKeyboardHint: true // New: show on-screen keyboard hint
             },
             syllabus: [], // Will hold main lesson content
             keyboardHintData: { // Will hold hint data for different layouts
@@ -33,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 items: [], // Bengali text
                 phonetic_items: [] // Phonetic hints based on selected layout
             },
-            isHintVisible: false,
+            isHintVisible: true, // Set to true by default to show keyboard
             lessonLevels: [
                 { title: "মৌলিক অক্ষর", lessons: [0, 1, 2, 3, 4, 5] }, // Level 1: Lessons 1-6
                 { title: "টপ রো ও বিশেষ স্বরবর্ণ", lessons: [6, 7, 8, 9, 10, 11, 12, 13, 14] }, // Level 2: Lessons 7-15
@@ -41,7 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 { title: "যুক্তাক্ষর - ক থেকে ন", lessons: [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] }, // Level 4: Lessons 22-42
                 { title: "যুক্তাক্ষর - প থেকে হ", lessons: [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50] }, // Level 5: Lessons 43-51
                 { title: "ব্যবহারিক অনুশীলন", lessons: [51, 52, 53, 54, 55, 56] }  // Level 6: Lessons 52-57
-            ]
+            ],
+            // Track the currently highlighted key on the virtual keyboard
+            highlightedKey: null,
+            // Track if Shift is currently active on the virtual keyboard
+            isShiftActive: false
         };
 
         this.viewElements = {
@@ -59,7 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
             typingInput: document.getElementById('typing-input'),
             wordCount: document.getElementById('word-count'),
             hintContainer: document.getElementById('hint-container'),
-            keyboardMapContainer: document.getElementById('keyboard-map-container')
+            onScreenKeyboard: document.getElementById('on-screen-keyboard'), // New element for keyboard
+            lessonInstruction: document.getElementById('lesson-instruction') // New element for instruction
         };
 
         this.completionElements = {
@@ -72,11 +80,55 @@ document.addEventListener('DOMContentLoaded', () => {
         this.mobileMenu = document.getElementById('mobile-menu');
         this.onboardingModal = document.getElementById('onboarding-modal');
         this.confirmationModal = document.getElementById('confirmation-modal');
+        this.mainHeader = document.getElementById('main-header'); // Get the main header element
         
 
         // Chart instances to be destroyed before re-rendering
         this.wpmChartInstance = null;
         this.completionChartInstance = null;
+
+        // Define a comprehensive keyboard layout for rendering
+        // 'key' is the lowercase character, 'shiftKey' is the character when Shift is pressed
+        // 'code' is the KeyboardEvent.code for identifying the physical key
+        this.keyboardLayoutData = [
+            // Row 1: Numbers and symbols
+            [
+                { key: '`', shiftKey: '~', code: 'Backquote' }, { key: '1', shiftKey: '!', code: 'Digit1' }, { key: '2', shiftKey: '@', code: 'Digit2' },
+                { key: '3', shiftKey: '#', code: 'Digit3' }, { key: '4', shiftKey: '$', code: 'Digit4' }, { key: '5', shiftKey: '%', code: 'Digit5' },
+                { key: '6', shiftKey: '^', code: 'Digit6' }, { key: '7', shiftKey: '&', code: 'Digit7' }, { key: '8', shiftKey: '*', code: 'Digit8' },
+                { key: '9', shiftKey: '(', code: 'Digit9' }, { key: '0', shiftKey: ')', code: 'Digit0' }, { key: '-', shiftKey: '_', code: 'Minus' },
+                { key: '=', shiftKey: '+', code: 'Equal' }, { key: 'backspace', display: 'Backspace', class: 'w-20', code: 'Backspace' }
+            ],
+            // Row 2: QWERTY
+            [
+                { key: 'tab', display: 'Tab', class: 'w-16', code: 'Tab' }, { key: 'q', code: 'KeyQ' }, { key: 'w', code: 'KeyW' }, { key: 'e', code: 'KeyE' },
+                { key: 'r', code: 'KeyR' }, { key: 't', code: 'KeyT' }, { key: 'y', code: 'KeyY' }, { key: 'u', code: 'KeyU' }, { key: 'i', code: 'KeyI' }, { key: 'o', code: 'KeyO' },
+                { key: 'p', code: 'KeyP' }, { key: '[', shiftKey: '{', code: 'BracketLeft' }, { key: ']', shiftKey: '}', code: 'BracketRight' },
+                { key: '\\', shiftKey: '|', class: 'w-16', code: 'Backslash' }
+            ],
+            // Row 3: ASDFGHJKL
+            [
+                { key: 'capslock', display: 'Caps Lock', class: 'w-20', code: 'CapsLock' }, { key: 'a', code: 'KeyA' }, { key: 's', code: 'KeyS' },
+                { key: 'd', code: 'KeyD' }, { key: 'f', code: 'KeyF' }, { key: 'g', code: 'KeyG' }, { key: 'h', code: 'KeyH' }, { key: 'j', code: 'KeyJ' }, { key: 'k', code: 'KeyK' },
+                { key: 'l', code: 'KeyL' }, { key: ';', shiftKey: ':', code: 'Semicolon' }, { key: "'", shiftKey: '"', code: 'Quote' },
+                { key: 'enter', display: 'Enter', class: 'w-24', code: 'Enter' }
+            ],
+            // Row 4: ZXCVBNM
+            [
+                { key: 'shiftleft', display: 'Shift', class: 'w-28', code: 'ShiftLeft' }, { key: 'z', code: 'KeyZ' }, { key: 'x', code: 'KeyX' },
+                { key: 'c', code: 'KeyC' }, { key: 'v', code: 'KeyV' }, { key: 'b', code: 'KeyB' }, { key: 'n', code: 'KeyN' }, { key: 'm', code: 'KeyM' },
+                { key: ',', shiftKey: '<', code: 'Comma' }, { key: '.', shiftKey: '>', code: 'Period' }, { key: '/', shiftKey: '?', code: 'Slash' },
+                { key: 'shiftright', display: 'Shift', class: 'w-28', code: 'ShiftRight' }
+            ],
+            // Row 5: Ctrl, Alt, Space
+            [
+                { key: 'controlleft', display: 'Ctrl', class: 'w-16', code: 'ControlLeft' },
+                { key: 'altleft', display: 'Alt', class: 'w-16', code: 'AltLeft' },
+                { key: 'space', display: 'Space', class: 'w-96', code: 'Space' },
+                { key: 'altright', display: 'Alt', class: 'w-16', code: 'AltRight' },
+                { key: 'controlright', display: 'Ctrl', class: 'w-16', code: 'ControlRight' }
+            ]
+        ];
     };
 
     App.prototype.init = async function() {
@@ -107,6 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('hashchange', () => this.handleHashChange());
         this.lessonElements.typingInput.addEventListener('input', (e) => this.handleTyping(e));
         this.lessonElements.typingInput.addEventListener('keydown', (e) => this.handleTypingKeydown(e));
+        this.lessonElements.typingInput.addEventListener('keyup', (e) => this.handleTypingKeyup(e)); // New keyup listener
 
         // Event delegation for lesson cards
         document.getElementById('levels-container').addEventListener('click', (e) => {
@@ -130,6 +183,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('onboarding-start-button').addEventListener('click', () => this.completeOnboarding());
         // Reset confirmation button listener
         document.getElementById('confirm-reset-button').addEventListener('click', () => this.resetProgress());
+
+        // Escape key to go back to learn page
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.state.currentPage === 'lesson') {
+                e.preventDefault();
+                this.navigateTo('learn');
+            }
+        });
     };
     
     App.prototype.toggleMobileMenu = function() {
@@ -195,6 +256,13 @@ document.addEventListener('DOMContentLoaded', () => {
             this.viewElements[page].classList.remove('hidden');
             this.viewElements[page].classList.add('fade-in');
             this.executePageSpecificActions(page);
+        }
+
+        // Control header visibility
+        if (page === 'lesson') {
+            this.mainHeader.classList.add('header-hidden');
+        } else {
+            this.mainHeader.classList.remove('header-hidden');
         }
     };
 
@@ -300,11 +368,12 @@ document.addEventListener('DOMContentLoaded', () => {
         this.state.currentWordIndex = 0;
         this.state.userInput = '';
         this.state.startTime = null;
-        this.state.isHintVisible = true;
         this.state.correctCharsCount = 0;
         this.state.incorrectCharsCount = 0;
         this.state.totalKeystrokes = 0;
         this.state.mistakeCount = 0;
+        this.state.highlightedKey = null; // Reset highlighted key
+        this.state.isShiftActive = false; // Reset shift state
 
         const lesson = this.state.syllabus[this.state.currentLesson]; // Main lesson content
         const selectedLayoutHints = this.state.keyboardHintData[this.state.userPreferences.keyboardLayout];
@@ -327,10 +396,113 @@ document.addEventListener('DOMContentLoaded', () => {
         this.navigateTo('lesson');
     };
 
-    App.prototype.toggleHint = function() {
-        this.state.isHintVisible = !this.state.isHintVisible;
-        this.renderLessonView();
+    // Renders the on-screen keyboard
+    App.prototype.renderKeyboard = function() {
+        const keyboardContainer = this.lessonElements.onScreenKeyboard;
+        keyboardContainer.innerHTML = ''; // Clear previous keyboard
+
+        this.keyboardLayoutData.forEach(row => {
+            const rowDiv = document.createElement('div');
+            rowDiv.className = 'keyboard-row';
+            row.forEach(keyData => {
+                const keyDiv = document.createElement('div');
+                keyDiv.className = `key ${keyData.class || ''}`;
+                keyDiv.dataset.key = keyData.key; // Store the base key for identification
+                keyDiv.dataset.code = keyData.code; // Store the KeyboardEvent.code
+
+                let keyContent = '';
+                if (keyData.display) {
+                    keyContent = `<span class="bottom-label">${keyData.display}</span>`;
+                } else {
+                    // For regular keys, show shifted char on top, base char on bottom
+                    const topLabel = keyData.shiftKey ? `<span class="top-label">${keyData.shiftKey}</span>` : '';
+                    const bottomLabel = `<span class="bottom-label">${keyData.key}</span>`;
+                    keyContent = `${topLabel}${bottomLabel}`;
+                }
+                keyDiv.innerHTML = keyContent;
+                rowDiv.appendChild(keyDiv);
+            });
+            keyboardContainer.appendChild(rowDiv);
+        });
+        this.updateKeyboardHighlight(); // Apply initial highlight
     };
+
+    // Updates the highlighting on the keyboard based on the next expected input
+    App.prototype.updateKeyboardHighlight = function() {
+        // Remove all existing highlights and pressed states
+        document.querySelectorAll('.key').forEach(keyEl => {
+            keyEl.classList.remove('highlight-key', 'pressed-visual');
+        });
+        
+        // Remove shift active state from shift keys
+        document.querySelectorAll('[data-key="shiftleft"], [data-key="shiftright"]').forEach(shiftKeyEl => {
+            shiftKeyEl.classList.remove('active');
+        });
+
+        const { items, phonetic_items } = this.state.currentLessonData;
+        const currentItem = items[this.state.currentWordIndex];
+        const phoneticItem = phonetic_items[this.state.currentWordIndex];
+
+        if (!currentItem || !phoneticItem) {
+            this.state.highlightedKey = null;
+            return;
+        }
+
+        // Determine the next expected phonetic character to type
+        const typedLength = this.state.userInput.length;
+        if (typedLength >= phoneticItem.length) {
+            this.state.highlightedKey = null; // Word completed, no highlight
+            return;
+        }
+
+        // Get the next character(s) from the phonetic string
+        const nextPhoneticChar = phoneticItem[typedLength];
+        
+        // Determine the physical key and if shift is needed
+        let targetKey = nextPhoneticChar.toLowerCase();
+        let needsShift = (nextPhoneticChar === nextPhoneticChar.toUpperCase() && nextPhoneticChar.toLowerCase() !== nextPhoneticChar.toUpperCase());
+
+        // Special handling for symbols that require shift, e.g., '?' is Shift + '/'
+        if (nextPhoneticChar === '!' && targetKey === '1') needsShift = true;
+        else if (nextPhoneticChar === '@' && targetKey === '2') needsShift = true;
+        else if (nextPhoneticChar === '#' && targetKey === '3') needsShift = true;
+        else if (nextPhoneticChar === '$' && targetKey === '4') needsShift = true;
+        else if (nextPhoneticChar === '%' && targetKey === '5') needsShift = true;
+        else if (nextPhoneticChar === '^' && targetKey === '6') needsShift = true;
+        else if (nextPhoneticChar === '&' && targetKey === '7') needsShift = true;
+        else if (nextPhoneticChar === '*' && targetKey === '8') needsShift = true;
+        else if (nextPhoneticChar === '(' && targetKey === '9') needsShift = true;
+        else if (nextPhoneticChar === ')' && targetKey === '0') needsShift = true;
+        else if (nextPhoneticChar === '_' && targetKey === '-') needsShift = true;
+        else if (nextPhoneticChar === '+' && targetKey === '=') needsShift = true;
+        else if (nextPhoneticChar === '{' && targetKey === '[') needsShift = true;
+        else if (nextPhoneticChar === '}' && targetKey === ']') needsShift = true;
+        else if (nextPhoneticChar === '|' && targetKey === '\\') needsShift = true;
+        else if (nextPhoneticChar === ':' && targetKey === ';') needsShift = true;
+        else if (nextPhoneticChar === '"' && targetKey === "'") needsShift = true;
+        else if (nextPhoneticChar === '<' && targetKey === ',') needsShift = true;
+        else if (nextPhoneticChar === '>' && targetKey === '.') needsShift = true;
+        else if (nextPhoneticChar === '?' && targetKey === '/') needsShift = true;
+        else if (nextPhoneticChar === '~' && targetKey === '`') needsShift = true;
+
+
+        this.state.highlightedKey = targetKey;
+        this.state.isShiftActive = needsShift;
+
+        // Find the key element and apply highlight
+        const keyToHighlight = document.querySelector(`.key[data-key="${targetKey}"]`);
+        if (keyToHighlight) {
+            keyToHighlight.classList.add('highlight-key');
+        }
+
+        // Highlight Shift keys if needed
+        if (needsShift) {
+            document.querySelectorAll('[data-key="shiftleft"], [data-key="shiftright"]').forEach(shiftKeyEl => {
+                shiftKeyEl.classList.add('active');
+            });
+        }
+    };
+
 
     App.prototype.renderLessonView = function() {
         const lesson = this.state.syllabus[this.state.currentLesson]; // Main lesson content
@@ -354,24 +526,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentItem = items[this.state.currentWordIndex];
         const phoneticItem = phonetic_items[this.state.currentWordIndex];
         
-        this.lessonElements.title.textContent = `${lesson.title}`;
         this.lessonElements.typingDisplay.innerHTML = this.getDisplayHTML(currentItem, this.state.userInput);
         this.lessonElements.typingDisplay.classList.remove('text-change-animation');
         void this.lessonElements.typingDisplay.offsetWidth; // Trigger reflow
         this.lessonElements.typingDisplay.classList.add('text-change-animation');
-        this.lessonElements.phoneticDisplay.textContent = `(${phoneticItem})`;
-        this.lessonElements.wordCount.textContent = `শব্দ: ${this.convertToBengaliNumber(this.state.currentWordIndex + 1)} / ${this.convertToBengaliNumber(items.length)}`;
+        
+        // Conditionally display phonetic hint
+        if (this.state.userPreferences.showPhoneticHint) {
+            this.lessonElements.phoneticDisplay.textContent = `(${phoneticItem})`;
+            this.lessonElements.phoneticDisplay.classList.remove('hidden');
+        } else {
+            this.lessonElements.phoneticDisplay.classList.add('hidden');
+        }
 
-        // Use keyboard_map from the selected hint file
-        if (this.state.isHintVisible && hintData.keyboard_map) {
+        // Render and update the dynamic keyboard
+        if (this.state.userPreferences.showKeyboardHint && this.state.userPreferences.keyboardLayout === 'avro') {
             this.lessonElements.hintContainer.classList.remove('hidden');
-            this.lessonElements.keyboardMapContainer.innerHTML = Object.entries(hintData.keyboard_map).map(([key, value]) => `
-                <div class="flex items-center justify-center p-2 bg-gray-200 rounded-md">
-                    <span class="font-mono text-lg font-semibold">${key}</span>
-                    <span class="mx-2">→</span>
-                    <span class="text-lg font-semibold">${value}</span>
-                </div>
-            `).join('');
+            this.renderKeyboard(); // Render the keyboard structure
+            this.updateKeyboardHighlight(); // Apply highlighting
         } else {
             this.lessonElements.hintContainer.classList.add('hidden');
         }
@@ -403,11 +575,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, { once: true });
             }
         }
+        this.updateKeyboardHighlight(); // Update highlight on input
     };
 
     App.prototype.handleTypingKeydown = function(e) {
         const { items } = this.state.currentLessonData;
         const currentItem = items[this.state.currentWordIndex];
+
+        // Add visual pressed state to the key
+        const pressedKeyEl = document.querySelector(`.key[data-code="${e.code}"]`);
+        if (pressedKeyEl) {
+            pressedKeyEl.classList.add('pressed-visual');
+        }
 
         if (e.key === 'Enter' || (e.key === ' ' && this.state.userInput === currentItem)) {
             e.preventDefault();
@@ -419,6 +598,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     this.lessonElements.typingInput.classList.remove('shake-animation');
                 }, { once: true });
             }
+        }
+    };
+
+    // New keyup handler to remove pressed state
+    App.prototype.handleTypingKeyup = function(e) {
+        const pressedKeyEl = document.querySelector(`.key[data-code="${e.code}"]`);
+        if (pressedKeyEl) {
+            pressedKeyEl.classList.remove('pressed-visual');
         }
     };
 
@@ -505,6 +692,7 @@ document.addEventListener('DOMContentLoaded', () => {
             nextLessonButton.onclick = () => this.navigateTo('learn');
             nextLessonButton.classList.remove('hidden'); // Ensure it's visible
         }
+        this.updateKeyboardHighlight(); // Clear highlight on completion
     };
 
     App.prototype.startNextLesson = function() {
@@ -547,6 +735,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('profile-keyboard-layout-select').value = this.state.userPreferences.keyboardLayout;
         // Set the current theme in the profile settings dropdown
         document.getElementById('profile-dark-mode-select').value = this.state.userPreferences.theme;
+        // Set the current values for new preferences
+        document.getElementById('profile-show-phonetic-hint').value = this.state.userPreferences.showPhoneticHint.toString();
+        document.getElementById('profile-show-word-count').value = this.state.userPreferences.showWordCount.toString();
+        document.getElementById('profile-show-keyboard-hint').value = this.state.userPreferences.showKeyboardHint.toString();
     };
     
     App.prototype.renderCharts = function() {
@@ -742,8 +934,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 performance: this.state.progressData.performance,
                 unlockedLevels: Array.from(this.state.progressData.unlockedLevels),
             }));
-            // Save user preferences separately as they are global
-            localStorage.setItem('typingUserPreferences', JSON.stringify(this.state.userPreferences));
+            this.saveUserPreferences(); // Save user preferences separately as they are global
         } catch (e) {
             console.error("Failed to save progress to localStorage", e);
         }
@@ -766,7 +957,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const defaultPreferences = {
                     keyboardLayout: 'avro',
                     onboardingCompleted: false,
-                    theme: 'system'
+                    theme: 'system',
+                    showPhoneticHint: true,
+                    showWordCount: true,
+                    showKeyboardHint: true
                 };
                 this.state.userPreferences = Object.assign({}, defaultPreferences, parsedPreferences);
 
@@ -776,6 +970,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } else {
                 this.state.userPreferences.theme = 'system';
+                this.state.userPreferences.showPhoneticHint = true;
+                this.state.userPreferences.showWordCount = true;
+                this.state.userPreferences.showKeyboardHint = true;
             }
 
             // Then, load progress for the current layout
@@ -925,11 +1122,24 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     
-    App.prototype.setDarkMode = function(theme) {
+    App.prototype.setTheme = function(theme) {
         this.state.userPreferences.theme = theme;
         this.applyTheme(theme);
-        this.saveProgress();
+        this.saveUserPreferences(); // Save preferences after theme change
         // Re-render charts if on profile page to apply new colors
+        if (this.state.currentPage === 'profile') {
+            this.renderProfilePage();
+        }
+    };
+
+    App.prototype.setPreference = function(preferenceName, value) {
+        this.state.userPreferences[preferenceName] = value;
+        this.saveUserPreferences();
+        // If on lesson page, re-render to apply changes immediately
+        if (this.state.currentPage === 'lesson' && this.state.currentLesson !== null) {
+            this.renderLessonView();
+        }
+        // Re-render profile page to update dropdowns if needed
         if (this.state.currentPage === 'profile') {
             this.renderProfilePage();
         }
@@ -950,6 +1160,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             document.body.classList.remove('dark-mode');
         }
+        this.saveUserPreferences(); // Save theme preference immediately
     };
     
     app = new App();

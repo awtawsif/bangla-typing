@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+/* Header visibility control */
+#main-header.header-hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
 /* Light Mode Variables (Default) */
 :root {
 --bg-primary: #F0F2F5;
@@ -41,6 +51,15 @@
 --chart-doughnut-completed: #1877F2;
 --chart-doughnut-remaining: #E4E6EB;
 --chart-doughnut-border: #FFFFFF;
+
+/* New variables for keyboard highlighting */
+--key-highlight-bg: #FFD700; /* Gold */
+--key-highlight-color: #050505; /* Black text */
+--key-highlight-shadow: rgba(255, 215, 0, 0.6);
+
+--key-pressed-visual-bg: #6c757d; /* Darker gray for visual press */
+--key-pressed-visual-color: #FFFFFF;
+--key-pressed-visual-shadow: rgba(0, 0, 0, 0.3);
 }
 
 /* Dark Mode Variables */
@@ -84,6 +103,15 @@ body.dark-mode {
 --chart-doughnut-completed: #2D88FF;
 --chart-doughnut-remaining: #3A3B3C;
 --chart-doughnut-border: #18191A;
+
+/* New variables for keyboard highlighting in dark mode */
+--key-highlight-bg: #FFEA00; /* Brighter gold for dark mode */
+--key-highlight-color: #18191A; /* Dark text */
+--key-highlight-shadow: rgba(255, 234, 0, 0.7);
+
+--key-pressed-visual-bg: #5a6268; /* Slightly lighter dark gray for visual press */
+--key-pressed-visual-color: #E4E6EB;
+--key-pressed-visual-shadow: rgba(0, 0, 0, 0.4);
 }
 
 
@@ -95,6 +123,16 @@ body {
     display: flex;
     flex-direction: column;
     transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+/* Header visibility control */
+#main-header.header-hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
 }
 
 /* Specific background and text colors using variables */
@@ -281,15 +319,15 @@ body.dark-mode .lesson-card::before {
     font-size: 2.25rem;
     font-weight: 600;
     letter-spacing: 2px;
-    padding: 20px;
+    padding: 15px; /* Reduced padding */
     background-color: var(--bg-primary);
-    border-radius: 12px;
+    border-radius: 8px; /* Slightly less rounded */
     border: 1px solid var(--border-color);
-    min-height: 80px;
-    box-shadow: 0 4px 12px var(--shadow-color);
+    min-height: 70px; /* Reduced min-height */
+    box-shadow: none; /* Removed box-shadow */
     position: relative;
     overflow: hidden;
-    color: var(--text-primary); /* Default text color for typing display */
+    color: var(--text-primary);
 }
 
 .correct { color: var(--key-correct-bg); }
@@ -300,10 +338,11 @@ body.dark-mode .lesson-card::before {
     color: var(--text-primary);
     border-color: var(--input-border);
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+    border-radius: 8px; /* Match typing-display */
 }
 
 .typing-input:focus {
-    box-shadow: 0 0 0 3px var(--input-focus-shadow);
+    box-shadow: 0 0 0 2px var(--input-focus-shadow); /* Reduced shadow on focus */
     transition: box-shadow 0.2s ease-in-out;
 }
 
@@ -328,14 +367,15 @@ body.dark-mode .lesson-card::before {
     }
 }
 
-#keyboard-container {
-    margin-top: 20px;
-}
-
-.keyboard {
+/* Keyboard Styling */
+#on-screen-keyboard {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    align-items: center; /* Center the keyboard */
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.05); /* Inner shadow for depth */
 }
 
 .keyboard-row {
@@ -348,73 +388,76 @@ body.dark-mode .lesson-card::before {
     background-color: var(--key-bg);
     border: 1px solid var(--key-border);
     border-radius: 8px;
-    padding: 12px 18px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease, color 0.2s ease;
+    width: 100%;
+    padding: 10px 14px; /* Adjusted padding for better fit */
+    font-size: 1rem; /* Slightly smaller font for more keys */
+    cursor: default; /* Not clickable, so default cursor */
+    transition: background-color 0.1s ease, transform 0.05s ease, box-shadow 0.1s ease, color 0.1s ease;
     box-shadow: 0 2px 4px var(--key-shadow);
-    min-width: 45px;
+    min-width: 40px; /* Smaller min-width for more keys */
     display: flex;
+    flex-direction: column; /* For top/bottom labels */
     justify-content: center;
     align-items: center;
     font-weight: 500;
     color: var(--text-primary); /* Default key text color */
+    position: relative;
+    user-select: none; /* Prevent text selection */
 }
 
-.key:hover {
-    background-color: var(--key-hover-bg);
-    box-shadow: 0 4px 8px var(--key-hover-shadow);
+.key .top-label {
+    font-size: 0.7rem;
+    position: absolute;
+    top: 4px;
+    left: 6px;
+    color: var(--text-secondary); /* Lighter text for shift characters */
 }
 
-.key.active {
-    background-color: var(--key-active-bg);
-    color: var(--key-active-color);
-    transform: scale(0.98);
-    box-shadow: 0 4px 12px var(--key-active-shadow);
-    border-color: var(--key-active-bg);
+.key .bottom-label {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: auto; /* Push to bottom if top label exists */
 }
 
-.key.pressed {
-    animation: key-press-animation 0.2s ease-out;
+/* Specific key widths */
+.key.w-16 { min-width: 64px; } /* Tab, \, Ctrl, Alt */
+.key.w-20 { min-width: 101px; } /* Backspace, Caps Lock */
+.key.w-24 { min-width: 96px; } /* Enter */
+.key.w-28 { min-width: 112px; } /* Shift */
+.key.w-96 { min-width: 384px; } /* Spacebar */
+
+
+/* Highlighting for the next expected key */
+.key.highlight-key {
+    background-color: var(--key-highlight-bg);
+    color: var(--key-highlight-color);
+    box-shadow: 0 4px 12px var(--key-highlight-shadow);
+    transform: scale(1.02);
+    border-color: var(--key-highlight-bg);
+}
+
+/* Visual feedback for a physically pressed key */
+.key.pressed-visual {
+    background-color: var(--key-pressed-visual-bg);
+    color: var(--key-pressed-visual-color);
     transform: scale(0.95);
-    background-color: var(--key-pressed-bg);
-    color: var(--key-pressed-color);
-    box-shadow: 0 4px 12px var(--key-pressed-shadow);
-    border-color: var(--key-pressed-bg);
+    box-shadow: 0 2px 5px var(--key-pressed-visual-shadow);
+    border-color: var(--key-pressed-visual-bg);
 }
 
-.key.pressed-correct {
-    background-color: var(--key-correct-bg) !important;
-    color: #fff !important;
-    border-color: var(--key-correct-bg) !important;
-    box-shadow: 0 6px 15px rgba(49, 162, 76, 0.5) !important;
-    animation: key-correct-animation 0.3s ease-out;
+/* Examples for legend */
+.highlight-key-example, .pressed-key-example {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-right: 5px;
 }
 
-.key.pressed-wrong {
-    background-color: var(--key-wrong-bg) !important;
-    color: #fff !important;
-    border-color: var(--key-wrong-bg) !important;
-    box-shadow: 0 6px 15px rgba(228, 30, 63, 0.5) !important;
-    animation: key-wrong-animation 0.4s ease;
-}
+.bg-key-highlight { background-color: var(--key-highlight-bg); }
+.bg-key-pressed { background-color: var(--key-pressed-visual-bg); }
 
-@keyframes key-press-animation {
-    0% { transform: scale(1); }
-    50% { transform: scale(0.92); }
-    100% { transform: scale(0.95); }
-}
-
-@keyframes key-correct-animation {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
-@keyframes key-wrong-animation {
-    0%, 100% { transform: translateX(0); }
-    20%, 60% { transform: translateX(-5px); }
-    40%, 80% { transform: translateX(5px); }
-}
 
 /* Animations for page transitions */
 .fade-in {
