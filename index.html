@@ -205,23 +205,11 @@
             <div class="bg-white p-8 rounded-xl shadow-2xl max-w-md w-full text-center border border-gray-200">
                 <h2 class="text-3xl font-bold text-accent mb-6">স্বাগতম!</h2>
                 <p class="text-lg text-gray-700 mb-6">আপনার টাইপিং যাত্রা শুরু করার জন্য কিছু তথ্য দিন।</p>
-
-                <div class="mb-6 text-left">
-                    <label for="onboarding-keyboard-layout" class="block text-gray-700 text-sm font-bold mb-2">আপনার পছন্দের কিবোর্ড লেআউট:</label>
-                    <select id="onboarding-keyboard-layout" class="app-select w-full">
-                        <option value="avro">Avro Phonetic</option>
-                        <option value="bijoy">Bijoy</option>
-                        <option value="probhat">Probhat (উদাহরণ)</option>
-                    </select>
-                </div>
-
                 <div class="mb-8 text-left">
-                    <label for="onboarding-experience-level" class="block text-gray-700 text-sm font-bold mb-2">আপনার টাইপিং অভিজ্ঞতা:</label>
-                    <select id="onboarding-experience-level" class="app-select w-full">
-                        <option value="new">নতুন</option>
-                        <option value="intermediate">মাঝারি</option>
-                        <option value="experienced">অভিজ্ঞ</option>
-                    </select>
+                    <label class="block text-gray-700 text-sm font-bold mb-2">আপনার টাইপিং অভিজ্ঞতা:</label>
+                    <div id="onboarding-experience-levels-container" class="space-y-4">
+                        <!-- Experience level dropdowns will be dynamically generated here -->
+                    </div>
                 </div>
 
                 <div class="mb-8 text-left">

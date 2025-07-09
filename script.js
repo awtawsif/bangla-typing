@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // User preferences
             userPreferences: {
                 keyboardLayout: 'avro', // Default to Avro
-                experienceLevel: 'new', // Default to new
                 onboardingCompleted: false, // Track if onboarding is done
                 theme: 'system' // New: 'system', 'light', 'dark'
             },
@@ -750,6 +749,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    App.prototype.saveUserPreferences = function() {
+        try {
+            localStorage.setItem('typingUserPreferences', JSON.stringify(this.state.userPreferences));
+        } catch (e) {
+            console.error("Failed to save user preferences to localStorage", e);
+        }
+    };
+
     App.prototype.loadProgress = function() {
         try {
             // Load global user preferences first
@@ -758,7 +765,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const parsedPreferences = JSON.parse(savedPreferences);
                 const defaultPreferences = {
                     keyboardLayout: 'avro',
-                    experienceLevel: 'new',
                     onboardingCompleted: false,
                     theme: 'system'
                 };
@@ -809,39 +815,66 @@ document.addEventListener('DOMContentLoaded', () => {
     App.prototype.showOnboarding = function() {
         this.onboardingModal.classList.remove('hidden');
         // Ensure initial values are set in the onboarding modal
-        document.getElementById('onboarding-keyboard-layout').value = this.state.userPreferences.keyboardLayout;
-        document.getElementById('onboarding-experience-level').value = this.state.userPreferences.experienceLevel;
         document.getElementById('onboarding-dark-mode').value = this.state.userPreferences.theme;
+
+        const container = document.getElementById('onboarding-experience-levels-container');
+        container.innerHTML = ''; // Clear previous content
+
+        for (const layoutKey in this.state.keyboardHintData) {
+            if (this.state.keyboardHintData.hasOwnProperty(layoutKey) && this.state.keyboardHintData[layoutKey] !== null) {
+                const layoutName = layoutKey.charAt(0).toUpperCase() + layoutKey.slice(1); // Capitalize first letter
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <label for="onboarding-experience-level-${layoutKey}" class="block text-gray-600 text-sm font-medium mb-1">${layoutName}:</label>
+                    <select id="onboarding-experience-level-${layoutKey}" class="app-select w-full">
+                        <option value="new">নতুন</option>
+                        <option value="intermediate">মাঝারি</option>
+                        <option value="experienced">অভিজ্ঞ</option>
+                    </select>
+                `;
+                container.appendChild(div);
+            }
+        }
     };
 
     App.prototype.completeOnboarding = function() {
-        this.state.userPreferences.keyboardLayout = document.getElementById('onboarding-keyboard-layout').value;
-        this.state.userPreferences.experienceLevel = document.getElementById('onboarding-experience-level').value;
+        this.state.userPreferences.keyboardLayout = 'avro'; // Default to Avro as initial layout
         this.state.userPreferences.theme = document.getElementById('onboarding-dark-mode').value;
         this.state.userPreferences.onboardingCompleted = true;
-        this.saveProgress(); // Save preferences
-        this.applyTheme(this.state.userPreferences.theme); // Apply the selected theme immediately
 
-        // Apply level unlocking based on experience level
-        this.state.progressData.unlockedLevels.clear(); // Clear existing unlocked levels
-        this.state.progressData.unlockedLevels.add(0); // Always unlock Level 1 (index 0)
+        for (const layoutKey in this.state.keyboardHintData) {
+            if (this.state.keyboardHintData.hasOwnProperty(layoutKey) && this.state.keyboardHintData[layoutKey] !== null) {
+                const experience = document.getElementById(`onboarding-experience-level-${layoutKey}`).value;
+                const unlockedLevels = new Set([0]);
 
-        if (this.state.userPreferences.experienceLevel === 'intermediate') {
-            this.state.progressData.unlockedLevels.add(1); // Unlock Level 2
-            this.state.progressData.unlockedLevels.add(2); // Unlock Level 3
-        } else if (this.state.userPreferences.experienceLevel === 'experienced') {
-            // Unlock all levels
-            for (let i = 0; i < this.state.lessonLevels.length; i++) {
-                this.state.progressData.unlockedLevels.add(i);
+                if (experience === 'intermediate') {
+                    unlockedLevels.add(1); // Unlock Level 2
+                    unlockedLevels.add(2); // Unlock Level 3
+                } else if (experience === 'experienced') {
+                    // Unlock all levels
+                    for (let i = 0; i < this.state.lessonLevels.length; i++) {
+                        unlockedLevels.add(i);
+                    }
+                }
+
+                const progressKey = `typingProgress-${layoutKey}`;
+                const progressData = {
+                    completedLessons: [],
+                    performance: [],
+                    unlockedLevels: Array.from(unlockedLevels)
+                };
+                localStorage.setItem(progressKey, JSON.stringify(progressData));
             }
         }
-        this.saveProgress(); // Save updated unlocked levels
+
+        this.saveUserPreferences(); // Save the global user preferences
+        this.applyTheme(this.state.userPreferences.theme); // Apply the selected theme immediately
 
         this.onboardingModal.classList.add('hidden');
-        // Update the main header dropdown
+        this.loadProgress(); // Load progress for the initially selected layout
         document.getElementById('keyboard-layout-select').value = this.state.userPreferences.keyboardLayout;
-        this.navigateTo('learn'); // Navigate to learn page after onboarding
-        this.renderLearnPage(); // Re-render learn page to show newly unlocked lessons
+        this.navigateTo('learn');
+        this.renderLearnPage();
     };
 
     App.prototype.setKeyboardLayout = function(layout) {
