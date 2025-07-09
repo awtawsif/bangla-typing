@@ -2,574 +2,285 @@
     {
         "phonetic_char": ["a", "s", "d", "."],
         "phonetic_words": ["asa", "sada", "as", "sa"],
-        "phrases_phonetic": ["asa asa.", "sada sada.", "as as."],
-        "keyboard_map": {
-            "a": "আ",
-            "s": "স",
-            "A": "া",
-            "d": "দ",
-            ".": "।"
-        }
+        "phrases_phonetic": ["asa asa.", "sada sada.", "as as."]
     },
     {
         "phonetic_char": ["f", "b"],
         "phonetic_words": ["dada", "fada", "ad", "saf", "das", "fas", "ada", "dasa"],
-        "phrases_phonetic": ["dada ase.", "fada dao.", "ada dao.", "saf saf."],
-        "keyboard_map": {
-            "f": "ফ",
-            "b": "ব",
-            "e": "ে",
-            "o": "ো"
-        }
+        "phrases_phonetic": ["dada ase.", "fada dao.", "ada dao.", "saf saf."]
     },
     {
         "phonetic_char": ["k", "m", "l", "ch", "j"],
         "phonetic_words": ["kaka", "mala", "mama", "kam", "mak", "ama", "akom", "koma"],
-        "phrases_phonetic": ["kaka ase.", "mala ache.", "mama ase.", "kam kaj."],
-        "keyboard_map": {
-            "k": "ক",
-            "m": "ম",
-            "l": "ল",
-            "ch": "ছ",
-            "j": "জ"
-        }
+        "phrases_phonetic": ["kaka ase.", "mala ache.", "mama ase.", "kam kaj."]
     },
     {
         "phonetic_char": ["I", "v"],
         "phonetic_words": ["kolom", "komi", "kaki", "masi", "mali", "kiki", "kali", "ami", "akal", "kolam", "kakima", "lika"],
-        "phrases_phonetic": ["amar kolom.", "komi aj.", "kaki bhalo.", "masi ase.", "mali kaj.", "kali dao."],
-        "keyboard_map": {
-            "I": "ই",
-            "i": "ি",
-            "v": "ভ"
-        }
+        "phrases_phonetic": ["amar kolom.", "komi aj.", "kaki bhalo.", "masi ase.", "mali kaj.", "kali dao."]
     },
     {
         "phonetic_char": ["n"],
         "phonetic_words": ["bon", "nonod", "nob", "bochon", "monon", "lobon", "bina", "bamon", "kobon", "nokol", "nabik", "bonolota"],
-        "phrases_phonetic": ["amar bon.", "nonod ase.", "nob kaka.", "bochon bolo.", "lobon dao.", "bina kaj."],
-        "keyboard_map": {
-            "n": "ন"
-        }
+        "phrases_phonetic": ["amar bon.", "nonod ase.", "nob kaka.", "bochon bolo.", "lobon dao.", "bina kaj."]
     },
     {
         "phonetic_char": ["y", "?", "h"],
         "phonetic_words": ["mone", "kone", "bolo", "sonali", "keno", "kono", "jeno", "lok", "bonas", "kemon", "bela", "lekhe", "kol", "nem"],
-        "phrases_phonetic": ["mone koro.", "kone ase.", "bolo na.", "keno bolo.", "kono kaj.", "kemon acho?", "bela holo."],
-        "keyboard_map": {
-            "y": "য",
-            "?": "?",
-            "h": "হ"
-        }
+        "phrases_phonetic": ["mone koro.", "kone ase.", "bolo na.", "keno bolo.", "kono kaj.", "kemon acho?", "bela holo."]
     },
     {
         "phonetic_char": ["t", "r"],
         "phonetic_words": ["tara", "rat", "rotno", "torol", "roton", "toroni", "tondra", "tarikh", "torkari", "tor", "tora", "rota"],
-        "phrases_phonetic": ["tara ase.", "rat holo.", "rotno ache.", "torol dao.", "roton ase.", "toroni chole."],
-        "keyboard_map": {
-            "t": "ত",
-            "r": "র"
-        }
+        "phrases_phonetic": ["tara ase.", "rat holo.", "rotno ache.", "torol dao.", "roton ase.", "toroni chole."]
     },
     {
         "phonetic_char": ["p", "c"],
         "phonetic_words": ["pap", "chacha", "chap", "papi", "chup", "pur", "putul", "chaka", "pach", "chapol"],
-        "phrases_phonetic": ["pap koro na.", "chacha ase.", "chap dao.", "chup koro.", "putul nache."],
-        "keyboard_map": {
-            "p": "প",
-            "c": "চ",
-            "u": "ু"
-        }
+        "phrases_phonetic": ["pap koro na.", "chacha ase.", "chap dao.", "chup koro.", "putul nache."]
     },
     {
         "phonetic_char": ["y"],
-        "phonetic_words": ["jol", "jma", "jola", "jay", "joy", "joyi", "payra", "upay", "chachajan", "aj", "kaj", "jao"],
-        "keyboard_map": {
-            "y": "য়"
-        }
+        "phonetic_words": ["jol", "jma", "jola", "jay", "joy", "joyi", "payra", "upay", "chachajan", "aj", "kaj", "jao"]
     },
     {
         "phonetic_char": ["D", "R", "g", "kh"],
         "phonetic_words": ["Dal", "Dim", "Dana", "Dor", "poRa", "boRo", "gari", "paR", "Dimbo", "Daka", "Dor"],
-        "phrases_phonetic": ["Dal ranna koro.", "Dim bhaja khao.", "pakhi Dana mele.", "boRo gari.", "poRaleKha koro.", "paR ache."],
-        "keyboard_map": {
-            "D": "ড",
-            "R": "ড়",
-            "g": "গ",
-            "kh": "খ",
-            "U": "ূ"
-        }
+        "phrases_phonetic": ["Dal ranna koro.", "Dim bhaja khao.", "pakhi Dana mele.", "boRo gari.", "poRaleKha koro.", "paR ache."]
     },
     {
         "phonetic_char": ["Dh", "Rh"],
         "phonetic_words": ["Dhakna", "Dheu", "Dhol", "Dhal", "Rhuli", "Dhak", "Dhakna", "Dhola", "Rhak"],
-        "phrases_phonetic": ["Dhakna dao.", "Dheu ase.", "Dhol bajao.", "Rhuli ase.", "Dhal ache."],
-        "keyboard_map": {
-            "Dh": "ঢ",
-            "Rh": "ঢ়"
-        }
+        "phrases_phonetic": ["Dhakna dao.", "Dheu ase.", "Dhol bajao.", "Rhuli ase.", "Dhal ache."]
     },
     {
         "phonetic_char": ["Th", "`"],
         "phonetic_words": ["Thakuma", "Thanda", "ThoT", "Thanda", "Tha`i", "Thok", "Thunko"],
-        "phrases_phonetic": ["Thakuma golpo bolen.", "Thanda jol dao.", "ThoT bhalo.", "Tha`i dao."],
-        "keyboard_map": {
-            "Th": "ঠ",
-            "`": "ঁ"
-        }
+        "phrases_phonetic": ["Thakuma golpo bolen.", "Thanda jol dao.", "ThoT bhalo.", "Tha`i dao."]
     },
     {
         "phonetic_char": [],
         "phonetic_words": ["ha`s", "haR", "hata", "hat", "bhab", "bhalo", "bhari", "bhoy", "bhor", "ha`Ta", "bhromon", "har", "bhora"],
-        "phrases_phonetic": ["ha`s jole bhase.", "amar hat.", "bhalo kore bhabo.", "bhoy peo na.", "bhor holo.", "har ache."],
-        "keyboard_map": {}
+        "phrases_phonetic": ["ha`s jole bhase.", "amar hat.", "bhalo kore bhabo.", "bhoy peo na.", "bhor holo.", "har ache."]
     },
     {
         "phonetic_char": ["I", "U"],
         "phonetic_words": ["Id", "Usha", "Urdhwo", "IgOl", "Un"],
-        "phrases_phonetic": ["Id mobarak.", "Usha ase.", "IgOl ore.", "Un ache."],
-        "keyboard_map": {
-            "I": "ঈ",
-            "U": "ঊ"
-        }
+        "phrases_phonetic": ["Id mobarak.", "Usha ase.", "IgOl ore.", "Un ache."]
     },
     {
         "phonetic_char": ["rri"],
         "phonetic_words": ["rriShi", "rritu", "rriN", "rriju", "rrituraj"],
-        "phrases_phonetic": ["rriShi toposhsha.", "rritu poriborton.", "rriN shodh koro.", "rriju poth."],
-        "keyboard_map": {
-            "rri": "ঋ"
-        }
+        "phrases_phonetic": ["rriShi toposhsha.", "rritu poriborton.", "rriN shodh koro.", "rriju poth."]
     },
     {
         "phonetic_char": ["ng", ":"],
         "phonetic_words": ["rong", "dukkho", "ontohpur", "shongkolpo", "duhsahos", "ongsho", "shongbad", "duhsomoy", "bongsho", "hongsho"],
-        "phrases_phonetic": ["rong dao.", "dukkho nei.", "shongkolpo koro.", "ongsho nao.", "shongbad ache."],
-        "keyboard_map": {
-            "ng": "ং",
-            ":": "ঃ"
-        }
+        "phrases_phonetic": ["rong dao.", "dukkho nei.", "shongkolpo koro.", "ongsho nao.", "shongbad ache."]
     },
     {
         "phonetic_char": [".t"],
         "phonetic_words": ["ha`s", "cha`d", "ba`sh", "sot", "fol", "utshob", "ha`Ta", "pa`ch", "a`ka", "kha`Ti"],
-        "phrases_phonetic": ["ha`s jole bhase.", "cha`d uTheche.", "ba`sh ache.", "sot lok.", "utshob holo."],
-        "keyboard_map": {
-            ".t": "ৎ"
-        }
+        "phrases_phonetic": ["ha`s jole bhase.", "cha`d uTheche.", "ba`sh ache.", "sot lok.", "utshob holo."]
     },
     {
         "phonetic_char": [","],
         "phonetic_words": ["ami bhalo achi.", "kemon acho?", "jao, khao.", "she ase.", "jol dao.", "shomoy holo."],
-        "phrases_phonetic": ["amar nam roma.", "tumi kothay?", "aj kaj ache.", "she bhalo, ami bhalo."],
-        "keyboard_map": {
-            ",": ","
-        }
+        "phrases_phonetic": ["amar nam roma.", "tumi kothay?", "aj kaj ache.", "she bhalo, ami bhalo."]
     },
     {
         "phonetic_char": ["$", ":"],
         "phonetic_words": ["$50", "$100", "somoy:", "Taka:", "$10", "$5"],
-        "phrases_phonetic": ["aj $50 lagbe.", "somoy: 10Ta baje.", "$100 dao.", "Taka: 20."],
-        "keyboard_map": {
-            "$": "৳",
-            ":": ":"
-        }
+        "phrases_phonetic": ["aj $50 lagbe.", "somoy: 10Ta baje.", "$100 dao.", "Taka: 20."]
     },
     {
         "phonetic_char": ["0", "1", "2", "3", "4", "5"],
         "phonetic_words": ["ek", "dui", "tin", "char", "pa`ch", "eka", "duiTa", "tinTa", "charTa", "pa`chTa", "ekosh", "0", "1", "2", "3", "4", "5"],
-        "phrases_phonetic": ["1Ti am dao.", "2Ti kolom ache.", "3Ti boi kinbo.", "4Ti ful sundor.", "5Ti fol ache.", "0 Taka."],
-        "keyboard_map": {
-            "0": "০",
-            "1": "১",
-            "2": "২",
-            "3": "৩",
-            "4": "৪",
-            "5": "৫"
-        }
+        "phrases_phonetic": ["1Ti am dao.", "2Ti kolom ache.", "3Ti boi kinbo.", "4Ti ful sundor.", "5Ti fol ache.", "0 Taka."]
     },
     {
         "phonetic_char": ["6", "7", "8", "9"],
         "phonetic_words": ["choy", "sat", "aT", "noy", "dosh", "satash", "ashi", "nobboi", "shoto", "choyosh", "6", "7", "8", "9"],
-        "phrases_phonetic": ["6Ti apel dao.", "7Ti pakhi urche.", "8Ti mach dhoro.", "9Ti tara dekha jay.", "dosh Taka."],
-        "keyboard_map": {
-            "6": "৬",
-            "7": "৭",
-            "8": "৮",
-            "9": "৯"
-        }
+        "phrases_phonetic": ["6Ti apel dao.", "7Ti pakhi urche.", "8Ti mach dhoro.", "9Ti tara dekha jay.", "dosh Taka."]
     },
     {
         "phonetic_char": ["kk", "kt", "km", "kw"],
         "phonetic_words": ["okka", "rokto", "byakti", "pokko", "boktobyo", "shokto", "chokro"],
-        "phrases_phonetic": ["rokto dao.", "byakti ase.", "boktobyo bolo.", "pokko fol."],
-        "keyboard_map": {
-            "kk": "ক্ক",
-            "kt": "ক্ত",
-            "km": "ক্ম",
-            "kw": "ক্ব"
-        }
+        "phrases_phonetic": ["rokto dao.", "byakti ase.", "boktobyo bolo.", "pokko fol."]
     },
     {
         "phonetic_char": ["kl", "kSh"],
         "phonetic_words": ["klanto", "klinik", "klip", "shikkha", "khoma", "lokkho", "kokkho", "dokkho", "khudro"],
-        "phrases_phonetic": ["klanto lagche.", "klinik kothay?", "shikkha nao.", "khoma koro.", "lokkho sthir."],
-        "keyboard_map": {
-            "kl": "ক্ল",
-            "kSh": "ক্ষ"
-        }
+        "phrases_phonetic": ["klanto lagche.", "klinik kothay?", "shikkha nao.", "khoma koro.", "lokkho sthir."]
     },
     {
         "phonetic_char": ["gdh", "gn", "gw", "gm"],
         "phonetic_words": ["dogdho", "mugdho", "bhogno", "rugno", "digbijoy", "jugmo", "bagmi"],
-        "phrases_phonetic": ["mugdho hoyechi.", "dogdho hoyeche.", "bhogno hridoy.", "rugno deho."],
-        "keyboard_map": {
-            "gdh": "গ্ধ",
-            "gn": "গ্ন",
-            "gw": "গ্ব",
-            "gm": "গ্ম"
-        }
+        "phrases_phonetic": ["mugdho hoyechi.", "dogdho hoyeche.", "bhogno hridoy.", "rugno deho."]
     },
     {
         "phonetic_char": ["gl", "ghn"],
         "phonetic_words": ["glani", "glob", "ghn", "ghriNaghno", "sneho ghno"],
-        "phrases_phonetic": ["glani dur koro.", "glob dekho.", "ghriNaghno oushOdh."],
-        "keyboard_map": {
-            "gl": "গ্ল",
-            "ghn": "ঘ্ন"
-        }
+        "phrases_phonetic": ["glani dur koro.", "glob dekho.", "ghriNaghno oushOdh."]
     },
     {
         "phonetic_char": ["Ngk", "Ngkt", "NgkSh", "Ngkh"],
         "phonetic_words": ["onko", "shonka", "ponkil", "shongkolpo", "bonki", "shonkho", "lonka"],
-        "phrases_phonetic": ["onko kosho.", "shonka nei.", "shongkolpo koro.", "shonkho bajao."],
-        "keyboard_map": {
-            "Ngk": "ঙ্ক",
-            "Ngkt": "ঙ্ক্ত",
-            "NgkSh": "ঙ্ক্ষ",
-            "Ngkh": "ঙ্খ"
-        }
+        "phrases_phonetic": ["onko kosho.", "shonka nei.", "shongkolpo koro.", "shonkho bajao."]
     },
     {
         "phonetic_char": ["Ngg", "Nggh", "Ngm"],
         "phonetic_words": ["bongo", "mongol", "songo", "rongo", "jongha", "shonggho", "bangmoy"],
-        "phrases_phonetic": ["bongo desh.", "mongol kamona.", "songo dao.", "jongha byatha."],
-        "keyboard_map": {
-            "Ngg": "ঙ্গ",
-            "Nggh": "ঙ্ঘ",
-            "Ngm": "ঙ্ম"
-        }
+        "phrases_phonetic": ["bongo desh.", "mongol kamona.", "songo dao.", "jongha byatha."]
     },
     {
         "phonetic_char": ["cc", "cC", "cCw"],
         "phonetic_words": ["uchcho", "ichcha", "uchchash", "shochho", "bichchhinno", "uchchol", "tuchcho"],
-        "phrases_phonetic": ["uchcho shwore bolo.", "ichcha puron.", "uchchash koro.", "shochho jol."],
-        "keyboard_map": {
-            "cc": "চ্চ",
-            "cC": "চ্ছ",
-            "cCw": "চ্ছ্ব"
-        }
+        "phrases_phonetic": ["uchcho shwore bolo.", "ichcha puron.", "uchchash koro.", "shochho jol."]
     },
     {
         "phonetic_char": ["cY", "cw", "jj", "jjw"],
         "phonetic_words": ["jachcha", "jachcho", "bojjat", "ujjwol", "shojja", "lojjha", "ujjibito"],
-        "phrases_phonetic": ["jachcha koro.", "bojjat lok.", "ujjwol alo.", "shojja koro."],
-        "keyboard_map": {
-            "cY": "চ্ঞ",
-            "cw": "চ্ব",
-            "jj": "জ্জ",
-            "jjw": "জ্জ্ব"
-        }
+        "phrases_phonetic": ["jachcha koro.", "bojjat lok.", "ujjwol alo.", "shojja koro."]
     },
     {
         "phonetic_char": ["jjh", "jY", "jw"],
         "phonetic_words": ["jhonjha", "gyan", "biggan", "jwor", "jwala", "projjolito", "gyat", "oggo"],
-        "phrases_phonetic": ["jhonjha ase.", "gyan orjon.", "biggan poro.", "jwor hoyeche."],
-        "keyboard_map": {
-            "jjh": "জ্ঝ",
-            "jY": "জ্ঞ",
-            "jw": "জ্ব"
-        }
+        "phrases_phonetic": ["jhonjha ase.", "gyan orjon.", "biggan poro.", "jwor hoyeche."]
     },
     {
         "phonetic_char": ["Yc", "YC", "Yj", "Yjh"],
         "phonetic_words": ["moncho", "ponchash", "banChito", "gonjona", "kunjo", "onjoli", "jhonjhaT", "sonjoy"],
-        "phrases_phonetic": ["monche esho.", "ponchash Taka.", "banChito fol.", "onjoli dao."],
-        "keyboard_map": {
-            "Yc": "ঞ্চ",
-            "YC": "ঞ্ছ",
-            "Yj": "ঞ্জ",
-            "Yjh": "ঞ্ঝ"
-        }
+        "phrases_phonetic": ["monche esho.", "ponchash Taka.", "banChito fol.", "onjoli dao."]
     },
     {
         "phonetic_char": ["NT", "NTh", "ND", "NDh"],
         "phonetic_words": ["konTho", "panDob", "lonThon", "donDo", "bonTon", "kunDoli", "gonDogol", "khonDon"],
-        "phrases_phonetic": ["konTho bhalo.", "panDob ase.", "lonThon jalo.", "donDo dao."],
-        "keyboard_map": {
-            "NT": "ণ্ট",
-            "NTh": "ণ্ঠ",
-            "ND": "ণ্ড",
-            "NDh": "ণ্ঢ"
-        }
+        "phrases_phonetic": ["konTho bhalo.", "panDob ase.", "lonThon jalo.", "donDo dao."]
     },
     {
         "phonetic_char": ["NN", "Nw", "Nm"],
         "phonetic_words": ["bishonno", "trishnarto", "ushno", "trishna", "purbaNNo", "oporahNNo", "purbaNNo"],
-        "phrases_phonetic": ["bishonno mon.", "trishnarto pothik.", "ushno jol.", "trishna peyeche."],
-        "keyboard_map": {
-            "NN": "ণ্ণ",
-            "Nw": "ণ্ব",
-            "Nm": "ণ্ম"
-        }
+        "phrases_phonetic": ["bishonno mon.", "trishnarto pothik.", "ushno jol.", "trishna peyeche."]
     },
     {
         "phonetic_char": ["tk", "tt", "ttw", "tth"],
         "phonetic_words": ["utkriShto", "utkonTha", "sottwa", "totto", "utthan", "parthokko", "utthapon"],
-        "phrases_phonetic": ["utkriShto kaj.", "sottwa ache.", "totto poro.", "utthan poton."],
-        "keyboard_map": {
-            "tk": "ৎক",
-            "tt": "ত্ত",
-            "ttw": "ত্ত্ব",
-            "tth": "ত্থ"
-        }
+        "phrases_phonetic": ["utkriShto kaj.", "sottwa ache.", "totto poro.", "utthan poton."]
     },
     {
         "phonetic_char": ["tn", "tw", "tm", "tl", "ts"],
         "phonetic_words": ["jotno", "rotno", "sottor", "attma", "attiyo", "utshob", "utshah", "utfullo", "kutsha"],
-        "phrases_phonetic": ["jotno koro.", "rotno mile.", "sottor esho.", "attma omor.", "utshob holo."],
-        "keyboard_map": {
-            "tn": "ত্ন",
-            "tw": "ত্ব",
-            "tm": "ত্ম",
-            "tl": "ৎল",
-            "ts": "ৎস"
-        }
+        "phrases_phonetic": ["jotno koro.", "rotno mile.", "sottor esho.", "attma omor.", "utshob holo."]
     },
     {
         "phonetic_char": ["thw", "dg", "dgh", "dd"],
         "phonetic_words": ["prithwi", "udgar", "udghaTon", "uddipona", "uddeshsho", "uddipTo", "uddam"],
-        "phrases_phonetic": ["prithwi sundor.", "udgar koro.", "uddeshsho bhalo.", "uddipona dao."],
-        "keyboard_map": {
-            "thw": "থ্ব",
-            "dg": "দ্গ",
-            "dgh": "দ্ঘ",
-            "dd": "দ্দ"
-        }
+        "phrases_phonetic": ["prithwi sundor.", "udgar koro.", "uddeshsho bhalo.", "uddipona dao."]
     },
     {
         "phonetic_char": ["ddw", "ddh", "dw", "dv"],
         "phonetic_words": ["uddwigno", "ddh", "dwin", "dwidha", "dwesh", "udbhoT", "udbhinno", "udbhab"],
-        "phrases_phonetic": ["uddwigno mon.", "dwin lok.", "dwidha nei.", "udbhoT kotha."],
-        "keyboard_map": {
-            "ddw": "দ্দ্ব",
-            "ddh": "দ্ধ",
-            "dw": "দ্ব",
-            "dv": "দ্ভ"
-        }
+        "phrases_phonetic": ["uddwigno mon.", "dwin lok.", "dwidha nei.", "udbhoT kotha."]
     },
     {
         "phonetic_char": ["dm", "dhn", "dhw", "dhm", "nT", "nTh", "nD"],
         "phonetic_words": ["poddo", "chhoddo", "dhwonito", "dhwonito", "dhm", "konTok", "lonThon", "panDob", "kanDo", "Thanda", "fanD"],
-        "phrases_phonetic": ["poddo ful.", "chhoddo besh.", "dhwonito holo.", "konTok poth.", "lonThon jalo.", "panDob ase."],
-        "keyboard_map": {
-            "dm": "দ্ম",
-            "dhn": "ধ্ন",
-            "dhw": "ধ্ব",
-            "dhm": "ধ্ম",
-            "nT": "ন্ট",
-            "nTh": "ন্ঠ",
-            "nD": "ন্ড"
-        }
+        "phrases_phonetic": ["poddo ful.", "chhoddo besh.", "dhwonito holo.", "konTok poth.", "lonThon jalo.", "panDob ase."]
     },
     {
         "phonetic_char": ["nt", "ntw", "nth", "nd", "ndw", "ndh", "nn", "nw", "nm"],
         "phonetic_words": ["shanto", "ontoto", "donto", "kranto", "shotontro", "grontho", "nodi", "dondwo", "bondho", "ondho", "onno", "onneshon", "jonmo", "nirmmol"],
-        "phrases_phonetic": ["shanto thako.", "ontoto esho.", "donto ache.", "shotontro desh.", "grontho poro.", "dondwo nei.", "bondho dorja."],
-        "keyboard_map": {
-            "nt": "ন্ত",
-            "ntw": "ন্ত্ব",
-            "nth": "ন্থ",
-            "nd": "নদ",
-            "ndw": "ন্দ্ব",
-            "ndh": "ন্ধ",
-            "nn": "ন্ন",
-            "nw": "ন্ব",
-            "nm": "ন্ম"
-        }
+        "phrases_phonetic": ["shanto thako.", "ontoto esho.", "donto ache.", "shotontro desh.", "grontho poro.", "dondwo nei.", "bondho dorja."]
     },
     {
         "phonetic_char": ["pt", "pn", "pp", "pl", "ps", "fl", "bj", "bd", "bdh"],
         "phonetic_words": ["lipto", "topto", "shopno", "shappor", "plabon", "plasTik", "ps", "flyaT", "objo", "shobdo", "lobdho", "lobdhi"],
-        "phrases_phonetic": ["lipto theko na.", "topto jol.", "shopno dekho.", "plabon esheche.", "flyaT sundor.", "shobdo shona.", "lobdho gyan."],
-        "keyboard_map": {
-            "pt": "প্ত",
-            "pn": "প্ন",
-            "pp": "প্প",
-            "pl": "প্ল",
-            "ps": "প্স",
-            "fl": "ফ্ল",
-            "bj": "ব্জ",
-            "bd": "ব্দ",
-            "bdh": "ব্ধ"
-        }
+        "phrases_phonetic": ["lipto theko na.", "topto jol.", "shopno dekho.", "plabon esheche.", "flyaT sundor.", "shobdo shona.", "lobdho gyan."]
     },
     {
         "phonetic_char": ["bb", "bl", "vw", "mn", "mp", "mf"],
         "phonetic_words": ["Dabba", "blyakborD", "vw", "mn", "shompod", "kompon", "shompurNo", "shomporko", "lomphon", "gumphon"],
-        "phrases_phonetic": ["Dabba ache.", "blyakborD dekho.", "shompod ache.", "kompon onubhuto.", "shompurNo koro.", "lomphon koro."],
-        "keyboard_map": {
-            "bb": "ব্ব",
-            "bl": "ব্ল",
-            "vw": "ভ্ব",
-            "mn": "ম্ন",
-            "mp": "ম্প",
-            "mf": "ম্ফ"
-        }
+        "phrases_phonetic": ["Dabba ache.", "blyakborD dekho.", "shompod ache.", "kompon onubhuto.", "shompurNo koro.", "lomphon koro."]
     },
     {
         "phonetic_char": ["mb", "mv", "mm", "ml"],
         "phonetic_words": ["lomba", "shombol", "stomvo", "shombhabona", "shomman", "unmukto", "omlo", "mollo", "omlan", "mollika"],
-        "phrases_phonetic": ["lomba gach.", "shombol ache.", "stomvo ache.", "shomman dao.", "unmukto akash.", "omlo swad."],
-        "keyboard_map": {
-            "mb": "ম্ব",
-            "mv": "ম্ভ",
-            "mm": "ম্ম",
-            "ml": "ম্ল"
-        }
+        "phrases_phonetic": ["lomba gach.", "shombol ache.", "stomvo ache.", "shomman dao.", "unmukto akash.", "omlo swad."]
     },
     {
         "phonetic_char": ["y"],
         "phonetic_words": ["bhaggo", "dhonno", "biddut", "aboshshik", "shobvO", "dhoirjo", "khaddo", "baddho", "sastho", "joggo", "oddhoyon", "shojjho", "shahajjo"],
-        "phrases_phonetic": ["tar bhaggo bhalo.", "dhonno tumi.", "biddut nei.", "shobvO achoron.", "dhoirjo dhoro.", "khaddo grohon.", "shahajjo koro."],
-        "keyboard_map": {
-            "y": "্য"
-        }
+        "phrases_phonetic": ["tar bhaggo bhalo.", "dhonno tumi.", "biddut nei.", "shobvO achoron.", "dhoirjo dhoro.", "khaddo grohon.", "shahajjo koro."]
     },
     {
         "phonetic_char": ["r"],
         "phonetic_words": ["chattro", "proshno", "krom", "dhormo", "kormo", "bokro", "boktrita", "potro", "shrom", "groho", "orko", "arttonad", "khudro", "bhromon", "prostab"],
-        "phrases_phonetic": ["chattro poRoshona kore.", "proshno jiggesha koro.", "dhormo palon koro.", "kormo-i jibon.", "bokro pothe jeo na.", "boktrita bhalo.", "potro lekho."],
-        "keyboard_map": {
-            "r": "্র"
-        }
+        "phrases_phonetic": ["chattro poRoshona kore.", "proshno jiggesha koro.", "dhormo palon koro.", "kormo-i jibon.", "bokro pothe jeo na.", "boktrita bhalo.", "potro lekho."]
     },
     {
         "phonetic_char": ["l"],
         "phonetic_words": ["klanto", "glas", "plyan", "shlok", "klinik", "glani", "plabon", "oshlil", "klanti", "glob", "shlesh", "klip", "glamar"],
-        "phrases_phonetic": ["aj khub klanto.", "glas bhorti jol dao.", "plyan toyri koro.", "shlok abrittti koro.", "klinik kothay?", "glani dur koro.", "plabon esheche."],
-        "keyboard_map": {
-            "l": "্ল"
-        }
+        "phrases_phonetic": ["aj khub klanto.", "glas bhorti jol dao.", "plyan toyri koro.", "shlok abrittti koro.", "klinik kothay?", "glani dur koro.", "plabon esheche."]
     },
     {
         "phonetic_char": ["shc", "shC", "shn", "shw", "shm", "shl"],
         "phonetic_words": ["nishshoy", "uchchash", "proshno", "bishwash", "shongshoy", "ashonka", "poshom", "shleshma"],
-        "phrases_phonetic": ["nishshoy-i she ashbe.", "uchchash prokash koro.", "proshno jiggesha koro.", "bishwash rakho.", "shongshoy dur koro.", "poshom ache."],
-        "keyboard_map": {
-            "shc": "শ্চ",
-            "shC": "শ্ছ",
-            "shn": "শ্ন",
-            "shw": "শ্ব",
-            "shm": "শ্ম",
-            "shl": "শ্ল"
-        }
+        "phrases_phonetic": ["nishshoy-i she ashbe.", "uchchash prokash koro.", "proshno jiggesha koro.", "bishwash rakho.", "shongshoy dur koro.", "poshom ache."]
     },
     {
         "phonetic_char": ["Shk", "ShT", "ShTh", "ShN", "Shp", "Shf"],
         "phonetic_words": ["shushko", "koSTo", "shreSTho", "ushno", "trishna", "pushpo", "nishpap", "nishprobho", "nishpeshon", "sfoTik"],
-        "phrases_phonetic": ["shushko khabar.", "koSTo shojjho koro.", "shreSTho kaj.", "ushno jol.", "pushpo sundor.", "nishpap shishu."],
-        "keyboard_map": {
-            "Shk": "ষ্ক",
-            "ShT": "ষ্ট",
-            "ShTh": "ষ্ঠ",
-            "ShN": "ষ্ণ",
-            "Shp": "ষ্প",
-            "Shf": "ষ্ফ"
-        }
+        "phrases_phonetic": ["shushko khabar.", "koSTo shojjho koro.", "shreSTho kaj.", "ushno jol.", "pushpo sundor.", "nishpap shishu."]
     },
     {
         "phonetic_char": ["Shw", "Shm", "sk", "skh", "sT"],
         "phonetic_words": ["oshwo", "bhosmo", "shongskar", "skul", "skholon", "sTeshan", "sTarT", "sTail"],
-        "phrases_phonetic": ["oshwo douRay.", "bhosmo ache.", "shongskar koro.", "skul jao.", "sTeshan kothay?", "sTarT dao."],
-        "keyboard_map": {
-            "Shw": "ষ্ব",
-            "Shm": "ষ্ম",
-            "sk": "স্ক",
-            "skh": "স্খ",
-            "sT": "স্ট"
-        }
+        "phrases_phonetic": ["oshwo douRay.", "bhosmo ache.", "shongskar koro.", "skul jao.", "sTeshan kothay?", "sTarT dao."]
     },
     {
         "phonetic_char": ["st", "stw", "sth", "sn", "sp"],
         "phonetic_words": ["bostu", "astha", "shotontro", "sastho", "sthan", "snatok", "spoSTo", "sporsho", "shondon", "shondon"],
-        "phrases_phonetic": ["bostu ache.", "astha rakho.", "shotontro desh.", "sastho bhalo.", "sthan dao.", "snatok chattro.", "spoSTo bolo."],
-        "keyboard_map": {
-            "st": "স্ত",
-            "stw": "স্ত্ব",
-            "sth": "স্থ",
-            "sn": "স্ন",
-            "sp": "স্প"
-        }
+        "phrases_phonetic": ["bostu ache.", "astha rakho.", "shotontro desh.", "sastho bhalo.", "sthan dao.", "snatok chattro.", "spoSTo bolo."]
     },
     {
         "phonetic_char": ["spl", "sf", "sw", "sm", "sl"],
         "phonetic_words": ["splin", "sfoTik", "swagoto", "swor", "smriti", "shoron", "slip", "slab"],
-        "phrases_phonetic": ["splin ache.", "sfoTik pathor.", "swagoto janai.", "swor bhalo.", "smriti bhalo.", "slip koro."],
-        "keyboard_map": {
-            "spl": "স্প্ল",
-            "sf": "স্ফ",
-            "sw": "স্ব",
-            "sm": "স্ম",
-            "sl": "স্ল"
-        }
+        "phrases_phonetic": ["splin ache.", "sfoTik pathor.", "swagoto janai.", "swor bhalo.", "smriti bhalo.", "slip koro."]
     },
     {
         "phonetic_char": ["hN", "hn", "hw", "hm", "hl"],
         "phonetic_words": ["oporahNNo", "purbaNNo", "chihno", "bohni", "ahban", "ahlad", "bramhon", "bromho", "prohlad", "ahbayok"],
-        "phrases_phonetic": ["oporahNNo holo.", "chihno dao.", "bohni shikha.", "ahban koro.", "ahlad hochche.", "bramhon ase."],
-        "keyboard_map": {
-            "hN": "হ্ণ",
-            "hn": "হ্ন",
-            "hw": "হ্ব",
-            "hm": "হ্ম",
-            "hl": "হ্ল"
-        }
+        "phrases_phonetic": ["oporahNNo holo.", "chihno dao.", "bohni shikha.", "ahban koro.", "ahlad hochche.", "bramhon ase."]
     },
     {
         "phonetic_char": [],
         "phonetic_words": ["kolkata", "choTTogram", "Dhaka", "rajshahi", "khulna", "robinDroNath", "kaji nojrul islam", "shekh mujibur rohman", "shundorbon", "sileT", "borishal", "kumilla", "boguRa", "joshore", "foridpur", "moymonshingho", "rongpur", "bangladesh", "bharot"],
-        "phrases_phonetic": ["Dhaka bangladesher rajdhani.", "robinDroNath Thakur amader kobi.", "choTTogram ekTi sundor shohor.", "khulna bibhag boRo.", "sileT bhromon khub anondodayok.", "borishal jela kothay?", "moymonshingho ekTi purono shohor."],
-        "keyboard_map": {}
+        "phrases_phonetic": ["Dhaka bangladesher rajdhani.", "robinDroNath Thakur amader kobi.", "choTTogram ekTi sundor shohor.", "khulna bibhag boRo.", "sileT bhromon khub anondodayok.", "borishal jela kothay?", "moymonshingho ekTi purono shohor."]
     },
     {
         "phonetic_char": [],
         "phonetic_words": ["shubho", "sakal", "kemon", "acho", "dhonnobad", "kichu", "mone", "koro", "na", "onek", "bhalo", "laglo", "deri", "rattri", "abar", "dekha", "hobe", "cholche", "shomossha", "nei", "amar", "bhul", "hoyeche", "khub", "mon", "diye", "shono", "shabdhane", "theko"],
-        "phrases_phonetic": ["shubho sakal bondhu.", "tumi kemon acho aj?", "onek dhonnobad tomake.", "kichu mone koro na plij.", "ajker dinTa onek bhalo laglo.", "deri koro na, chole esho.", "shubho rattri, bhalo thko."],
-        "keyboard_map": {}
+        "phrases_phonetic": ["shubho sakal bondhu.", "tumi kemon acho aj?", "onek dhonnobad tomake.", "kichu mone koro na plij.", "ajker dinTa onek bhalo laglo.", "deri koro na, chole esho.", "shubho rattri, bhalo thko."]
     },
     {
         "phonetic_char": [],
         "phonetic_words": ["obhab", "shobhab", "noSTo", "alashsho", "shokoll", "unnoti", "ontoray", "gyan", "shimaboddho", "buddhi", "aRoSTo", "ekota", "bol", "jotno", "rotno", "mile", "chor", "palale", "baRe", "bhabiya", "korio", "kaj", "koriya", "bhabio", "lobhe", "pap", "mrittu", "koSTo", "keSTo", "mele", "montrer", "sadhan", "kimba", "shorir", "poton"],
-        "phrases_phonetic": ["obhabe shobhab noSTo hoy.", "alashsho shokoll unnotir ontoray.", "gyan jekhane shimaboddho, buddhi shekhane aRoSTo.", "ekotai bol, ekotai shokti.", "jotno korle rotno mile jay.", "chor palale buddhi baRe, age keno bareni?", "bhabiya korio kaj, koriya bhabio na."],
-        "keyboard_map": {}
+        "phrases_phonetic": ["obhabe shobhab noSTo hoy.", "alashsho shokoll unnotir ontoray.", "gyan jekhane shimaboddho, buddhi shekhane aRoSTo.", "ekotai bol, ekotai shokti.", "jotno korle rotno mile jay.", "chor palale buddhi baRe, age keno bareni?", "bhabiya korio kaj, koriya bhabio na."]
     },
     {
         "phonetic_char": [],
         "phonetic_words": ["robinDroNath", "Thakur", "choTogolpo", "bangla", "shahitter", "omullo", "shompod", "kaji", "nojrul", "islam", "kobita", "bidroho", "prem", "protik", "shorotchondro", "choTTopaddhay", "uponnash", "shomaj", "bastob", "chittro", "tule", "dhore"],
-        "phrases_phonetic": ["robinDroNath Thakurer choTogolpoguli bangla shahitter omullo shompod.", "kaji nojrul islami kobita bidroho o premer protik.", "shorotchondro choTTopaddhayer uponnashguli shomajer bastob chittro tule dhore.", "bangla shahitter bishwojure porichito.", "kobita manusher mon chhuNye jay."],
-        "keyboard_map": {}
+        "phrases_phonetic": ["robinDroNath Thakurer choTogolpoguli bangla shahitter omullo shompod.", "kaji nojrul islami kobita bidroho o premer protik.", "shorotchondro choTTopaddhayer uponnashguli shomajer bastob chittro tule dhore.", "bangla shahitter bishwojure porichito.", "kobita manusher mon chhuNye jay."]
     },
     {
         "phonetic_char": [],
         "phonetic_words": ["shongbad", "poribeshone", "nirbhulota", "bostuniSThota", "oporiharjo", "protibedon", "lekhar", "shomoy", "tottho", "jachai", "kora", "ottonto", "joruri", "shongbadikota", "mul", "uddeshsho", "shotto", "prokash"],
-        "phrases_phonetic": ["shongbad poribeshone nirbhulota oporiharjo.", "protibedon lekhar shomoy tottho jachai kora ottonto joruri.", "shongbadikotar mul uddeshsho holo shotto prokash kora.", "shongbadpotro shomajer dorpon.", "protibedonTi shomoy moto joma dao."],
-        "keyboard_map": {}
+        "phrases_phonetic": ["shongbad poribeshone nirbhulota oporiharjo.", "protibedon lekhar shomoy tottho jachai kora ottonto joruri.", "shongbadikotar mul uddeshsho holo shotto prokash kora.", "shongbadpotro shomajer dorpon.", "protibedonTi shomoy moto joma dao."]
     },
     {
         "phonetic_char": [],
         "phonetic_words": ["shorkari", "doliladi", "prostut", "korar", "shomoy", "soThik", "poribhaSha", "bybohar", "korun", "daptorik", "chiThipotro", "lekhar", "kkhetre", "spoSTota", "shongkhiptota", "bojaye", "rakhun", "proshashonik", "kaje", "bangla", "bhaShar", "proyog", "nishchit", "aboshshok"],
-        "phrases_phonetic": ["shorkari doliladi prostut korun.", "daptorik chiThipotro lekhar kkhetre spoSTota bojaye rakhun.", "proshashonik kaje bangla bhaShar soThik proyog nishchit kora aboshshok.", "shoThik poribhaSha bybohar korun.", "shongkhiptota bojaye rakha joruri."],
-        "keyboard_map": {}
+        "phrases_phonetic": ["shorkari doliladi prostut korun.", "daptorik chiThipotro lekhar kkhetre spoSTota bojaye rakhun.", "proshashonik kaje bangla bhaShar soThik proyog nishchit kora aboshshok.", "shoThik poribhaSha bybohar korun.", "shongkhiptota bojaye rakha joruri."]
     }
 ]
