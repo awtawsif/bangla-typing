@@ -22,7 +22,7 @@
                             <label for="keyboard-layout-select" class="sr-only">কিবোর্ড লেআউট</label>
                             <select id="keyboard-layout-select" onchange="app.setKeyboardLayout(this.value)" class="app-select">
                                 <option value="avro">Avro Phonetic</option>
-                                <option value="bijoy">Bijoy (উদাহরণ)</option>
+                                <option value="bijoy">Bijoy</option>
                                 <option value="probhat">Probhat (উদাহরণ)</option>
                             </select>
                         </div>
@@ -167,7 +167,7 @@
                                 <label for="profile-keyboard-layout-select" class="text-lg">কিবোর্ড লেআউট:</label>
                                 <select id="profile-keyboard-layout-select" onchange="app.setKeyboardLayout(this.value)" class="app-select">
                                     <option value="avro">Avro Phonetic</option>
-                                    <option value="bijoy">Bijoy (উদাহরণ)</option>
+                                    <option value="bijoy">Bijoy</option>
                                     <option value="probhat">Probhat (উদাহরণ)</option>
                                 </select>
                             </div>
@@ -192,8 +192,8 @@
                         <p class="text-xl mb-4">আপনার গতি ছিল: <span id="wpm-result" class="font-bold text-2xl"></span></p>
                         <p class="text-lg text-gray-600 mb-6">খুব ভালো করেছেন! অনুশীলন চালিয়ে যান।</p>
                         <div class="flex justify-center space-x-4">
-                            <button id="retry-lesson-button" class="btn-accent py-2 px-6 rounded-lg">পুনরায় চেষ্টা</button>
-                            <button id="next-lesson-button" onclick="app.startNextLesson()" class="bg-gray-200 text-gray-800 hover:bg-gray-300 py-2 px-6 rounded-lg">পরবর্তী পাঠ</button>
+                            <button id="retry-lesson-button" class="bg-gray-200 cursor-pointer text-gray-800 hover:bg-gray-300 py-2 px-6 rounded-lg">পুনরায় চেষ্টা</button>
+                            <button id="next-lesson-button" onclick="app.startNextLesson()" class="btn-accent py-2 px-6 rounded-lg">পরবর্তী পাঠ</button>
                         </div>
                     </div>
                 </div>
@@ -210,7 +210,7 @@
                     <label for="onboarding-keyboard-layout" class="block text-gray-700 text-sm font-bold mb-2">আপনার পছন্দের কিবোর্ড লেআউট:</label>
                     <select id="onboarding-keyboard-layout" class="app-select w-full">
                         <option value="avro">Avro Phonetic</option>
-                        <option value="bijoy">Bijoy (উদাহরণ)</option>
+                        <option value="bijoy">Bijoy</option>
                         <option value="probhat">Probhat (উদাহরণ)</option>
                     </select>
                 </div>
@@ -244,7 +244,7 @@
                 <p class="text-lg text-gray-700 mb-6">আপনি কি নিশ্চিত যে আপনি আপনার সমস্ত অগ্রগতি রিসেট করতে চান? এই কাজটি পূর্বাবস্থায় ফেরানো যাবে না।</p>
                 <div class="flex justify-center space-x-4">
                     <button id="confirm-reset-button" class="btn-accent py-2 px-6 rounded-lg bg-red-500 hover:bg-red-600">হ্যাঁ, রিসেট করুন</button>
-                    <button onclick="app.hideConfirmation()" class="bg-gray-200 text-gray-800 hover:bg-gray-300 py-2 px-6 rounded-lg">না, বাতিল করুন</button>
+                    <button onclick="app.hideConfirmation()" class="bg-gray-200 cursor-pointer text-gray-800 hover:bg-gray-300 py-2 px-6 rounded-lg">না, বাতিল করুন</button>
                 </div>
             </div>
         </div>

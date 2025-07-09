@@ -1,0 +1,918 @@
+[
+    {
+        "char_keys": ["g+f", "n", "l", "shift+g"],
+        "word_keys": ["g+f+n+f", "n+f+l+f", "g+f+n", "n+f"],
+        "phrase_keys": [
+            "g+f+n+f g+f+n+f+shift+g",
+            "n+f+l+f n+f+l+f+shift+g",
+            "g+f+n g+f+n+shift+g"
+        ],
+        "keyboard_map": {
+            "g+f": "আ",
+            "n": "স",
+            "l": "দ",
+            "shift+g": "."
+        }
+    },
+    {
+        "char_keys": ["shift+r", "h"],
+        "word_keys": ["l+f+l+f", "shift+r+f+l+f", "g+f+l", "n+f+shift+r", "l+f+n", "shift+r+f+n", "g+f+l+f", "l+f+n+f"],
+        "phrase_keys": [
+            "l+f+l+f g+f+n+c+shift+g",
+            "shift+r+f+l+f l+f+o+shift+g",
+            "g+f+l+f l+f+o+shift+g",
+            "n+f+shift+r n+f+shift+r+shift+g"
+        ],
+        "keyboard_map": {
+            "shift+r": "ফ",
+            "h": "ব",
+            "c": "ে",
+            "x": "ো"
+        }
+    },
+    {
+        "char_keys": ["j", "m", "shift+v", "shift+y", "u"],
+        "word_keys": ["j+f+j+f", "m+f+shift+v+f", "m+f+m+f", "j+f+m", "m+f+j", "g+f+m+f", "g+f+j+m", "j+m+f"],
+        "phrase_keys": [
+            "j+f+j+f g+f+n+c+shift+g",
+            "m+f+shift+v+f g+f+shift+y+c+shift+g",
+            "m+f+m+f g+f+n+c+shift+g",
+            "j+f+m j+f+u+shift+g"
+        ],
+        "keyboard_map": {
+            "j": "ক",
+            "m": "ম",
+            "shift+v": "ল",
+            "shift+y": "ছ",
+            "u": "জ"
+        }
+    },
+    {
+        "char_keys": ["g+d", "shift+h"],
+        "word_keys": ["j+shift+v+m", "j+m+d", "j+f+j+d", "m+f+n+d", "m+f+shift+v+d", "j+d+j+d", "j+f+shift+v+d", "g+f+m+d", "g+f+j+f+shift+v", "j+shift+v+f+m", "j+f+j+d+m+f", "shift+v+d+j+f"],
+        "phrase_keys": [
+            "g+f+m+f+v j+shift+v+m+shift+g",
+            "j+m+d g+f+u+shift+g",
+            "j+f+j+d shift+h+f+shift+v+x+shift+g",
+            "m+f+n+d g+f+n+c+shift+g",
+            "m+f+shift+v+d j+f+u+shift+g",
+            "j+f+shift+v+d l+f+o+shift+g"
+        ],
+        "keyboard_map": {
+            "g+d": "ই",
+            "d": "ি",
+            "shift+h": "ভ"
+        }
+    },
+    {
+        "char_keys": ["b"],
+        "word_keys": ["h+x+b", "b+b+l", "b+h", "h+shift+y+b", "m+b+b", "shift+v+h+b", "h+d+b+f", "h+f+m+b", "j+h+b", "b+j+shift+v", "b+f+h+d+j", "h+b+shift+v+k+f"],
+        "phrase_keys": [
+            "g+f+m+f+v h+x+b+shift+g",
+            "b+b+l g+f+n+c+shift+g",
+            "b+h j+f+j+f+shift+g",
+            "h+shift+y+b h+shift+v+x+shift+g",
+            "shift+v+h+b l+f+o+shift+g",
+            "h+d+b+f j+f+u+shift+g"
+        ],
+        "keyboard_map": {
+            "b": "ন"
+        }
+    },
+    {
+        "char_keys": ["w", "shift+/", "i"],
+        "word_keys": ["m+b+c", "j+b+c", "h+shift+v+x", "n+x+b+f+shift+v+d", "j+c+b", "j+x+b+x", "w+c+b", "shift+v+x+j", "h+x+b+f+n", "j+c+m+b", "h+c+shift+v+f", "shift+v+c+shift+o+c", "j+x+shift+v", "b+c+m"],
+        "phrase_keys": [
+            "m+b+c j+v+x+shift+g",
+            "j+b+c g+f+n+c+shift+g",
+            "h+shift+v+x b+f+shift+g",
+            "j+c+b h+shift+v+x+shift+g",
+            "j+x+b+x j+f+u+shift+g",
+            "j+c+m+b g+f+shift+y+x+shift+/",
+            "h+c+shift+v+f i+shift+v+x+shift+g"
+        ],
+        "keyboard_map": {
+            "w": "য",
+            "shift/": "?",
+            "i": "হ"
+        }
+    },
+    {
+        "char_keys": ["k", "v"],
+        "word_keys": ["k+f+v+f", "v+f+k", "v+k+g+b", "k+v+shift+v", "v+k+b", "k+v+b+d", "k+g+b+g+l+g+v+f", "k+f+v+d+shift+o", "k+v+j+f+v+d", "k+x+v", "k+v+f", "v+k+f"],
+        "phrase_keys": [
+            "k+f+v+f g+f+n+c+shift+g",
+            "v+f+k i+shift+v+x+shift+g",
+            "v+k+g+b g+f+shift+y+c+shift+g",
+            "k+v+shift+v l+f+o+shift+g",
+            "v+k+b g+f+n+c+shift+g",
+            "k+v+b+d shift+y+shift+v+c+shift+g"
+        ],
+        "keyboard_map": {
+            "k": "ত",
+            "v": "র"
+        }
+    },
+    {
+        "char_keys": ["r", "y"],
+        "word_keys": ["r+f+r", "y+f+y+f", "y+f+r", "r+f+r+d", "y+s+r", "r+s+v", "r+s+k+s+shift+v", "y+f+j+f", "r+f+y", "y+f+r+shift+v"],
+        "phrase_keys": [
+            "r+f+r j+v+x b+f+shift+g",
+            "y+f+y+f g+f+n+c+shift+g",
+            "y+f+r l+f+o+shift+g",
+            "y+s+r j+v+x+shift+g",
+            "r+s+k+s+shift+v b+f+shift+y+c+shift+g"
+        ],
+        "keyboard_map": {
+            "r": "প",
+            "y": "চ",
+            "s": "ু"
+        }
+    },
+    {
+        "char_keys": ["shift+w"],
+        "word_keys": ["u+shift+v", "u+f+m+f", "u+shift+v+f", "w+f+shift+w", "u+shift+w", "u+shift+w+d", "r+f+shift+w+v+f", "s+r+f+shift+w", "y+f+y+f+u+f+b", "g+f+u", "j+f+u", "w+f+o"],
+        "keyboard_map": {
+            "shift+w": "য়"
+        }
+    },
+    {
+        "char_keys": ["e", "shift+w", "o", "shift+j"],
+        "word_keys": ["e+f+shift+v", "e+d+m", "e+f+b+f", "e+x+v", "r+shift+w+f", "h+shift+w", "o+f+shift+w+d", "r+f+shift+w", "e+d+m+g+h", "e+f+j+f", "e+v"],
+        "phrase_keys": [
+            "e+f+shift+v v+f+b+g+b+f j+v+x+shift+g",
+            "e+d+m shift+h+f+u+f shift+o+f+o+shift+g",
+            "r+f+shift+o+d e+f+b+f m+c+shift+v+c+shift+g",
+            "h+shift+w o+f+shift+w+d+shift+g",
+            "r+shift+w+f+shift+v+c+shift+o+f j+v+x+shift+g",
+            "r+f+shift+w g+f+shift+y+c+shift+g"
+        ],
+        "keyboard_map": {
+            "e": "ড",
+            "shift+w": "ড়",
+            "o": "গ",
+            "shift+j": "খ",
+            "shift+s": "ূ"
+        }
+    },
+    {
+        "char_keys": ["shift+e", "p"],
+        "word_keys": ["shift+e+f+j+b+f", "shift+e+c+s", "shift+e+x+shift+v", "shift+e+f+shift+v", "p+s+shift+v+d", "shift+e+f+j", "shift+e+f+j+b+f", "shift+e+x+shift+v+f", "p+f+j"],
+        "phrase_keys": [
+            "shift+e+f+j+b+f l+f+o+shift+g",
+            "shift+e+c+s g+f+n+c+shift+g",
+            "shift+e+x+shift+v h+f+u+f+o+shift+g",
+            "p+s+shift+v+d g+f+n+c+shift+g",
+            "shift+e+f+shift+v g+f+shift+y+c+shift+g"
+        ],
+        "keyboard_map": {
+            "shift+e": "ঢ",
+            "p": "ঢ়"
+        }
+    },
+    {
+        "char_keys": ["shift+t", "shift+\\"],
+        "word_keys": ["shift+t+f+j+s+m+f", "shift+t+f+b+g+e+f", "shift+t+shift+\\+x+shift+t", "shift+t+f+b+g+e+f", "shift+t+shift+\\+f+shift+w+d", "shift+t+j", "shift+t+s+b+j+x"],
+        "phrase_keys": [
+            "shift+t+f+j+s+m+f o+shift+v+g+r h+shift+v+c+b+shift+g",
+            "shift+t+f+b+g+e+f u+shift+v l+f+o+shift+g",
+            "shift+t+shift+\\+x+shift+t shift+h+f+shift+v+x+shift+g",
+            "shift+t+shift+\\+f+shift+w+d l+f+o+shift+g"
+        ],
+        "keyboard_map": {
+            "shift+t": "ঠ",
+            "shift+\\": "ঁ"
+        }
+    },
+    {
+        "char_keys": [],
+        "word_keys": ["i+shift+\\+f+n", "i+f+shift+w", "i+f+k+f", "i+f+k", "shift+h+f+h", "shift+h+f+shift+v+x", "shift+h+f+v+d", "shift+h+shift+w", "shift+h+x+v", "i+shift+\\+f+shift+t+f", "shift+h+g+v+m+b", "i+f+v", "shift+h+v+f"],
+        "phrase_keys": [
+            "i+shift+\\+f+n u+shift+v+c shift+h+f+n+c+shift+g",
+            "g+f+m+f+v i+f+k+shift+g",
+            "shift+h+f+shift+v+x j+v+c shift+h+f+h+x+shift+g",
+            "shift+h+shift+w r+c+o b+f+shift+g",
+            "shift+h+x+v i+shift+v+x+shift+g",
+            "i+f+v g+f+shift+y+c+shift+g"
+        ],
+        "keyboard_map": {}
+    },
+    {
+        "char_keys": ["g+shift+d", "g+shift+s"],
+        "word_keys": ["g+shift+d+l", "g+shift+s+shift+h+f", "g+shift+s+g+l+g+h+shift+g+w", "g+shift+d+o+shift+v", "g+shift+s+b"],
+        "phrase_keys": [
+            "g+shift+d+l m+s+h+f+v+j+shift+g",
+            "g+shift+s+shift+h+f g+f+n+c+shift+g",
+            "g+shift+d+o+shift+v o+shift+w+c+shift+g",
+            "g+shift+s+b g+f+shift+y+c+shift+g"
+        ],
+        "keyboard_map": {
+            "g+shift+d": "ঈ",
+            "g+shift+s": "ঊ"
+        }
+    },
+    {
+        "char_keys": ["g+a"],
+        "word_keys": ["g+a+shift+h+d", "g+a+k+s", "g+a+b", "g+a+u+s", "g+a+k+s+v+f+u"],
+        "phrase_keys": [
+            "g+a+shift+h+d k+r+n+g+w+f+shift+g",
+            "g+a+k+s r+v+d+h+k+g+b+shift+g",
+            "g+a+b n+x+l j+v+x+shift+g",
+            "g+a+u+s r+k+shift+g"
+        ],
+        "keyboard_map": {
+            "g+a": "ঋ"
+        }
+    },
+    {
+        "char_keys": ["shift+q", "shift+;"],
+        "word_keys": ["v+shift+q", "l+s+shift+;+shift+o", "g+f+b+g+k+shift+;+r+s+v", "n+shift+q+j+shift+v+g+r", "l+s+shift+;+n+f+i+n", "g+f+shift+q+n", "n+shift+q+h+f+l", "l+s+shift+;+n+m+shift+w", "h+shift+q+n", "i+shift+q+n"],
+        "phrase_keys": [
+            "v+shift+q l+f+o+shift+g",
+            "l+s+shift+;+shift+o b+c+shift+w+d+shift+g",
+            "n+shift+q+j+shift+v+g+r j+v+x+shift+g",
+            "g+f+shift+q+n b+f+o+shift+g",
+            "n+shift+q+h+f+l g+f+shift+y+c+shift+g"
+        ],
+        "keyboard_map": {
+            "shift+q": "ং",
+            "shift+;": "ঃ"
+        }
+    },
+    {
+        "char_keys": ["g+k"],
+        "word_keys": ["i+shift+\\+f+n", "y+shift+\\+f+l", "h+shift+\\+f+n", "n+g+k", "r+shift+v+g+k", "s+g+k+n+h", "i+shift+\\+f+shift+t+f", "r+shift+\\+f+y", "g+f+shift+\\+j+f", "shift+o+f+shift+\\+t+d"],
+        "phrase_keys": [
+            "i+shift+\\+f+n u+shift+v+c shift+h+f+n+c+shift+g",
+            "y+shift+\\+f+l s+shift+t+c+shift+y+c+shift+g",
+            "h+shift+\\+f+n g+f+shift+y+c+shift+g",
+            "n+g+k shift+v+x+j+shift+g",
+            "s+g+k+n+h i+shift+v+x+shift+g"
+        ],
+        "keyboard_map": {
+            "g+k": "ৎ"
+        }
+    },
+    {
+        "char_keys": [","],
+        "word_keys": ["g+f+m+d shift+h+f+shift+v+x g+f+shift+y+d+shift+g", "j+c+m+b g+f+shift+y+x+shift+/", "w+f+o, shift+o+f+o+shift+g", "n+c g+f+n+c+shift+g", "u+shift+v l+f+o+shift+g", "n+m+shift+w i+shift+v+x+shift+g"],
+        "phrase_keys": [
+            "g+f+m+f+v b+f+m v+m+f+shift+g",
+            "k+s+m+d j+x+k+f+shift+w+shift+/",
+            "g+f+u j+f+u g+f+shift+y+c+shift+g",
+            "n+c shift+h+f+shift+v+x, g+f+m+d shift+h+f+shift+v+x+shift+g"
+        ],
+        "keyboard_map": {
+            ",": ","
+        }
+    },
+    {
+        "char_keys": ["shift+4", ":"],
+        "word_keys": ["shift+4+5+0", "shift+4+1+0+0", "n+m+shift+w:", "t+f+j+f:", "shift+4+1+0", "shift+4+5"],
+        "phrase_keys": [
+            "g+f+u shift+4+5+0 shift+v+f+o+h+c+shift+g",
+            "n+m+shift+w: 1+0+t+f h+f+u+c+shift+g",
+            "shift+4+1+0+0 l+f+o+shift+g",
+            "t+f+j+f: 2+0+shift+g"
+        ],
+        "keyboard_map": {
+            "shift+4": "৳",
+            ":": ":"
+        }
+    },
+    {
+        "char_keys": ["0", "1", "2", "3", "4", "5"],
+        "word_keys": ["g+c+j", "l+s+d", "k+d+b", "y+f+v", "r+f+shift+\\+y", "g+c+j+f", "l+s+d+t+f", "k+d+b+t+f", "y+f+v+t+f", "r+f+shift+\\+y+t+f", "g+c+j+n", "0", "1", "2", "3", "4", "5"],
+        "phrase_keys": [
+            "1+t+d g+f+m l+f+o+shift+g",
+            "2+t+d j+shift+v+m g+f+shift+y+c+shift+g",
+            "3+t+d h+d j+d+b+h+x+shift+g",
+            "4+t+d r+s+shift+v n+s+b+g+l+v+shift+g",
+            "5+t+d r+s+shift+v g+f+shift+y+c+shift+g",
+            "0 t+f+j+f+shift+g"
+        ],
+        "keyboard_map": {
+            "0": "০",
+            "1": "১",
+            "2": "২",
+            "3": "৩",
+            "4": "৪",
+            "5": "৫"
+        }
+    },
+    {
+        "char_keys": ["6", "7", "8", "9"],
+        "word_keys": ["shift+y+shift+w", "n+f+k", "g+f+t", "b+shift+w", "l+shift+m", "n+f+k+f+shift+m", "g+f+shift+m+d", "b+h+g+h+g+d", "shift+m+k", "shift+y+shift+w+shift+m", "6", "7", "8", "9"],
+        "phrase_keys": [
+            "6+t+d g+f+r+c+shift+v l+f+x+shift+g",
+            "7+t+d r+f+j+d i+s+v+c+y+c+shift+g",
+            "8+t+d m+f+y l+v+x+shift+g",
+            "9+t+d k+f+v+f l+c+j+f w+f+w+shift+g",
+            "l+shift+m t+f+j+f+shift+g"
+        ],
+        "keyboard_map": {
+            "৬": "6",
+            "৭": "7",
+            "৮": "8",
+            "৯": "9"
+        }
+    },
+    {
+        "char_keys": ["j+g+j", "j+g+k", "j+g+m", "j+g+h"],
+        "word_keys": ["shift+f+j+g+j+f", "v+j+g+k", "h+z+j+g+k+d", "r+j+g+j", "h+j+g+k+h+z", "n+j+g+k", "y+j+shift+z"],
+        "phrase_keys": [
+            "v+j+g+k l+f+x+shift+g",
+            "h+z+j+g+k+d g+f+n+c+shift+g",
+            "h+j+g+k+h+z h+shift+v+x+shift+g",
+            "r+j+g+j r+shift+v l+f+o+shift+g"
+        ],
+        "keyboard_map": {
+            "ক্ক": "j+g+j",
+            "ক্ত": "j+g+k",
+            "ক্ম": "j+g+m",
+            "ক্ব": "j+g+h"
+        }
+    },
+    {
+        "char_keys": ["j+g+v", "j+g+shift+n"],
+        "word_keys": ["j+g+v+f+b+g+k", "j+g+v+d+b+d+j", "j+g+v+d+r", "shift+m+d+j+g+shift+n+f", "j+g+shift+n+m+f", "shift+v+j+g+shift+n+z", "j+j+g+shift+n", "l+j+g+shift+n", "j+g+shift+n+s+l+shift+z"],
+        "phrase_keys": [
+            "j+g+v+f+b+g+k v+f+o+y+c+shift+g",
+            "j+g+v+d+b+d+j j+x+k+f+w+shift+/",
+            "shift+m+d+j+g+shift+n+f b+f+x+shift+g",
+            "j+g+shift+n+m+f j+v+x+shift+g",
+            "shift+v+j+g+shift+n z+j+d+v i+x+w+shift+g"
+        ],
+        "keyboard_map": {
+            "ক্ল": "j+g+v",
+            "ক্ষ": "j+g+shift+n"
+        }
+    },
+    {
+        "char_keys": ["o+g+l", "o+g+b", "o+g+h", "o+g+m"],
+        "word_keys": ["l+o+l", "m+s+o+l", "h+o+b", "v+s+o+b", "l+d+o+h+d+u+w", "w+s+o+m", "h+f+o+m+d"],
+        "phrase_keys": [
+            "m+s+o+l i+c+w+c+y+d+shift+g",
+            "l+o+l i+c+w+c+y+c+shift+g",
+            "h+o+b i+d+l+w+shift+g",
+            "v+s+o+b l+c+i+shift+g"
+        ],
+        "keyboard_map": {
+            "গ্ধ": "o+g+l",
+            "গ্ন": "o+g+b",
+            "গ্ব": "o+g+h",
+            "গ্ম": "o+g+m"
+        }
+    },
+    {
+        "char_keys": ["o+g+v", "shift+o+b"],
+        "word_keys": ["o+v+f+b+d", "o+v+x+h", "shift+o+b", "shift+o+b+f+shift+o+b", "z+b+c+i+shift+o+b"],
+        "phrase_keys": [
+            "o+v+f+b+d l+s+v j+v+x+shift+g",
+            "o+v+x+h l+c+j+x+shift+g",
+            "shift+o+b+f+shift+o+b g+x+w+l+f+shift+g"
+        ],
+        "keyboard_map": {
+            "গ্ল": "o+g+v",
+            "ঘ্ন": "shift+o+g+b"
+        }
+    },
+    {
+        "char_keys": ["q+g+j", "q+g+j+g+k", "q+g+j+g+shift+n", "q+g+shift+o"],
+        "word_keys": ["g+q+j", "shift+m+q+j+f", "r+q+j+d+v", "n+q+j+v+r", "h+q+j+d", "shift+m+q+shift+o", "v+q+j+f"],
+        "phrase_keys": [
+            "g+q+j j+w+x+shift+g",
+            "shift+m+q+j+f b+c+d+shift+g",
+            "n+q+j+v+r j+v+x+shift+g",
+            "shift+m+q+shift+o h+f+u+f+x+shift+g"
+        ],
+        "keyboard_map": {
+            "ঙ্ক": "q+g+j",
+            "ঙ্ক্ত": "q+g+j+g+k",
+            "ঙ্ক্ষ": "q+g+j+g+shift+n",
+            "ঙ্খ": "q+g+shift+o"
+        }
+    },
+    {
+        "char_keys": ["q+g+o", "q+g+shift+o", "q+g+m"],
+        "word_keys": ["h+q+g+o", "m+q+g+o+v", "n+q+g+o", "v+q+g+o", "u+q+g+shift+o+f", "n+q+g+o", "h+f+q+g+m+w"],
+        "phrase_keys": [
+            "h+q+g+o l+c+shift+m+shift+g",
+            "m+q+g+o+v j+f+m+b+f+shift+g",
+            "n+q+g+o l+f+x+shift+g",
+            "u+q+g+shift+o+f h+z+k+f+shift+g"
+        ],
+        "keyboard_map": {
+            "ঙ্গ": "q+g+o",
+            "ঙ্ঘ": "q+g+shift+o",
+            "ঙ্ম": "q+g+m"
+        }
+    },
+    {
+        "char_keys": ["y+g+y", "y+g+shift+y", "y+g+shift+y+g+h"],
+        "word_keys": ["s+y+g+y", "d+y+g+shift+y+f", "s+y+g+shift+y+f+n", "z+y+g+shift+y", "h+d+y+g+shift+y+d+b+b", "s+y+g+shift+y+v", "k+s+y+g+y"],
+        "phrase_keys": [
+            "s+y+g+y z+v+c h+v+x+shift+g",
+            "d+y+g+shift+y+f r+s+v+b+shift+g",
+            "s+y+g+shift+y+f+n u+v+shift+g",
+            "z+y+g+shift+y u+v+shift+g"
+        ],
+        "keyboard_map": {
+            "চ্চ": "y+g+y",
+            "চ্ছ": "y+g+shift+y",
+            "চ্ছ্ব": "y+g+shift+y+g+h"
+        }
+    },
+    {
+        "char_keys": ["y+g+shift+i", "y+g+h", "u+g+u", "u+g+u+g+h"],
+        "word_keys": ["w+f+y+g+shift+i+f", "w+f+y+g+h", "h+u+g+u+f+k", "s+u+g+u+v", "n+u+g+u+f", "v+u+g+u+f", "s+u+g+u+d+h+k"],
+        "phrase_keys": [
+            "w+f+y+g+shift+i+f j+v+x+shift+g",
+            "h+u+g+u+f+k v+x+j+shift+g",
+            "s+u+g+u+v g+f+v+x+shift+g",
+            "n+u+g+u+f j+v+x+shift+g"
+        ],
+        "keyboard_map": {
+            "চ্ঞ": "y+g+shift+i",
+            "চ্ব": "y+g+h",
+            "জ্জ": "u+g+u",
+            "জ্জ্ব": "u+g+u+g+h"
+        }
+    },
+    {
+        "char_keys": ["u+g+shift+u", "u+g+shift+i", "u+g+h"],
+        "word_keys": ["shift+u+b+shift+u+f", "u+g+shift+i+f+b", "h+d+u+g+shift+i+f+b", "u+g+h+v", "u+g+h+f+v+f", "r+v+u+g+u+g+h+v+d+k", "u+g+shift+i+f+k", "g+u+g+shift+i"],
+        "phrase_keys": [
+            "shift+u+b+shift+u+f g+f+n+c+shift+g",
+            "u+g+shift+i+f+b g+r+u+g+b j+v+x+shift+g",
+            "h+d+u+g+shift+i+f+b r+v+x+shift+g",
+            "u+g+h+v i+c+w+c+y+c+shift+g"
+        ],
+        "keyboard_map": {
+            "জ্ঝ": "u+g+shift+u",
+            "জ্ঞ": "u+g+shift+i",
+            "জ্ব": "u+g+h"
+        }
+    },
+    {
+        "char_keys": ["shift+i+g+y", "shift+i+g+shift+y", "shift+i+g+u", "shift+i+g+shift+u"],
+        "word_keys": ["m+shift+i+g+y", "r+shift+i+g+y+f+shift+m", "h+f+shift+i+g+shift+y+d+k", "o+shift+i+g+u+b+f", "j+s+shift+i+g+u", "shift+f+shift+i+g+u+shift+v+d", "shift+u+shift+i+g+shift+u+f+t", "n+shift+i+g+u+shift+w"],
+        "phrase_keys": [
+            "m+shift+i+g+y+c g+c+n+x+shift+g",
+            "r+shift+i+g+y+f+shift+m t+f+j+f+shift+g",
+            "h+f+shift+i+g+shift+y+d+k r+shift+v l+f+o+shift+g",
+            "shift+f+shift+i+g+u+shift+v+d l+f+x+shift+g"
+        ],
+        "keyboard_map": {
+            "ঞ্চ": "shift+i+g+y",
+            "ঞ্ছ": "shift+i+g+shift+y",
+            "ঞ্জ": "shift+i+g+u",
+            "ঞ্ঝ": "shift+i+g+shift+u"
+        }
+    },
+    {
+        "char_keys": ["shift+b+g+t", "shift+b+g+shift+t", "shift+b+g+e", "shift+b+g+shift+e"],
+        "word_keys": ["j+shift+b+g+t", "r+f+shift+b+g+e+h", "v+shift+b+g+t+b", "l+shift+b+g+e", "h+shift+b+g+t+b", "j+s+shift+b+g+e+v+d", "o+shift+b+g+e+o+x+v", "j+shift+b+g+e+b"],
+        "phrase_keys": [
+            "j+shift+b+g+t h+f+v+x+shift+g",
+            "r+f+shift+b+g+e+h g+f+n+c+shift+g",
+            "v+shift+b+g+t+b u+g+h+f+v+x+shift+g",
+            "l+shift+b+g+e l+f+x+shift+g"
+        ],
+        "keyboard_map": {
+            "ণ্ট": "shift+b+g+t",
+            "ণ্ঠ": "shift+b+g+shift+t",
+            "ণ্ড": "shift+b+g+e",
+            "ণ্ঢ": "shift+b+g+shift+e"
+        }
+    },
+    {
+        "char_keys": ["shift+b+g+b", "shift+b+g+h", "shift+b+g+m"],
+        "word_keys": ["h+d+w+shift+b+g+b", "k+g+w+shift+b+f+k+g+w", "s+w+shift+b", "k+g+w+shift+b+f", "r+s+h+g+f+shift+b+g+b", "g+r+v+f+i+g+b", "r+s+h+g+f+i+g+b"],
+        "phrase_keys": [
+            "h+d+w+shift+b+g+b m+b+shift+g",
+            "k+g+w+shift+b+f+k+g+w r+k+d+j+shift+g",
+            "s+w+shift+b u+v+shift+g",
+            "k+g+w+shift+b+f r+c+w+c+y+c+shift+g"
+        ],
+        "keyboard_map": {
+            "ণ্ণ": "shift+b+g+b",
+            "ণ্ব": "shift+b+g+h",
+            "ণ্ম": "shift+b+g+m"
+        }
+    },
+    {
+        "char_keys": ["g+k+j", "k+g+k", "k+g+k+g+h", "k+g+shift+k"],
+        "word_keys": ["s+k+g+j+g+w+t", "s+k+g+j+g+b+t+f", "n+k+g+k+f", "k+g+k+g+h", "s+k+g+shift+k+f+b", "r+f+k+g+shift+k+g+w", "s+k+g+shift+k+f+r+b"],
+        "phrase_keys": [
+            "s+k+g+j+g+w+t j+f+u+shift+g",
+            "n+k+g+k+f g+f+y+c+shift+g",
+            "k+g+k+g+h r+v+x+shift+g",
+            "s+k+g+shift+k+f+b r+k+b+shift+g"
+        ],
+        "keyboard_map": {
+            "ৎক": "g+k+j",
+            "ত্ত": "k+g+k",
+            "ত্ত্ব": "k+g+k+g+h",
+            "ত্থ": "k+g+shift+k"
+        }
+    },
+    {
+        "char_keys": ["k+g+b", "k+g+h", "k+g+m", "g+k+v", "g+k+n"],
+        "word_keys": ["w+k+g+b", "v+k+g+b", "n+k+g+h+v", "g+f+k+g+m+f", "g+f+k+g+m+d+w", "s+k+g+n+h", "s+k+g+n+f+i", "s+k+g+r+s+v+v", "j+s+k+g+n+f"],
+        "phrase_keys": [
+            "w+k+g+b j+v+x+shift+g",
+            "v+k+g+b m+d+v+c+shift+g",
+            "n+k+g+h+v g+c+n+x+shift+g",
+            "g+f+k+g+m+f g+m+v+shift+g",
+            "s+k+g+n+h i+v+x+shift+g"
+        ],
+        "keyboard_map": {
+            "ত্ন": "k+g+b",
+            "ত্ব": "k+g+h",
+            "ত্ম": "k+g+m",
+            "ৎল": "g+k+v",
+            "ৎস": "g+k+n"
+        }
+    },
+    {
+        "char_keys": ["shift+k+g+h", "l+g+o", "l+g+shift+o", "l+g+l"],
+        "word_keys": ["r+g+a+shift+k+g+h+d", "s+l+g+o+f+v", "s+l+g+shift+o+f+t+b", "s+l+g+l+d+r+b+f", "s+l+g+l+c+shift+m+z", "s+l+g+l+d+r+k", "s+l+g+l+f+m"],
+        "phrase_keys": [
+            "r+g+a+shift+k+g+h+d n+s+b+l+v+shift+g",
+            "s+l+g+o+f+v j+v+x+shift+g",
+            "s+l+g+l+c+shift+m+z h+f+v+x+shift+g",
+            "s+l+g+l+d+r+b+f l+f+x+shift+g"
+        ],
+        "keyboard_map": {
+            "থ্ব": "shift+k+g+h",
+            "দ্গ": "l+g+o",
+            "দ্ঘ": "l+g+shift+o",
+            "দ্দ": "l+g+l"
+        }
+    },
+    {
+        "char_keys": ["l+g+l+g+h", "l+g+shift+l", "l+g+h", "l+g+shift+h"],
+        "word_keys": ["s+l+g+l+g+h+d+o+b", "l+g+shift+l", "l+g+h+d+b", "l+g+h+d+shift+l+f", "l+g+h+c+w", "s+l+g+shift+h+t", "s+l+g+shift+h+d+b+b", "s+l+g+shift+h+h"],
+        "phrase_keys": [
+            "s+l+g+l+g+h+d+o+b m+b+shift+g",
+            "l+g+h+d+b v+x+j+shift+g",
+            "l+g+h+d+shift+l+f b+c+d+shift+g",
+            "s+l+g+shift+h+t j+k+f+shift+g"
+        ],
+        "keyboard_map": {
+            "দ্দ্ব": "l+g+l+g+h",
+            "দ্ধ": "l+g+shift+l",
+            "দ্ব": "l+g+h",
+            "দ্ভ": "l+g+shift+h"
+        }
+    },
+    {
+        "char_keys": ["l+g+m", "shift+l+g+b", "shift+l+g+h", "shift+l+g+m", "b+g+t", "b+g+shift+t", "b+g+e"],
+        "word_keys": ["r+l+g+m", "y+l+g+m", "shift+l+g+b+d+k", "shift+l+g+b+d+k", "shift+l+g+m", "j+b+g+t+j", "v+b+g+t+b", "r+f+b+g+e+h", "j+f+b+g+e", "t+f+b+g+e+f", "r+f+b+g+e"],
+        "phrase_keys": [
+            "r+l+g+m r+s+v+shift+g",
+            "y+l+g+m h+c+shift+m+shift+g",
+            "shift+l+g+b+d+k i+v+x+shift+g",
+            "j+b+g+t+j r+k+shift+g",
+            "v+b+g+t+b u+g+h+f+v+x+shift+g",
+            "r+f+b+g+e+h g+f+n+c+shift+g"
+        ],
+        "keyboard_map": {
+            "দ্ম": "l+g+m",
+            "ধ্ন": "shift+l+g+b",
+            "ধ্ব": "shift+l+g+h",
+            "ধ্ম": "shift+l+g+m",
+            "ন্ট": "b+g+t",
+            "ন্ঠ": "b+g+shift+t",
+            "ন্ড": "b+g+e"
+        }
+    },
+    {
+        "char_keys": ["b+g+k", "b+g+k+g+h", "b+g+shift+k", "b+g+l", "b+g+l+g+h", "b+g+shift+l", "b+g+b", "b+g+h", "b+g+m"],
+        "word_keys": ["shift+m+f+b+g+k", "g+b+g+k+k", "l+b+g+k", "j+g+v+f+b+g+k", "z+k+b+g+k+g+h", "o+g+v+b+g+shift+k", "b+l+d", "l+g+h+b+g+l+g+h", "h+b+g+shift+l", "g+b+g+shift+l", "g+b+g+b", "g+b+g+h+c+w+b", "u+b+g+m", "b+d+h+g+m+g+v"],
+        "phrase_keys": [
+            "shift+m+f+b+g+k k+f+j+x+shift+g",
+            "g+b+g+k+k g+c+n+x+shift+g",
+            "l+b+g+k g+f+y+c+shift+g",
+            "z+k+b+g+k+g+h l+c+shift+m+shift+g",
+            "o+g+v+b+g+shift+k r+v+x+shift+g",
+            "l+g+h+b+g+l+g+h b+c+d+shift+g",
+            "h+b+g+shift+l l+v+u+f+shift+g"
+        ],
+        "keyboard_map": {
+            "ন্ত": "b+g+k",
+            "ন্ত্ব": "b+g+k+g+h",
+            "ন্থ": "b+g+shift+k",
+            "ন্দ": "b+g+l",
+            "ন্দ্ব": "b+g+l+g+h",
+            "ন্ধ": "b+g+shift+l",
+            "ন্ন": "b+g+b",
+            "ন্ব": "b+g+h",
+            "ন্ম": "b+g+m"
+        }
+    },
+    {
+        "char_keys": ["r+g+k", "r+g+b", "r+g+r", "r+g+v", "r+g+n", "shift+r+g+v", "h+g+u", "h+g+l", "h+g+shift+l"],
+        "word_keys": ["v+d+r+g+k", "k+r+g+k", "z+r+g+b", "n+f+r+g+r+v", "r+g+v+f+h+b", "r+g+v+f+z+t+d+j", "r+g+n", "shift+r+g+v+z+f+t", "g+h+g+u", "shift+m+h+g+l", "v+h+g+shift+l", "v+h+g+shift+l+d"],
+        "phrase_keys": [
+            "v+d+r+g+k k+c+j+x b+f+shift+g",
+            "k+r+g+k u+v+shift+g",
+            "z+r+g+b l+c+j+x+shift+g",
+            "r+g+v+f+h+b g+c+n+c+y+c+shift+g",
+            "shift+r+g+v+z+f+t n+s+b+l+v+shift+g",
+            "shift+m+h+g+l shift+m+s+b+f+shift+g",
+            "v+h+g+shift+l u+g+i+f+b+shift+g"
+        ],
+        "keyboard_map": {
+            "প্ত": "r+g+k",
+            "প্ন": "r+g+b",
+            "প্প": "r+g+r",
+            "প্ল": "r+g+v",
+            "প্স": "r+g+n",
+            "ফ্ল": "shift+r+g+v",
+            "ব্জ": "h+g+u",
+            "ব্দ": "h+g+l",
+            "ব্ধ": "h+g+shift+l"
+        }
+    },
+    {
+        "char_keys": ["h+g+h", "h+g+v", "shift+h+g+h", "m+g+b", "m+g+r", "m+g+shift+r"],
+        "word_keys": ["e+f+h+g+h+f", "h+g+v+z+f+j+h+x+v+g+e", "shift+h+g+h", "m+g+b", "n+m+g+r+l", "j+m+g+r+b", "n+m+g+r+s+shift+b+g+b", "n+m+g+r+j+g+v", "shift+v+m+g+shift+r+b", "o+s+m+g+shift+r+b"],
+        "phrase_keys": [
+            "e+f+h+g+h+f g+f+y+c+shift+g",
+            "h+g+v+z+f+j+h+x+v+g+e l+c+j+x+shift+g",
+            "n+m+g+r+l g+f+y+c+shift+g",
+            "j+m+g+r+b g+b+s+h+s+k+shift+g",
+            "n+m+g+r+s+shift+b+g+b j+v+x+shift+g",
+            "shift+v+m+g+shift+r+b j+v+x+shift+g"
+        ],
+        "keyboard_map": {
+            "ব্ব": "h+g+h",
+            "ব্ল": "h+g+v",
+            "ভ্ব": "shift+h+g+h",
+            "ম্ন": "m+g+b",
+            "ম্প": "m+g+r",
+            "ম্ফ": "m+g+shift+r"
+        }
+    },
+    {
+        "char_keys": ["m+g+h", "m+g+shift+h", "m+g+m", "m+g+v"],
+        "word_keys": ["v+m+g+h+f", "n+m+g+h+v", "n+k+m+g+shift+h", "n+m+g+shift+h+f+h+b+f", "n+m+g+m+f+b", "s+b+m+s+j+g+k", "g+m+g+v", "m+v+g+v", "g+m+g+v+f+b", "m+v+g+v+d+j+f"],
+        "phrase_keys": [
+            "v+m+g+h+f o+f+y+shift+g",
+            "n+m+g+h+v g+f+y+c+shift+g",
+            "n+k+m+g+shift+h g+f+y+c+shift+g",
+            "n+m+g+m+f+b l+f+x+shift+g",
+            "s+b+m+s+j+g+k g+f+j+f+shift+m+shift+g",
+            "g+m+g+v z+f+l+shift+g"
+        ],
+        "keyboard_map": {
+            "ম্ব": "m+g+h",
+            "ম্ভ": "m+g+shift+h",
+            "ম্ম": "m+g+m",
+            "ম্ল": "m+g+v"
+        }
+    },
+    {
+        "char_keys": ["z"],
+        "word_keys": ["h+f+o+g+z", "l+b+g+z", "h+d+l+g+z+s+k", "g+f+h+shift+m+g+z+j", "n+h+g+z", "l+c+i+g+z", "j+f+l+g+z", "h+f+l+g+z", "z+f+z+g+z", "w+x+o+g+z", "g+l+g+z+w+b", "n+i+g+z", "n+f+i+f+u+g+z"],
+        "phrase_keys": [
+            "k+f+v h+f+o+g+z h+f+v+x+shift+g",
+            "l+b+g+z k+s+m+d+shift+g",
+            "h+d+l+g+z+s+k b+c+d+shift+g",
+            "n+h+g+z g+f+y+v+b+shift+g",
+            "l+c+i+g+z l+v+x+shift+g",
+            "j+f+l+g+z o+g+v+i+b+shift+g",
+            "n+f+i+f+u+g+z j+v+x+shift+g"
+        ],
+        "keyboard_map": {
+            "্য": "z"
+        }
+    },
+    {
+        "char_keys": ["shift+z"],
+        "word_keys": ["y+f+k+g+shift+z", "r+g+v+shift+m+b+g+shift+z", "j+g+v+m", "l+g+v+m", "j+g+v+m", "h+j+g+v", "h+j+g+v+d+k+f", "r+k+g+v", "shift+m+g+v+m", "o+g+v+i", "g+v+j", "g+f+k+g+v+b+f+l", "j+s+l+g+v", "h+g+v+m+b", "r+g+v+z+k+f+h"],
+        "phrase_keys": [
+            "y+f+k+g+shift+z r+v+f+shift+m+x+b+f j+v+c+shift+g",
+            "r+g+v+shift+m+b+g+shift+z u+d+o+g+z+f+n+f j+v+x+shift+g",
+            "l+g+v+m r+f+v+b j+v+x+shift+g",
+            "j+g+v+m+d u+d+h+b+shift+g",
+            "h+j+g+v r+k+c h+c+w+x b+f+shift+g",
+            "h+j+g+v+d+k+f h+f+v+x+shift+g",
+            "r+k+g+v v+c+j+x+shift+g"
+        ],
+        "keyboard_map": {
+            "্র": "shift+z"
+        }
+    },
+    {
+        "char_keys": ["g+v"],
+        "word_keys": ["j+g+v+f+b+g+k", "o+g+v+f+n", "r+g+v+z+f+b", "shift+m+g+v+x+j", "j+g+v+d+b+d+j", "o+g+v+f+b+d", "r+g+v+f+h+b", "g+shift+m+g+v+d+v", "j+g+v+f+b+g+k+d", "o+g+v+x+h", "shift+m+g+v+c+w", "j+g+v+d+r", "o+g+v+z+f+m+f+v"],
+        "phrase_keys": [
+            "g+f+u j+s+h j+g+v+f+b+g+k+shift+g",
+            "o+g+v+f+n h+f+v+g+k+d u+v l+f+x+shift+g",
+            "r+g+v+z+f+b k+c+d+v j+v+x+shift+g",
+            "shift+m+g+v+x+j g+f+h+g+v+d+k+d j+v+x+shift+g",
+            "j+g+v+d+b+d+j j+x+k+f+w+shift+/",
+            "o+g+v+f+b+d l+s+v j+v+x+shift+g",
+            "r+g+v+f+h+b g+c+n+c+y+c+shift+g"
+        ],
+        "keyboard_map": {
+            "্ল": "g+v"
+        }
+    },
+    {
+        "char_keys": ["shift+m+g+y", "shift+m+g+shift+y", "shift+m+g+b", "shift+m+g+h", "shift+m+g+m", "shift+m+g+v"],
+        "word_keys": ["b+d+shift+m+g+y+w", "s+y+g+shift+y+f+n", "r+g+v+shift+m+b+g+shift+z", "h+d+shift+m+g+h+f+n", "n+q+g+shift+m+w", "g+f+shift+m+q+j+f", "r+shift+m+m", "shift+m+g+v+c+w+g+m+f"],
+        "phrase_keys": [
+            "b+d+shift+m+g+y+w+d n+c g+f+n+h+c+shift+g",
+            "s+y+g+shift+y+f+n r+g+v+j+f+shift+m j+v+x+shift+g",
+            "r+g+v+shift+m+b+g+shift+z u+d+o+g+z+f+n+f j+v+x+shift+g",
+            "h+d+shift+m+g+h+f+n v+f+j+x+shift+g",
+            "n+q+g+shift+m+w l+s+v j+v+x+shift+g",
+            "r+shift+m+m g+f+y+c+shift+g"
+        ],
+        "keyboard_map": {
+            "শ্চ": "shift+m+g+y",
+            "শ্ছ": "shift+m+g+shift+y",
+            "শ্ন": "shift+m+g+b",
+            "শ্ব": "shift+m+g+h",
+            "শ্ম": "shift+m+g+m",
+            "শ্ল": "shift+m+g+v"
+        }
+    },
+    {
+        "char_keys": ["shift+n+g+j", "shift+n+g+t", "shift+n+g+shift+t", "shift+n+g+b", "shift+n+g+r", "shift+n+g+shift+r"],
+        "word_keys": ["shift+w+s+w+shift+n+g+j", "j+w+t", "shift+m+g+v+c+w+t", "s+w+shift+b", "k+g+w+shift+b+f", "r+s+w+r", "b+d+w+r+f+r", "b+d+w+r+g+v+h", "b+d+w+r+c+w+b", "z+r+t+d+j"],
+        "phrase_keys": [
+            "shift+w+s+w+shift+n+g+j j+f+h+f+v+shift+g",
+            "j+w+t n+i+g+z j+v+x+shift+g",
+            "shift+m+g+v+c+w+t j+f+u+shift+g",
+            "s+w+shift+b u+v+shift+g",
+            "r+s+w+r n+s+b+l+v+shift+g",
+            "b+d+w+r+f+r shift+m+d+shift+w+s+shift+g"
+        ],
+        "keyboard_map": {
+            "ষ্ক": "shift+n+g+j",
+            "ষ্ট": "shift+n+g+t",
+            "ষ্ঠ": "shift+n+g+shift+t",
+            "ষ্ণ": "shift+n+g+b",
+            "ষ্প": "shift+n+g+r",
+            "ষ্ফ": "shift+n+g+shift+r"
+        }
+    },
+    {
+        "char_keys": ["shift+n+g+h", "shift+n+g+m", "n+g+j", "n+g+shift+j", "n+g+t"],
+        "word_keys": ["g+shift+n+g+h", "h+w+m", "n+q+n+j+f+v", "z+j+s+v", "z+j+f+v+b", "z+t+c+w+b", "z+t+f+t+g+t", "z+t+f+d+v"],
+        "phrase_keys": [
+            "g+shift+n+g+h l+c+v+f+w+shift+g",
+            "h+w+m g+f+y+c+shift+g",
+            "n+q+n+j+f+v j+v+x+shift+g",
+            "z+j+s+v w+f+x+shift+g",
+            "z+t+c+w+b j+x+k+f+w+shift+/",
+            "z+t+f+t+g+t l+f+x+shift+g"
+        ],
+        "keyboard_map": {
+            "ষ্ব": "shift+n+g+h",
+            "ষ্ম": "shift+n+g+m",
+            "স্ক": "n+g+j",
+            "স্খ": "n+g+shift+j",
+            "স্ট": "n+g+t"
+        }
+    },
+    {
+        "char_keys": ["n+g+k", "n+g+k+g+h", "n+g+shift+k", "n+g+b", "n+g+r"],
+        "word_keys": ["h+n+g+k+s", "g+f+z+g+k+f", "z+k+b+g+k+g+h", "z+f+z+g+z", "z+g+k+f+b", "z+b+f+k+j", "z+r+w+t", "z+r+g+v+shift+m", "z+r+b+l+b", "z+r+b+l+b"],
+        "phrase_keys": [
+            "h+n+g+k+s g+f+y+c+shift+g",
+            "g+f+z+g+k+f v+f+j+x+shift+g",
+            "z+k+b+g+k+g+h l+c+shift+m+shift+g",
+            "z+f+z+g+z h+f+v+x+shift+g",
+            "z+g+k+f+b l+f+x+shift+g",
+            "z+b+f+k+j y+f+k+g+v+shift+g",
+            "z+r+w+t h+v+x+shift+g"
+        ],
+        "keyboard_map": {
+            "স্ত": "n+g+k",
+            "স্ত্ব": "n+g+k+g+h",
+            "স্থ": "n+g+shift+k",
+            "স্ন": "n+g+b",
+            "স্প": "n+g+r"
+        }
+    },
+    {
+        "char_keys": ["n+g+r+g+v", "n+g+shift+r", "n+g+h", "n+g+m", "n+g+v"],
+        "word_keys": ["z+r+g+v+d+b", "z+r+t+d+j", "z+f+o+k", "z+g+h+v", "z+g+m+g+k+d", "z+g+m+v+b", "z+g+v+d+r", "z+g+v+f+h"],
+        "phrase_keys": [
+            "z+r+g+v+d+b g+f+y+c+shift+g",
+            "z+r+t+d+j r+f+k+i+v+shift+g",
+            "z+f+o+k u+f+b+f+d+shift+g",
+            "z+g+h+v h+f+v+x+shift+g",
+            "z+g+m+g+k+d h+f+v+x+shift+g",
+            "z+g+v+d+r j+v+x+shift+g"
+        ],
+        "keyboard_map": {
+            "স্প্ল": "n+g+r+g+v",
+            "স্ফ": "n+g+shift+r",
+            "স্ব": "n+g+h",
+            "স্ম": "n+g+m",
+            "স্ল": "n+g+v"
+        }
+    },
+    {
+        "char_keys": ["i+g+shift+b", "i+g+b", "i+g+h", "i+g+m", "i+g+v"],
+        "word_keys": ["g+r+v+f+i+g+shift+b", "r+s+h+g+f+i+g+shift+b", "y+d+i+g+b", "h+i+g+b+d", "g+f+i+g+h+f+b", "g+f+i+g+v+f+l", "h+g+v+f+i+g+m+shift+b", "h+g+v+i+g+m", "r+g+v+i+g+v+f+l", "g+f+i+g+h+f+w+j"],
+        "phrase_keys": [
+            "g+r+v+f+i+g+shift+b i+v+x+shift+g",
+            "y+d+i+g+b l+f+x+shift+g",
+            "h+i+g+b+d shift+m+d+j+f+shift+g",
+            "g+f+i+g+h+f+b j+v+x+shift+g",
+            "g+f+i+g+v+f+l i+y+g+y+c+shift+g",
+            "h+g+v+f+i+g+m+shift+b g+f+n+c+shift+g"
+        ],
+        "keyboard_map": {
+            "হ্ণ": "i+g+shift+b",
+            "হ্ন": "i+g+b",
+            "হ্ব": "i+g+h",
+            "হ্ম": "i+g+m",
+            "হ্ল": "i+g+v"
+        }
+    },
+    {
+        "char_keys": [],
+        "word_keys": ["j+v+j+f+k+f", "y+t+g+v+f+m", "e+f+j+f", "v+f+u+shift+m+f+i+d", "j+s+v+b+f", "v+h+d+b+l+g+v+f+b+f+k+s+v g+d+n+g+v+f+m", "shift+m+c+j m+s+u+d+h+s+v v+i+m+f+b", "n+s+b+l+v+h+b", "n+d+v+c+t", "h+v+d+shift+m+f+v", "j+s+m+d+g+v+g+v+f", "h+o+s+v+f", "w+shift+m+x+v", "r+d+v+l+r+s+v", "m+w+m+b+n+d+q+i", "v+q+r+s+v", "h+f+q+o+l+c+shift+m", "h+f+v+k"],
+        "phrase_keys": [
+            "e+f+j+f h+f+q+o+l+c+shift+m+c+v v+f+u+l+f+b+d+shift+g",
+            "v+h+d+b+l+g+v+f+b+f+k+s+v g+f+m+f+l+c+v j+h+d+shift+g",
+            "y+t+g+v+f+m g+c+j+t+d n+s+b+l+v shift+m+i+v+shift+g",
+            "j+s+v+b+f h+d+h+f+o h+v+shift+g",
+            "n+d+v+c+t h+g+v+m+b j+s+h g+f+b+b+l+f+w+j+shift+g",
+            "h+v+d+shift+m+f+v u+c+v+f+w+shift+/",
+            "m+w+m+b+n+d+q+i g+c+j+t+d r+s+v+f+b+x shift+m+i+v+shift+g"
+        ],
+        "keyboard_map": {}
+    },
+    {
+        "char_keys": [],
+        "word_keys": ["shift+m+s+h", "n+j+f+v", "j+c+m+b", "g+f+y+x", "l+b+g+h+f+l", "j+d+y+s", "m+b+c", "j+v+x", "b+f", "g+b+c+j", "h+f+v+x", "v+f+o+v+x", "l+c+v+d", "v+f+k+g+v+d", "g+f+h+f+v", "l+c+j+f", "i+h+c", "y+v+y+c", "n+m+z+f", "b+c+d", "g+f+m+f+v", "h+s+v", "i+c+w+c+y+c", "shift+m+s+h+l+f+b+c", "k+c+j+x"],
+        "phrase_keys": [
+            "shift+m+s+h n+j+f+v h+b+l+s+shift+g",
+            "k+s+m+d j+c+m+b g+f+y+x+shift+g",
+            "g+b+c+j l+b+g+h+f+l k+s+m+f+c+shift+g",
+            "j+d+y+s m+b+c j+v+x b+f+shift+g",
+            "g+f+u+c+v+c+v l+b+g+k+f g+b+c+j h+f+v+x v+f+o+v+x+shift+g",
+            "l+c+v+d j+v+x b+f, y+v+c g+c+n+x+shift+g",
+            "shift+m+s+h v+f+k+g+v+d, h+f+v+x k+c+j+x+shift+g"
+        ],
+        "keyboard_map": {}
+    },
+    {
+        "char_keys": [],
+        "word_keys": ["g+h+f+h", "z+h+f+h", "b+w+t", "g+f+v+z+z", "n+j+v", "s+b+b+k+d", "g+b+k+v+f+w", "u+g+i+f+b", "n+d+m+f+h+l", "h+s+l+g+h", "j+x+v", "r+f+h+d+w+f", "j+v+d+w+f", "h+f+h+d+w+f", "v+x+h+c", "r+f+r", "m+b+g+k+g+v+c+v", "n+f+l+b", "j+d+q+h+f", "shift+m+v+d+v", "r+k+b"],
+        "phrase_keys": [
+            "g+h+f+h+c z+h+f+h b+w+t i+w+shift+g",
+            "g+f+v+z+z n+j+v s+b+b+k+d+v g+b+k+v+f+w+shift+g",
+            "u+g+i+f+b u+c+i+f+b+c n+d+m+f+h+l, h+s+l+g+h n+c+i+f+b+c g+f+v+w+t+shift+g",
+            "g+c+j+k+f+d h+v, g+c+j+k+f+d h+f+h+d+w+f b+f+shift+g",
+            "h+f+h+d+w+f j+v+d+w+f b+f+shift+g, g+f+o+c j+c+b h+f+h+d+w+f b+f+shift+g"
+        ],
+        "keyboard_map": {}
+    },
+    {
+        "char_keys": [],
+        "word_keys": ["v+h+d+b+l+g+v+f+b+f+k+s+v", "k+f+j+s+v+o+s+r+s+v+o+s+v+d", "h+f+q+o+l+c+shift+m", "n+f+i+d+k+z", "h+d+l+g+v+x+i+c", "r+g+v+c+m", "j+f+u+d", "b+u+g+v+c+v", "shift+m+v+k+g+y+g+v+f+r+f+w", "shift+m+v+k+g+y+g+v+f+r+f+w+c+v+d", "s+r+l+g+y+g+v+f+r+f+w", "n+f+u+c+v", "h+d+shift+m+g+v+c+w+c+v+d"],
+        "phrase_keys": [
+            "v+h+d+b+l+g+v+f+b+f+k+s+v k+f+j+s+v+o+s+r+s+v+o+s+v+d h+f+q+o+l+c+shift+m+c+v g+m+s+v+g+z n+m+r+l+shift+g",
+            "j+f+u+d b+u+g+v+c+v h+d+l+g+v+x+i+c x r+g+v+c+m+c+v r+g+v+k+d+j+shift+g",
+            "shift+m+v+k+g+y+g+v+f+r+f+w n+f+u+c+v+c+v h+f+q+o+l+c+shift+m+c+v n+f+u+c+v h+d+shift+m+g+v+c+w+c+v+d k+s+v+c l+s+v+c l+s+v+c+shift+g",
+            "h+f+q+o+l+c+shift+m n+f+i+d+k+z h+d+shift+m+g+v+c+w+c+v+d r+g+v+c+m+c+v r+g+v+k+d+j+shift+g",
+            "j+h+d+k+f m+f+b+s+w+c+w u+f+w+c u+f+w+c+shift+g"
+        ],
+        "keyboard_map": {}
+    },
+    {
+        "char_keys": [],
+        "word_keys": ["n+q+o+f+l", "r+v+d+h+c+shift+m+b+c", "b+d+h+s+v+k+f", "h+w+k+s+b+d+w+t+f", "n+q+o+f+l", "r+v+d+h+c+shift+m+b+c", "b+d+h+s+v+k+f", "h+w+k+s+b+d+w+t+f", "n+f+q+o+f+l", "w+f+y+f+d", "j+v+f", "g+k+z+b+k", "n+k+g+z", "r+g+v+j+f+shift+m"],
+        "phrase_keys": [
+            "n+q+o+f+l r+v+d+h+c+shift+m+b+c b+d+h+s+v+k+f g+r+v+d+i+f+w+f+w+shift+g",
+            "r+v+d+h+c+shift+m+b+c v+c+j+f+v n+m+w g+k+z+b+k j+v+f g+k+z+b+k+shift+g",
+            "n+f+q+o+f+l r+v+d+h+c+shift+m+b+c+v m+s+v l+c+shift+m+f+b j+v+f+shift+g",
+            "n+q+o+f+l r+v+d+h+c+shift+m+b+c+v l+c+shift+m+f+b+c+v l+c+shift+m+f+b+c+v+shift+g",
+            "r+v+d+h+c+shift+m+b+c n+f+m+f+v k+f+u+f m+k+f u+f+w+f+shift+g"
+        ],
+        "keyboard_map": {}
+    },
+    {
+        "char_keys": [],
+        "word_keys": ["n+v+j+f+v+d", "l+v+d+v+f+l+d", "r+g+v+z+g+k", "j+v+f+v", "n+m+w", "n+q+j+s+v+k+f", "l+f+r+t+d+j", "n+q+j+s+v+k+f", "h+f+w+f+v", "n+r+w+x+o", "h+f+w+f+v", "n+r+w+x+o", "r+g+v+f+w+c+v", "b+d+w+t+f", "g+f+h+z+j"],
+        "phrase_keys": [
+            "n+v+j+f+v+d l+v+d+v+f+l+d r+g+v+z+g+k j+v+f+v+shift+g",
+            "l+f+r+t+d+j v+c+j+f+v n+m+w w+f+y+f+d j+v+f g+k+z+b+k+shift+g",
+            "n+q+j+s+v+k+f+v m+s+v l+c+shift+m+f+b j+v+f+shift+g",
+            "n+q+j+s+v+k+f+v l+c+shift+m+f+b+c+v l+c+shift+m+f+b+c+v+shift+g",
+            "n+r+w+x+o j+f+u+c j+v+f+shift+g"
+        ],
+        "keyboard_map": {}
+    }
+]

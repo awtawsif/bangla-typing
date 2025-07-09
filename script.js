@@ -152,9 +152,8 @@ document.addEventListener('DOMContentLoaded', () => {
             ]);
             this.state.syllabus = await syllabusResponse.json();
             this.state.keyboardHintData.avro = await avroHintResponse.json();
-            // In the future, you would load bijoy_hint.json and probhat_hint.json here:
-            // const bijoyHintResponse = await fetch('bijoy_hint.json');
-            // this.state.keyboardHintData.bijoy = await bijoyHintResponse.json();
+            const bijoyHintResponse = await fetch('bijoy_hint.json');
+            this.state.keyboardHintData.bijoy = await bijoyHintResponse.json();
             // const probhatHintResponse = await fetch('probhat_hint.json');
             // this.state.keyboardHintData.probhat = await probhatHintResponse.json();
 
@@ -321,8 +320,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         this.state.currentLessonData = {
             items: [...(lesson.characters || []), ...(lesson.words || []), ...(lesson.phrases || [])],
-            // Use phonetic data from the selected hint file
-            phonetic_items: [...(hintData.phonetic_char || []), ...(hintData.phonetic_words || []), ...(hintData.phrases_phonetic || [])]
+            phonetic_items: this.state.userPreferences.keyboardLayout === 'bijoy' 
+                ? [...(hintData.char_keys || []), ...(hintData.word_keys || []), ...(hintData.phrase_keys || [])]
+                : [...(hintData.phonetic_char || []), ...(hintData.phonetic_words || []), ...(hintData.phrases_phonetic || [])]
         };
 
         this.navigateTo('lesson');
@@ -736,12 +736,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     App.prototype.saveProgress = function() {
         try {
-            localStorage.setItem('typingProgress', JSON.stringify({
+            const layout = this.state.userPreferences.keyboardLayout;
+            const progressKey = `typingProgress-${layout}`;
+            localStorage.setItem(progressKey, JSON.stringify({
                 completedLessons: Array.from(this.state.progressData.completedLessons),
                 performance: this.state.progressData.performance,
                 unlockedLevels: Array.from(this.state.progressData.unlockedLevels),
-                userPreferences: this.state.userPreferences // Save user preferences
             }));
+            // Save user preferences separately as they are global
+            localStorage.setItem('typingUserPreferences', JSON.stringify(this.state.userPreferences));
         } catch (e) {
             console.error("Failed to save progress to localStorage", e);
         }
@@ -749,7 +752,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     App.prototype.loadProgress = function() {
         try {
-            const savedData = localStorage.getItem('typingProgress');
+            // Load global user preferences first
+            const savedPreferences = localStorage.getItem('typingUserPreferences');
+            if (savedPreferences) {
+                const parsedPreferences = JSON.parse(savedPreferences);
+                const defaultPreferences = {
+                    keyboardLayout: 'avro',
+                    experienceLevel: 'new',
+                    onboardingCompleted: false,
+                    theme: 'system'
+                };
+                this.state.userPreferences = Object.assign({}, defaultPreferences, parsedPreferences);
+
+                if (this.state.userPreferences.isDarkMode !== undefined) {
+                    this.state.userPreferences.theme = this.state.userPreferences.isDarkMode ? 'dark' : 'light';
+                    delete this.state.userPreferences.isDarkMode;
+                }
+            } else {
+                this.state.userPreferences.theme = 'system';
+            }
+
+            // Then, load progress for the current layout
+            const layout = this.state.userPreferences.keyboardLayout;
+            const progressKey = `typingProgress-${layout}`;
+            const savedData = localStorage.getItem(progressKey);
             if (savedData) {
                 const parsed = JSON.parse(savedData);
                 this.state.progressData = {
@@ -757,27 +783,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     performance: parsed.performance || [],
                     unlockedLevels: new Set(parsed.unlockedLevels || [0])
                 };
-                // Load user preferences, merging with defaults to prevent missing properties
-                const defaultPreferences = {
-                    keyboardLayout: 'avro',
-                    experienceLevel: 'new',
-                    onboardingCompleted: false,
-                    theme: 'system'
-                };
-                this.state.userPreferences = Object.assign({}, defaultPreferences, parsed.userPreferences);
-
-                // If old data format, convert isDarkMode to theme
-                if (this.state.userPreferences.isDarkMode !== undefined) {
-                    this.state.userPreferences.theme = this.state.userPreferences.isDarkMode ? 'dark' : 'light';
-                    delete this.state.userPreferences.isDarkMode; // Clean up old property
-                }
             } else {
-                // If no saved data, set theme to system preference
-                this.state.userPreferences.theme = 'system';
+                // If no progress for this layout, reset to default
+                this.state.progressData = {
+                    completedLessons: new Set(),
+                    performance: [],
+                    unlockedLevels: new Set([0])
+                };
             }
         } catch (e) {
             console.error("Failed to load progress from localStorage", e);
-            // Defaults are now handled by Object.assign, so no specific fallback is needed here.
         }
     };
 
@@ -831,13 +846,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     App.prototype.setKeyboardLayout = function(layout) {
         this.state.userPreferences.keyboardLayout = layout;
-        this.saveProgress(); // Save preference immediately
+        localStorage.setItem('typingUserPreferences', JSON.stringify(this.state.userPreferences));
+        this.loadProgress(); // Load progress for the new layout
+
         // Update both dropdowns to reflect the change
         document.getElementById('keyboard-layout-select').value = layout;
         const profileKeyboardSelect = document.getElementById('profile-keyboard-layout-select');
         if (profileKeyboardSelect) {
             profileKeyboardSelect.value = layout;
         }
+
+        // Re-render the current page to reflect the new progress data
+        this.executePageSpecificActions(this.state.currentPage);
+
         // If on a lesson, re-render to update hints
         if (this.state.currentPage === 'lesson' && this.state.currentLesson !== null) {
             this.renderLessonView();
@@ -853,6 +874,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     App.prototype.resetProgress = function() {
+        const layout = this.state.userPreferences.keyboardLayout;
+        const progressKey = `typingProgress-${layout}`;
+        localStorage.removeItem(progressKey);
+
         // Reset only progress-related data, keep preferences
         this.state.progressData = {
             completedLessons: new Set(),
