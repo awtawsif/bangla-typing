@@ -556,5 +556,9 @@ input:checked + .block .dot {
 
 body.dark-mode .chart-container {
     background-color: var(--chart-bg);
-    box-shadow: 0 4px 12px var(--chart-shadow);
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.main-content-push {
+    margin-top: -4rem; /* Equal to header height */
 }

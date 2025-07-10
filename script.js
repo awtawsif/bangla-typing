@@ -21,7 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
             userPreferences: {
                 keyboardLayout: 'avro', // Default to Avro
                 onboardingCompleted: false, // Track if onboarding is done
-                theme: 'system' // New: 'system', 'light', 'dark'
+                theme: 'system', // New: 'system', 'light', 'dark'
+                showHints: true,
+                showWordCount: true,
+                showPhoneticDisplay: true
             },
             syllabus: [], // Will hold main lesson content
             keyboardHintData: { // Will hold hint data for different layouts
@@ -59,7 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
             typingInput: document.getElementById('typing-input'),
             wordCount: document.getElementById('word-count'),
             hintContainer: document.getElementById('hint-container'),
-            keyboardMapContainer: document.getElementById('keyboard-map-container')
+            keyboardMapContainer: document.getElementById('keyboard-map-container'),
+            mainContent: document.getElementById('lesson-main-content')
         };
 
         this.completionElements = {
@@ -72,6 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
         this.mobileMenu = document.getElementById('mobile-menu');
         this.onboardingModal = document.getElementById('onboarding-modal');
         this.confirmationModal = document.getElementById('confirmation-modal');
+        this.headerElement = document.querySelector('header');
+        this.mainContentElement = document.getElementById('main-content');
         
 
         // Chart instances to be destroyed before re-rendering
@@ -163,6 +169,15 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     App.prototype.navigateTo = function(page) {
+        // Hide or show the header based on the page
+        if (page === 'lesson') {
+            this.headerElement.classList.add('-translate-y-full');
+            this.mainContentElement.classList.add('main-content-push');
+        } else {
+            this.headerElement.classList.remove('-translate-y-full');
+            this.mainContentElement.classList.remove('main-content-push');
+        }
+
         const currentPageElement = this.viewElements[this.state.currentPage];
         const nextPageElement = this.viewElements[page];
 
@@ -300,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.state.currentWordIndex = 0;
         this.state.userInput = '';
         this.state.startTime = null;
-        this.state.isHintVisible = true;
+        this.state.isHintVisible = this.state.userPreferences.showHints;
         this.state.correctCharsCount = 0;
         this.state.incorrectCharsCount = 0;
         this.state.totalKeystrokes = 0;
@@ -359,12 +374,14 @@ document.addEventListener('DOMContentLoaded', () => {
         this.lessonElements.typingDisplay.classList.remove('text-change-animation');
         void this.lessonElements.typingDisplay.offsetWidth; // Trigger reflow
         this.lessonElements.typingDisplay.classList.add('text-change-animation');
-        this.lessonElements.phoneticDisplay.textContent = `(${phoneticItem})`;
-        this.lessonElements.wordCount.textContent = `শব্দ: ${this.convertToBengaliNumber(this.state.currentWordIndex + 1)} / ${this.convertToBengaliNumber(items.length)}`;
+        this.lessonElements.phoneticDisplay.textContent = this.state.userPreferences.showPhoneticDisplay ? `(${phoneticItem})` : '';
+        this.lessonElements.wordCount.textContent = this.state.userPreferences.showWordCount ? `শব্দ: ${this.convertToBengaliNumber(this.state.currentWordIndex + 1)} / ${this.convertToBengaliNumber(items.length)}` : '';
 
         // Use keyboard_map from the selected hint file
         if (this.state.isHintVisible && hintData.keyboard_map) {
             this.lessonElements.hintContainer.classList.remove('hidden');
+            this.lessonElements.mainContent.classList.remove('md:col-span-3');
+            this.lessonElements.mainContent.classList.add('md:col-span-2');
             this.lessonElements.keyboardMapContainer.innerHTML = Object.entries(hintData.keyboard_map).map(([key, value]) => `
                 <div class="flex items-center justify-center p-2 bg-gray-200 rounded-md">
                     <span class="font-mono text-lg font-semibold">${key}</span>
@@ -374,6 +391,8 @@ document.addEventListener('DOMContentLoaded', () => {
             `).join('');
         } else {
             this.lessonElements.hintContainer.classList.add('hidden');
+            this.lessonElements.mainContent.classList.remove('md:col-span-2');
+            this.lessonElements.mainContent.classList.add('md:col-span-3');
         }
 
         this.lessonElements.typingInput.value = this.state.userInput;
@@ -547,6 +566,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('profile-keyboard-layout-select').value = this.state.userPreferences.keyboardLayout;
         // Set the current theme in the profile settings dropdown
         document.getElementById('profile-dark-mode-select').value = this.state.userPreferences.theme;
+
+        // Set the initial state of the new toggles
+        document.getElementById('profile-show-hints-toggle').checked = this.state.userPreferences.showHints;
+        document.getElementById('profile-show-word-count-toggle').checked = this.state.userPreferences.showWordCount;
+        document.getElementById('profile-show-phonetic-toggle').checked = this.state.userPreferences.showPhoneticDisplay;
     };
     
     App.prototype.renderCharts = function() {
@@ -766,7 +790,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const defaultPreferences = {
                     keyboardLayout: 'avro',
                     onboardingCompleted: false,
-                    theme: 'system'
+                    theme: 'system',
+                    showHints: true,
+                    showWordCount: true,
+                    showPhoneticDisplay: true
                 };
                 this.state.userPreferences = Object.assign({}, defaultPreferences, parsedPreferences);
 
@@ -925,6 +952,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     
+    App.prototype.setLessonSetting = function(setting, value) {
+        this.state.userPreferences[setting] = value;
+        this.saveUserPreferences();
+
+        // If currently in a lesson, re-render the lesson view to apply the setting immediately
+        if (this.state.currentPage === 'lesson') {
+            this.renderLessonView();
+        }
+    };
+
     App.prototype.setDarkMode = function(theme) {
         this.state.userPreferences.theme = theme;
         this.applyTheme(theme);
