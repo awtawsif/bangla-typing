@@ -57,6 +57,11 @@
 --key-highlight-color: #050505; /* Black text */
 --key-highlight-shadow: rgba(255, 215, 0, 0.6);
 
+/* New variables for shift key active state */
+--shift-active-bg: #ADD8E6; /* Light Blue */
+--shift-active-color: #050505; /* Black text */
+--shift-active-shadow: rgba(173, 216, 230, 0.6);
+
 --key-pressed-visual-bg: #6c757d; /* Darker gray for visual press */
 --key-pressed-visual-color: #FFFFFF;
 --key-pressed-visual-shadow: rgba(0, 0, 0, 0.3);
@@ -108,6 +113,11 @@ body.dark-mode {
 --key-highlight-bg: #FFEA00; /* Brighter gold for dark mode */
 --key-highlight-color: #18191A; /* Dark text */
 --key-highlight-shadow: rgba(255, 234, 0, 0.7);
+
+/* New variables for shift key active state in dark mode */
+--shift-active-bg: #87CEFA; /* Lighter Sky Blue */
+--shift-active-color: #18191A; /* Dark text */
+--shift-active-shadow: rgba(135, 206, 250, 0.7);
 
 --key-pressed-visual-bg: #5a6268; /* Slightly lighter dark gray for visual press */
 --key-pressed-visual-color: #E4E6EB;
@@ -453,6 +463,15 @@ body.dark-mode .lesson-card::before {
     border-radius: 4px;
     vertical-align: middle;
     margin-right: 5px;
+}
+
+/* Styling for active Shift keys with unique color */
+.key[data-key="shiftleft"].active,
+.key[data-key="shiftright"].active {
+    background-color: var(--shift-active-bg);
+    color: var(--shift-active-color);
+    box-shadow: 0 4px 12px var(--shift-active-shadow);
+    border-color: var(--shift-active-bg);
 }
 
 .bg-key-highlight { background-color: var(--key-highlight-bg); }
