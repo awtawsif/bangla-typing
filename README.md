@@ -97,7 +97,7 @@ Here's a roadmap of what's planned for the future of the Bangla Typing Tutor.
 
 ### Bugs to Fix
 
-*   **Syllabus Correction:** Reviewing and correcting inaccuracies, typos, and inconsistencies within the `syllabus.json` and `avro_hint.json` lesson files.
+*   **Syllabus Correction:** Reviewing and correcting inaccuracies, typos, and inconsistencies within the `syllabus.json`, `avro_hint.json` and `bijoy_hint.json` lesson files.
 *   **Cross-browser Compatibility:** Ensuring the application works flawlessly across all major browsers.
 
 ## License
