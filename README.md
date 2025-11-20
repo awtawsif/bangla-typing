@@ -1,3 +1,8 @@
+# **⚠️ WARNING: The Typing Syllabus Needs Improvement!**
+
+The current Bangla typing syllabus used on this site is **still not perfect**—some lessons may have inaccuracies or need corrections. If you spot any issues or can help improve the syllabus files (`syllabus.json`, `avro_hint.json`, `bijoy_hint.json`), **I would love your help!**  
+Please consider contributing suggestions or fixes via GitHub issues or pull requests.
+
 # Bangla Typing Tutor
 
 A web-based interactive application designed to help users learn and improve their typing skills in the Bengali (Bangla) script. This tutor provides a user-friendly platform with structured lessons to enhance typing speed and accuracy.
@@ -97,7 +102,7 @@ Here's a roadmap of what's planned for the future of the Bangla Typing Tutor.
 
 ### Bugs to Fix
 
-*   **Syllabus Correction:** Reviewing and correcting inaccuracies, typos, and inconsistencies within the `syllabus.json`, `avro_hint.json` and `bijoy_hint.json` lesson files.
+*   **Syllabus Correction:** Reviewing and correcting inaccuracies, typos, and inconsistencies within the `syllabus.json`, `avro_hint.json`, and `bijoy_hint.json` lesson files.
 *   **Cross-browser Compatibility:** Ensuring the application works flawlessly across all major browsers.
 
 ## License
