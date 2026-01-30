@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বাংলা টাইপিং শিক্ষক</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/css/tailwind_style.css">
+</head>
+<body class="bg-primary">
+    <div id="app-container" class="min-h-screen flex flex-col">
+        <header class="bg-secondary shadow-md sticky top-0 z-10 transition-transform duration-300 ease-in-out">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <a href="./" class="text-xl sm:text-2xl font-bold text-accent">ইন্টারেক্টিভ বাংলা টাইপিং শিক্ষক</a>
+                    <div class="flex items-center space-x-4">
+                        
+                        <div class="relative">
+                            <label for="keyboard-layout-select" class="sr-only">কিবোর্ড লেআউট</label>
+                            <select id="keyboard-layout-select" onchange="app.setKeyboardLayout(this.value)" class="app-select">
+                                <option value="avro">Avro Phonetic</option>
+                                <option value="bijoy">Bijoy</option>
+                                <option value="probhat">Probhat (উদাহরণ)</option>
+                            </select>
+                        </div>
+                        <nav class="hidden md:flex items-center space-x-2">
+                            <a onclick="app.navigateTo('learn')" class="nav-link">শিখুন</a>
+                            <a onclick="app.navigateTo('practice')" class="nav-link">অনুশীলন</a>
+                            <a onclick="app.navigateTo('profile')" class="nav-link">প্রোফাইল</a>
+                        </nav>
+                        <button class="md:hidden" onclick="app.toggleMobileMenu()">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+                <div id="mobile-menu" class="hidden md:hidden pb-4">
+                     <nav class="flex flex-col space-y-2">
+                        <a onclick="app.navigateTo('learn'); app.toggleMobileMenu();" class="nav-link">শিখুন</a>
+                        <a onclick="app.navigateTo('practice'); app.toggleMobileMenu();" class="nav-link">অনুশীলন</a>
+                        <a onclick="app.navigateTo('profile'); app.toggleMobileMenu();" class="nav-link">প্রোফাইল</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main id="main-content" class="flex-grow container mx-auto p-4 sm:p-6 lg:p-8 transition-all duration-300 ease-in-out">
+            <div id="learn-view" class="hidden">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold mb-2">আপনার পাঠ শুরু করুন</h2>
+                    <p class="text-gray-600">যেকোনো একটি পাঠে ক্লিক করে আপনার টাইপিং অনুশীলন শুরু করুন।</p>
+                </div>
+                <!-- Levels Container -->
+                <div id="levels-container" class="space-y-10">
+                    <!-- Level 1 -->
+                    <div class="level-section" data-level-index="0">
+                        <h3 class="level-title text-2xl font-bold mb-4 flex items-center">
+                            স্তর ১: মৌলিক অক্ষর <span class="level-status ml-4 text-sm font-semibold"></span>
+                        </h3>
+                        <div id="level-0-lessons" class="lesson-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            <!-- Lessons will be rendered here -->
+                        </div>
+                    </div>
+                    <!-- Level 2 -->
+                    <div class="level-section" data-level-index="1">
+                        <h3 class="level-title text-2xl font-bold mb-4 flex items-center">
+                            স্তর ২: টপ রো ও বিশেষ স্বরবর্ণ <span class="level-status ml-4 text-sm font-semibold"></span>
+                        </h3>
+                        <div id="level-1-lessons" class="lesson-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            <!-- Lessons will be rendered here -->
+                        </div>
+                    </div>
+                    <!-- Level 3 -->
+                    <div class="level-section" data-level-index="2">
+                        <h3 class="level-title text-2xl font-bold mb-4 flex items-center">
+                            স্তর ৩: বিশেষ চিহ্ন ও সংখ্যা <span class="level-status ml-4 text-sm font-semibold"></span>
+                        </h3>
+                        <div id="level-2-lessons" class="lesson-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            <!-- Lessons will be rendered here -->
+                        </div>
+                    </div>
+                    <!-- Level 4 -->
+                    <div class="level-section" data-level-index="3">
+                        <h3 class="class="level-title text-2xl font-bold mb-4 flex items-center">
+                            স্তর ৪: যুক্তাক্ষর - ক থেকে ন <span class="level-status ml-4 text-sm font-semibold"></span>
+                        </h3>
+                        <div id="level-3-lessons" class="lesson-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            <!-- Lessons will be rendered here -->
+                        </div>
+                    </div>
+                    <!-- Level 5 -->
+                    <div class="level-section" data-level-index="4">
+                        <h3 class="level-title text-2xl font-bold mb-4 flex items-center">
+                            স্তর ৫: যুক্তাক্ষর - প থেকে হ <span class="level-status ml-4 text-sm font-semibold"></span>
+                        </h3>
+                        <div id="level-4-lessons" class="lesson-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            <!-- Lessons will be rendered here -->
+                        </div>
+                    </div>
+                    <!-- Level 6 -->
+                    <div class="level-section" data-level-index="5">
+                        <h3 class="level-title text-2xl font-bold mb-4 flex items-center">
+                            স্তর ৬: ব্যবহারিক অনুশীলন <span class="level-status ml-4 text-sm font-semibold"></span>
+                        </h3>
+                        <div id="level-5-lessons" class="lesson-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            <!-- Lessons will be rendered here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="lesson-view" class="hidden">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div id="lesson-main-content" class="md:col-span-2">
+                        <div class="flex justify-between items-center mb-2">
+                            <button onclick="app.navigateTo('learn')" class="btn-accent py-2 px-4 rounded-lg flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                                সব পাঠ
+                            </button>
+                            <h2 id="lesson-title" class="text-2xl font-bold text-center flex-1"></h2>
+                            <button onclick="app.toggleHint()" class="btn-accent py-2 px-4 rounded-lg">Hint</button>
+                        </div>
+                        <div class="bg-secondary p-6 rounded-xl shadow-inner flex flex-col gap-2">
+                            <p class="text-center text-gray-600 mb-2">নিচের লেখাটির জন্য টাইপ করুন:</p>
+                            <div id="typing-display" class="typing-display text-center mb-2"></div>
+                            <p id="phonetic-display" class="text-center text-gray-500 mb-4"></p>
+                            <input id="typing-input" placeholder="Press Space/Enter to continue" class="w-full p-4 border-2 border-gray-300 rounded-lg text-2xl focus:border-accent focus:ring-accent" rows="3" autofocus></input>
+                            <div id="word-count" class="text-center mt-4 text-gray-500"></div>
+                        </div>
+                    </div>
+                    <div id="hint-container" class="hidden md:col-span-1 bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-xl font-bold mb-4 text-center">Keyboard Hints</h3>
+                        <div id="keyboard-map-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 gap-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="practice-view" class="hidden">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold mb-2">মুক্ত অনুশীলন</h2>
+                    <p class="text-gray-600 mb-8">এইখানে আপনি যা ইচ্ছা টাইপ করে অনুশীলন করতে পারেন।</p>
+                    <textarea class="resize-none bg-white w-full max-w-4xl mx-auto p-4 border-2 border-gray-300 rounded-lg text-lg focus:border-accent focus:ring-accent" rows="10" placeholder="এখানে টাইপ করুন..."></textarea>
+                </div>
+            </div>
+
+            <div id="profile-view" class="hidden">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold mb-2">আপনার প্রোফাইল</h2>
+                    <p class="text-gray-600">আপনার অগ্রগতি এবং সেটিংস এখানে পরিচালনা করুন।</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="font-bold text-xl mb-4 text-center">টাইপিং গতি (WPM)</h3>
+                        <div class="chart-container"><canvas id="wpmChart"></canvas></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="font-bold text-xl mb-4 text-center">পাঠ সমাপ্তি</h3>
+                        <div class="chart-container"><canvas id="completionChart"></canvas></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md md:col-span-2">
+                        <h3 class="font-bold text-xl mb-4 text-center">সেটিংস</h3>
+                        <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8">
+                            <div class="flex items-center space-x-2">
+                                <label for="profile-keyboard-layout-select" class="text-lg">কিবোর্ড লেআউট:</label>
+                                <select id="profile-keyboard-layout-select" onchange="app.setKeyboardLayout(this.value)" class="app-select">
+                                    <option value="avro">Avro Phonetic</option>
+                                    <option value="bijoy">Bijoy</option>
+                                    <option value="probhat">Probhat (উদাহরণ)</option>
+                                </select>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <label for="profile-dark-mode-select" class="text-lg">থিম:</label>
+                                <select id="profile-dark-mode-select" onchange="app.setDarkMode(this.value)" class="app-select">
+                                    <option value="system">সিস্টেম</option>
+                                    <option value="light">লাইট</option>
+                                    <option value="dark">ডার্ক</option>
+                                </select>
+                            </div>
+                            <button onclick="app.showResetConfirmation()" class="btn-accent py-2 px-6 rounded-lg bg-red-500 hover:bg-red-600">অগ্রগতি রিসেট করুন</button>
+                        </div>
+                        <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8 mt-4">
+                            <div class="flex items-center space-x-2">
+                                <label for="profile-show-hints-toggle" class="text-lg">হিন্ট দেখান:</label>
+                                <input type="checkbox" id="profile-show-hints-toggle" onchange="app.setLessonSetting('showHints', this.checked)" class="form-checkbox h-5 w-5 text-accent rounded">
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <label for="profile-show-word-count-toggle" class="text-lg">শব্দ গণনা দেখান:</label>
+                                <input type="checkbox" id="profile-show-word-count-toggle" onchange="app.setLessonSetting('showWordCount', this.checked)" class="form-checkbox h-5 w-5 text-accent rounded">
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <label for="profile-show-phonetic-toggle" class="text-lg">ফোনেটিক ডিসপ্লে দেখান:</label>
+                                <input type="checkbox" id="profile-show-phonetic-toggle" onchange="app.setLessonSetting('showPhoneticDisplay', this.checked)" class="form-checkbox h-5 w-5 text-accent rounded">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="completion-view" class="hidden">
+                <div class="text-center max-w-lg mx-auto">
+                    <h2 id="completion-title" class="text-3xl font-bold text-accent mb-4"></h2>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <p class="text-xl mb-4">আপনার গতি ছিল: <span id="wpm-result" class="font-bold text-2xl"></span></p>
+                        <p class="text-lg text-gray-600 mb-6">খুব ভালো করেছেন! অনুশীলন চালিয়ে যান।</p>
+                        <div class="flex justify-center space-x-4">
+                            <button id="retry-lesson-button" class="bg-gray-200 cursor-pointer text-gray-800 hover:bg-gray-300 py-2 px-6 rounded-lg">পুনরায় চেষ্টা</button>
+                            <button id="next-lesson-button" onclick="app.startNextLesson()" class="btn-accent py-2 px-6 rounded-lg">পরবর্তী পাঠ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Onboarding Modal -->
+        <div id="onboarding-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden fade-in">
+            <div class="bg-white p-8 rounded-xl shadow-2xl max-w-md w-full text-center border border-gray-200">
+                <h2 class="text-3xl font-bold text-accent mb-6">স্বাগতম!</h2>
+                <p class="text-lg text-gray-700 mb-6">আপনার টাইপিং যাত্রা শুরু করার জন্য কিছু তথ্য দিন।</p>
+                <div class="mb-8 text-left">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">আপনার টাইপিং অভিজ্ঞতা:</label>
+                    <div id="onboarding-experience-levels-container" class="space-y-4">
+                        <!-- Experience level dropdowns will be dynamically generated here -->
+                    </div>
+                </div>
+
+                <div class="mb-8 text-left">
+                    <label for="onboarding-dark-mode" class="block text-gray-700 text-sm font-bold mb-2">থিম:</label>
+                    <select id="onboarding-dark-mode" class="app-select w-full">
+                        <option value="system">সিস্টেম</option>
+                        <option value="light">লাইট</option>
+                        <option value="dark">ডার্ক</option>
+                    </select>
+                </div>
+
+                <button id="onboarding-start-button" class="btn-accent py-3 px-8 rounded-lg text-xl font-semibold">শুরু করুন</button>
+            </div>
+        </div>
+
+        <!-- Confirmation Modal (for reset) -->
+        <div id="confirmation-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden fade-in">
+            <div class="bg-white p-8 rounded-xl shadow-2xl max-w-sm w-full text-center border border-gray-200">
+                <h3 class="text-2xl font-bold text-red-600 mb-4">সতর্কতা!</h3>
+                <p class="text-lg text-gray-700 mb-6">আপনি কি নিশ্চিত যে আপনি আপনার সমস্ত অগ্রগতি রিসেট করতে চান? এই কাজটি পূর্বাবস্থায় ফেরানো যাবে না।</p>
+                <div class="flex justify-center space-x-4">
+                    <button id="confirm-reset-button" class="btn-accent py-2 px-6 rounded-lg bg-red-500 hover:bg-red-600">হ্যাঁ, রিসেট করুন</button>
+                    <button onclick="app.hideConfirmation()" class="bg-gray-200 cursor-pointer text-gray-800 hover:bg-gray-300 py-2 px-6 rounded-lg">না, বাতিল করুন</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="src/js/script.js"></script>
+</body>
+</html>

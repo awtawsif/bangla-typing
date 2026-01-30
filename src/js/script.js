@@ -152,12 +152,12 @@ document.addEventListener('DOMContentLoaded', () => {
     App.prototype.loadAllData = async function() {
         try {
             const [syllabusResponse, avroHintResponse] = await Promise.all([
-                fetch('../data/syllabus.json'),
-                fetch('../data/avro_hint.json')
+                fetch('data/syllabus.json'),
+                fetch('data/avro_hint.json')
             ]);
             this.state.syllabus = await syllabusResponse.json();
             this.state.keyboardHintData.avro = await avroHintResponse.json();
-            const bijoyHintResponse = await fetch('../data/bijoy_hint.json');
+            const bijoyHintResponse = await fetch('data/bijoy_hint.json');
             this.state.keyboardHintData.bijoy = await bijoyHintResponse.json();
             // const probhatHintResponse = await fetch('probhat_hint.json');
             // this.state.keyboardHintData.probhat = await probhatHintResponse.json();
