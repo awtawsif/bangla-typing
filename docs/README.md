@@ -1,6 +1,6 @@
 # **⚠️ WARNING: The Typing Syllabus Needs Improvement!**
 
-The current Bangla typing syllabus used on this site is **still not perfect**—some lessons may have inaccuracies or need corrections. If you spot any issues or can help improve the syllabus files (`syllabus.json`, `avro_hint.json`, `bijoy_hint.json`), **I would love your help!**  
+The current Bangla typing syllabus used on this site is **still not perfect**—some lessons may have inaccuracies or need corrections. If you spot any issues or can help improve the syllabus files (`data/syllabus.json`, `data/avro_hint.json`, `data/bijoy_hint.json`), **I would love your help!**  
 Please consider contributing suggestions or fixes via GitHub issues or pull requests.
 
 # Bangla Typing Tutor
@@ -58,20 +58,42 @@ If you wish to run this project locally for development or customization, follow
     npm run watch:css
     ```
 5.  **Open `index.html`:**
-    Simply open the `index.html` file in your preferred web browser. No server setup is required as it's a static web application.
+    Simply open the `public/index.html` file in your preferred web browser. No server setup is required as it's a static web application.
 
     ```bash
     # On Linux/macOS
-    open index.html
+    open public/index.html
 
     # On Windows
-    start index.html
+    start public/index.html
     ```
 
 6.  **Test the Application:**
     - Verify all CSS styles are applied correctly
     - Test keyboard layouts and typing functionality
     - Check charts and progress tracking features
+
+## Project Structure
+
+```
+bangla-typing/
+├── public/
+│   └── index.html              # Main HTML file
+├── src/
+│   ├── js/
+│   │   └── script.js           # Main JavaScript application
+│   └── css/
+│       ├── style.css           # Tailwind CSS source
+│       └── tailwind_style.css  # Compiled CSS output
+├── data/
+│   ├── syllabus.json          # Lesson content
+│   ├── avro_hint.json         # Avro keyboard layout
+│   └── bijoy_hint.json        # Bijoy keyboard layout
+├── docs/
+│   ├── README.md              # This file
+│   └── LICENSE                # License file
+└── package.json               # Dependencies and scripts
+```
 
 ## Technologies Used
 
@@ -80,7 +102,7 @@ If you wish to run this project locally for development or customization, follow
 -   **Tailwind CSS v4+:** Utility-first CSS framework with custom configuration
 -   **JavaScript (ES6+):** Modern JavaScript with async/await, event delegation, and modular architecture
 -   **Chart.js:** Data visualization for progress tracking and statistics
--   **JSON Data Files:** 
+-   **JSON Data Files:** (located in `data/` directory)
     - `syllabus.json` - 57+ lessons with characters, words, and phrases
     - `avro_hint.json` - Keyboard layout mapping for Avro Phonetic
     - `bijoy_hint.json` - Keyboard layout mapping for Bijoy layout
