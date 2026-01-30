@@ -15,11 +15,15 @@ Experience the Bangla Typing Tutor directly in your browser:
 
 ## Features
 
--   **Interactive Lessons:** Structured typing exercises to guide users from beginner to advanced levels.
--   **Real-time Feedback:** Instantaneous feedback on typing accuracy, errors, and speed (WPM).
--   **Progress Tracking:** Monitor your improvement over time.
--   **User-Friendly Interface:** Clean and intuitive design for an optimal learning experience.
--   **Phonetic Support:** Designed to work seamlessly with phonetic Bangla typing methods (e.g., Avro Keyboard style input).
+-   **Interactive Lessons:** 57+ structured typing exercises across 6 progressive levels (from basic characters to practical texts)
+-   **Real-time Feedback:** Instantaneous feedback on typing accuracy, errors, and speed (WPM) with visual keyboard hints
+-   **Progress Tracking:** Comprehensive progress monitoring with charts, WPM statistics, and lesson completion tracking
+-   **Multiple Keyboard Layouts:** Support for Avro Phonetic, Bijoy, and Probhat layouts with dynamic switching
+-   **Dark/Light Theme:** Automatic theme detection with manual override options
+-   **User-Friendly Interface:** Responsive design optimized for both desktop and mobile devices
+-   **Visual Keyboard Hints:** On-screen keyboard display showing correct finger positioning
+-   **Progressive Learning:** Level-based system unlocking new content as users master previous lessons
+-   **Bangla Number Display:** All statistics and UI elements use Bengali numerators for cultural consistency
 
 ## How to Use
 
@@ -64,13 +68,24 @@ If you wish to run this project locally for development or customization, follow
     start index.html
     ```
 
+6.  **Test the Application:**
+    - Verify all CSS styles are applied correctly
+    - Test keyboard layouts and typing functionality
+    - Check charts and progress tracking features
+
 ## Technologies Used
 
--   **HTML5:** For the structure of the web application.
--   **CSS3:** For styling and responsive design.
--   **Tailwind CSS:** For utility-first CSS styling.
--   **JavaScript (ES6+):** For interactive functionality, lesson logic, and real-time feedback.
--   **JSON:** To store syllabus data and typing exercises (`syllabus.json`).
+-   **HTML5:** Semantic structure with accessibility support (`lang="bn"`)
+-   **CSS3:** Advanced styling with CSS custom properties and animations
+-   **Tailwind CSS v4+:** Utility-first CSS framework with custom configuration
+-   **JavaScript (ES6+):** Modern JavaScript with async/await, event delegation, and modular architecture
+-   **Chart.js:** Data visualization for progress tracking and statistics
+-   **JSON Data Files:** 
+    - `syllabus.json` - 57+ lessons with characters, words, and phrases
+    - `avro_hint.json` - Keyboard layout mapping for Avro Phonetic
+    - `bijoy_hint.json` - Keyboard layout mapping for Bijoy layout
+-   **Google Fonts:** Hind Siliguri for consistent Bangla text rendering
+-   **LocalStorage:** Client-side progress persistence and user preferences
 
 ## Contributing
 
@@ -93,17 +108,21 @@ Here's a roadmap of what's planned for the future of the Bangla Typing Tutor.
 *   **More Lessons:** Expanding the syllabus with more advanced lessons and exercises.
 *   **Custom Lessons:** Allowing users to create and practice their own custom lessons.
 *   **Typing Games:** Adding fun and interactive games to make learning more engaging.
-*   **Multi-Layout Support:** Adding support for various Bangla keyboard layouts (e.g., Probhat, Jatiya) to cater to different user preferences.
+*   **Multi-Layout Support:** Adding support for additional Bangla keyboard layouts (e.g., Jatiya, Munir) to cater to different user preferences.
 
 ### Improvements to Make
 
-*   **UI/UX:** Enhancing the user interface for a more modern and intuitive experience.
-*   **Performance:** Optimizing the application for faster loading and smoother performance.
+*   **UI/UX:** Enhanced animations, micro-interactions, and accessibility improvements
+*   **Performance:** Bundle size optimization and faster chart rendering
+*   **Mobile Experience:** Improved touch interactions and mobile-specific keyboard layouts
+*   **Accessibility:** Better screen reader support and keyboard navigation
 
 ### Bugs to Fix
 
-*   **Syllabus Correction:** Reviewing and correcting inaccuracies, typos, and inconsistencies within the `syllabus.json`, `avro_hint.json`, and `bijoy_hint.json` lesson files.
-*   **Cross-browser Compatibility:** Ensuring the application works flawlessly across all major browsers.
+*   **Syllabus Enhancement:** Reviewing and expanding the 57 lessons across 6 levels for better learning progression
+*   **Cross-browser Compatibility:** Ensuring consistent behavior across Chrome, Firefox, Safari, and Edge
+*   **Data Validation:** Improving accuracy of keyboard hint mappings and phonetic displays
+*   **Performance Issues:** Optimizing chart rendering and large data set handling
 
 ## License
 
